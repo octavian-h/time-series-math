@@ -12,21 +12,6 @@
     <url>https://github.com/octavian-h/time-series-math</url>
     <inceptionYear>2015</inceptionYear>
 
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <scm>
-        <connection>scm:git:https://github.com/octavian-h/time-series-math.git</connection>
-        <developerConnection>scm:git:git@github.com:octavian-h/time-series-math.git</developerConnection>
-        <url>https://github.com/octavian-h/time-series-math</url>
-        <tag>HEAD</tag>
-    </scm>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -143,9 +128,41 @@
         </profile>
     </profiles>
 
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/octavian-h/time-series-math/issues</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>Travis CI</system>
+        <url>https://travis-ci.org/octavian-h/time-series-math</url>
+    </ciManagement>
+
+    <developers>
+        <developer>
+            <name>Octavian Hasna</name>
+            <id>octavian-h</id>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/octavian-h/time-series-math.git</connection>
+        <developerConnection>scm:git:git@github.com:octavian-h/time-series-math.git</developerConnection>
+        <url>https://github.com/octavian-h/time-series-math</url>
+        <tag>HEAD</tag>
+    </scm>
+
     <distributionManagement>
         <repository>
-            <id>bintray-repo-maven-example</id>
+            <id>bintray</id>
             <url>https://api.bintray.com/maven/octavian-h/maven/time-series-math</url>
         </repository>
     </distributionManagement>
