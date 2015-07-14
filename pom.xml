@@ -23,8 +23,8 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:git://github.com/octavian-h/time-series-math.git</connection>
-        <developerConnection>scm:git:git://github.com/octavian-h/time-series-math.git</developerConnection>
+        <connection>scm:git:https://github.com/octavian-h/time-series-math.git</connection>
+        <developerConnection>scm:git:git@github.com:octavian-h/time-series-math.git</developerConnection>
         <url>https://github.com/octavian-h/time-series-math</url>
         <tag>HEAD</tag>
     </scm>
