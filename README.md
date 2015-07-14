@@ -1,10 +1,14 @@
 # Time Series Math Library #
 
+[![Build Status](https://img.shields.io/travis/octavian-h/time-series-math/master.svg)](https://travis-ci.org/octavian-h/time-series-math)
+[![Coverage Status](https://img.shields.io/coveralls/octavian-h/time-series-math/master.svg)](https://coveralls.io/github/octavian-h/time-series-math?branch=master)
+
 ## Overview ##
 The goal of this library is to provide optimised algorithms for time-series analysis and signal processing.
 
 ## Features ##
-TODO
+
+* Piecewise Aggregate Approximation
 
 ## Contributing ##
 
