@@ -31,6 +31,9 @@ public class ZNormalizer implements Normalizer {
         this.standardDeviation = standardDeviation;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public double[] normalize(double[] values) {
         double m = mean.evaluate(values);

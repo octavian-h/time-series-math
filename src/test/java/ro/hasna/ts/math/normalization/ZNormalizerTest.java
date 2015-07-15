@@ -14,8 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
 /**
- * @author Octavian
- * @since 15.07.2015
+ * @since 1.0
  */
 @RunWith(MockitoJUnitRunner.class)
 public class ZNormalizerTest {
