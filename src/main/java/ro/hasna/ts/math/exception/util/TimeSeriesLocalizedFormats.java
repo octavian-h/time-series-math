@@ -11,7 +11,7 @@ import java.util.Locale;
  * @since 1.0
  */
 public enum TimeSeriesLocalizedFormats implements Localizable {
-    NUMBER_NOT_A_FACTOR("{0} is not a factor for {1}");
+    NUMBER_NOT_DIVISIBLE_WITH("{0} is not divisible with {1}");
 
     /**
      * Source English format.

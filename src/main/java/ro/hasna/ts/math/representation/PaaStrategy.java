@@ -8,7 +8,7 @@ package ro.hasna.ts.math.representation;
 public enum PaaStrategy {
     /**
      * The length of the sequence must be divisible with the number of segments.
-     * Otherwise it will throw a {@code NotAFactorNumberException}
+     * Otherwise it will throw a {@code NumberIsNotDivisibleException}
      */
     STRICT,
     /**
