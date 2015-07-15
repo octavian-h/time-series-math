@@ -1,4 +1,4 @@
-# Time Series Math Library #
+# Time Series Math Library (BETA) #
 
 [![Build Status](https://img.shields.io/travis/octavian-h/time-series-math/master.svg)](https://travis-ci.org/octavian-h/time-series-math)
 [![Coverage Status](https://img.shields.io/coveralls/octavian-h/time-series-math/master.svg)](https://coveralls.io/github/octavian-h/time-series-math?branch=master)
@@ -9,6 +9,28 @@ The goal of this library is to provide optimised algorithms for time-series anal
 ## Features ##
 
 * Piecewise Aggregate Approximation
+
+## Usage ##
+Add the following dependency to your maven project.
+```xml
+<dependency>
+    <groupId>ro.hasna.ts</groupId>
+    <artifactId>time-series-math</artifactId>
+    <version>0.2</version>
+</dependency>
+```
+
+And also add the following custom repository.
+```xml
+<repository>
+    <snapshots>
+        <enabled>false</enabled>
+    </snapshots>
+    <id>central</id>
+    <name>bintray</name>
+    <url>http://jcenter.bintray.com</url>
+</repository>
+```
 
 ## Contributing ##
 
