@@ -6,8 +6,8 @@ package ro.hasna.ts.math.distribution;
  * @since 1.0
  */
 public class UniformDistributionDivider implements DistributionDivider {
-    private double lower;
-    private double upper;
+    private final double lower;
+    private final double upper;
 
     /**
      * Creates a new instance of this class.
