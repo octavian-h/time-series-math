@@ -1,5 +1,6 @@
 package ro.hasna.ts.math.distribution;
 
+import org.apache.commons.math3.exception.NumberIsTooSmallException;
 import org.junit.Assert;
 import org.junit.Test;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
@@ -25,5 +26,10 @@ public class UniformDistributionDividerTest {
         double[] v = divider.getBreakpoints(4);
 
         Assert.assertArrayEquals(expected, v, TimeSeriesPrecision.EPSILON);
+    }
+
+    @Test(expected = NumberIsTooSmallException.class)
+    public void testSmallNumberOfAreas() throws Exception {
+        new UniformDistributionDivider(-1, 1).getBreakpoints(1);
     }
 }

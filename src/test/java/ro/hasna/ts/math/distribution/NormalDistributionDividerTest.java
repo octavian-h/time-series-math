@@ -1,5 +1,6 @@
 package ro.hasna.ts.math.distribution;
 
+import org.apache.commons.math3.exception.NumberIsTooSmallException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,6 +55,11 @@ public class NormalDistributionDividerTest {
         double[] v = divider.getBreakpoints(4);
 
         Assert.assertArrayEquals(expected, v, TimeSeriesPrecision.EPSILON);
+    }
+
+    @Test(expected = NumberIsTooSmallException.class)
+    public void testSmallNumberOfAreas() throws Exception {
+        divider.getBreakpoints(1);
     }
 
     @Test
