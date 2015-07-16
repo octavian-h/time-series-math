@@ -4,7 +4,7 @@
 
     <groupId>ro.hasna.ts</groupId>
     <artifactId>time-series-math</artifactId>
-    <version>0.4</version>
+    <version>0.5-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Time Series Math Library</name>
