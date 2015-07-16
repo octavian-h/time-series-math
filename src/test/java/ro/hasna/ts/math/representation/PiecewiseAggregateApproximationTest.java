@@ -123,18 +123,4 @@ public class PiecewiseAggregateApproximationTest {
         Assert.assertEquals(4, paa.getSegments());
         Assert.assertEquals(PaaStrategy.MEAN_PADDING, paa.getStrategy());
     }
-
-    @Test
-    public void testToString1() throws Exception {
-        PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(5);
-
-        Assert.assertEquals("PAA(5,STRICT)", paa.toString());
-    }
-
-    @Test
-    public void testToString2() throws Exception {
-        PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(6, PaaStrategy.IGNORE_REMAINING);
-
-        Assert.assertEquals("PAA(6,IGNORE_REMAINING)", paa.toString());
-    }
 }

@@ -104,8 +104,7 @@ public class SymbolicAggregateApproximation {
         return breakpoints;
     }
 
-    @Override
-    public String toString() {
-        return "SAX(" + paa + ',' + normalizer + ',' + (breakpoints.length + 1) + ')';
+    public int getAlphabetSize() {
+        return breakpoints.length + 1;
     }
 }

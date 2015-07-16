@@ -128,9 +128,4 @@ public class PiecewiseAggregateApproximation {
     public PaaStrategy getStrategy() {
         return strategy;
     }
-
-    @Override
-    public String toString() {
-        return "PAA(" + segments + "," + strategy + ")";
-    }
 }

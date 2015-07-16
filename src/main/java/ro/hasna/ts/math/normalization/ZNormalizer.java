@@ -46,4 +46,9 @@ public class ZNormalizer implements Normalizer {
         }
         return normalizedValues;
     }
+
+    @Override
+    public String toString() {
+        return "ZNormalizer";
+    }
 }
