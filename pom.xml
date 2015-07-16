@@ -155,7 +155,8 @@
 
     <scm>
         <connection>scm:git:https://github.com/octavian-h/time-series-math.git</connection>
-        <developerConnection>scm:git:git@github.com:octavian-h/time-series-math.git</developerConnection>
+        <developerConnection>scm:git:https://github.com/octavian-h/time-series-math.git</developerConnection>
+        <!--<developerConnection>scm:git:git@github.com:octavian-h/time-series-math.git</developerConnection>-->
         <url>https://github.com/octavian-h/time-series-math</url>
         <tag>time-series-math-0.4</tag>
     </scm>
