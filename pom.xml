@@ -161,9 +161,15 @@
     </scm>
 
     <distributionManagement>
+        <!-- Release repository -->
         <repository>
             <id>bintray</id>
             <url>https://api.bintray.com/maven/octavian-h/maven/time-series-math;publish=1</url>
         </repository>
+        <!-- Snapshot repository -->
+        <snapshotRepository>
+            <id>jfrog-snapshots</id>
+            <url>http://oss.jfrog.org/artifactory/oss-snapshot-local</url>
+        </snapshotRepository>
     </distributionManagement>
 </project>
