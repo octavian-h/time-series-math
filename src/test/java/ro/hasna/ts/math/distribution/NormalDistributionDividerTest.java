@@ -55,4 +55,18 @@ public class NormalDistributionDividerTest {
 
         Assert.assertArrayEquals(expected, v, TimeSeriesPrecision.EPSILON);
     }
+
+    @Test
+    public void testIsCachingEnabled1() throws Exception {
+        NormalDistributionDivider divider = new NormalDistributionDivider();
+
+        Assert.assertEquals(true, divider.isCachingEnabled());
+    }
+
+    @Test
+    public void testIsCachingEnabled2() throws Exception {
+        NormalDistributionDivider divider = new NormalDistributionDivider(false);
+
+        Assert.assertEquals(false, divider.isCachingEnabled());
+    }
 }
