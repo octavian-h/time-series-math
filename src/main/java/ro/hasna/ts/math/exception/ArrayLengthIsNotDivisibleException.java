@@ -3,8 +3,7 @@ package ro.hasna.ts.math.exception;
 import org.apache.commons.math3.exception.util.Localizable;
 
 /**
- * @author Octavian
- * @since 15.07.2015
+ * @since 1.0
  */
 public class ArrayLengthIsNotDivisibleException extends NumberIsNotDivisibleException {
     /**
