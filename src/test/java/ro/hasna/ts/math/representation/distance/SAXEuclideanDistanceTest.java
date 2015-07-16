@@ -1,11 +1,11 @@
 package ro.hasna.ts.math.representation.distance;
 
-import org.apache.commons.math3.util.Precision;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ro.hasna.ts.math.representation.SymbolicAggregateApproximation;
+import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
 import java.util.Random;
 
@@ -38,7 +38,7 @@ public class SAXEuclideanDistanceTest {
 
         double result = distance.compute(a, b);
 
-        Assert.assertEquals(8.440496812487385, result, Precision.EPSILON);
+        Assert.assertEquals(8.440496812487385, result, TimeSeriesPrecision.EPSILON);
     }
 
     @Test
@@ -54,6 +54,6 @@ public class SAXEuclideanDistanceTest {
 
         double result = distance.compute(a, b);
 
-        Assert.assertEquals(0, result, Precision.EPSILON);
+        Assert.assertEquals(0, result, TimeSeriesPrecision.EPSILON);
     }
 }
