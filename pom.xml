@@ -164,7 +164,7 @@
     <distributionManagement>
         <repository>
             <id>bintray</id>
-            <url>https://api.bintray.com/maven/octavian-h/maven/time-series-math</url>
+            <url>https://api.bintray.com/maven/octavian-h/maven/time-series-math;publish=1</url>
         </repository>
     </distributionManagement>
 </project>
