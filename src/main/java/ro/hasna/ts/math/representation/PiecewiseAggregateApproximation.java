@@ -3,6 +3,7 @@ package ro.hasna.ts.math.representation;
 import org.apache.commons.math3.util.Precision;
 import ro.hasna.ts.math.exception.ArrayLengthIsNotDivisibleException;
 import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
+import ro.hasna.ts.math.representation.util.PaaStrategy;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
 /**
@@ -42,11 +43,11 @@ public class PiecewiseAggregateApproximation {
     /**
      * Transform a given sequence of values using the algorithm Piecewise Aggregate Approximation (PAA).
      *
-     * @param sequence the sequence of values
+     * @param values the sequence of values
      * @return the result of the transformation
      */
-    public double[] transform(double[] sequence) {
-        int len = sequence.length;
+    public double[] transformToDoubleArray(double[] values) {
+        int len = values.length;
         if (len < segments) {
             throw new ArrayLengthIsTooSmallException(len, segments, true);
         }
@@ -62,7 +63,7 @@ public class PiecewiseAggregateApproximation {
             double sum = 0;
             int n = 0;
             for (int i = 0; i < len; i++) {
-                sum += sequence[i];
+                sum += values[i];
                 if ((i + 1) % intervalSize == 0) {
                     reducedValues[n++] = sum / intervalSize;
                     if (n == segments) break;
@@ -75,7 +76,7 @@ public class PiecewiseAggregateApproximation {
             double sum = 0;
             int n = 0;
             for (int i = 0; i < len; i++) {
-                sum += sequence[i];
+                sum += values[i];
                 if ((i + 1) % intervalSize == 0) {
                     reducedValues[n++] = sum / intervalSize;
                     sum = 0;
@@ -94,14 +95,14 @@ public class PiecewiseAggregateApproximation {
             int n = 0;
             while (i < len) {
                 if (!Precision.equals(x, 0, TimeSeriesPrecision.EPSILON)) {
-                    sum += sequence[i] * x;
+                    sum += values[i] * x;
                 }
                 int k = i + 1 + y;
                 for (int j = i + 1; j < k; j++) {
-                    sum += sequence[j];
+                    sum += values[j];
                 }
                 if (!Precision.equals(z, 0, TimeSeriesPrecision.EPSILON)) {
-                    sum += sequence[k] * z;
+                    sum += values[k] * z;
                 }
 
                 reducedValues[n++] = sum / intervalSize;
@@ -118,6 +119,14 @@ public class PiecewiseAggregateApproximation {
         }
 
         return reducedValues;
+    }
+
+    public int getSegments() {
+        return segments;
+    }
+
+    public PaaStrategy getStrategy() {
+        return strategy;
     }
 
     @Override

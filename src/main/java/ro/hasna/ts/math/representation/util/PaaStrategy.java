@@ -1,4 +1,6 @@
-package ro.hasna.ts.math.representation;
+package ro.hasna.ts.math.representation.util;
+
+import ro.hasna.ts.math.representation.PiecewiseAggregateApproximation;
 
 /**
  * Strategies use by {@link PiecewiseAggregateApproximation}
