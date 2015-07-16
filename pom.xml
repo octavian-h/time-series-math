@@ -14,6 +14,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.scm.id>github</project.scm.id>
     </properties>
 
     <dependencies>
@@ -22,7 +23,6 @@
             <artifactId>commons-math3</artifactId>
             <version>3.5</version>
         </dependency>
-
         <!-- Testing dependencies -->
         <dependency>
             <groupId>junit</groupId>
