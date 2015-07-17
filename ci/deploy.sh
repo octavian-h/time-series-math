@@ -9,5 +9,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
    [[ "$COMMIT_MESSAGE" != *"[start-release]"* ]]; then
 
    echo "Deploy Snapshot artifacts"
-   mvn deploy --settings ci/maven-settings.xml
+   mvn deploy -DskipTests=true --settings ci/maven-settings.xml
+else
+   echo "Skip deploy"
 fi
