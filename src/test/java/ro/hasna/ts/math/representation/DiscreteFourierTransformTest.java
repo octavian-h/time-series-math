@@ -28,7 +28,7 @@ public class DiscreteFourierTransformTest {
 
     @Before
     public void setUp() throws Exception {
-        Mockito.when(fastFourierTransformer.transform(Mockito.<double[]>any(), Mockito.<TransformType>any())).thenReturn(new Complex[]{});
+        Mockito.when(fastFourierTransformer.transform(Mockito.<double[]>any(), Mockito.<TransformType>any())).thenReturn(new Complex[]{new Complex(0)});
     }
 
     @After
@@ -84,6 +84,6 @@ public class DiscreteFourierTransformTest {
 
         Assert.assertEquals(amplitude, max, TimeSeriesPrecision.EPSILON);
         Assert.assertEquals(signalFrequency, pos * samplingFrequency / powerOfTwo, TimeSeriesPrecision.EPSILON);
-        Assert.assertEquals(displacement, result[0] / 2, TimeSeriesPrecision.EPSILON);
+        Assert.assertEquals(displacement, result[0], TimeSeriesPrecision.EPSILON);
     }
 }

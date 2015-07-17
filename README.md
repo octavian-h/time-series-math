@@ -10,7 +10,9 @@ The goal of this library is to provide optimised algorithms for time-series anal
 
 * Piecewise Aggregate Approximation
 * Z-Normalization
-* Symbolic Aggregate Approximation 
+* Symbolic Aggregate Approximation
+* Discrete Fourier Transformation
+* Discrete Cosine Transformation
 
 ## Usage ##
 Add the following dependency to your maven project.
@@ -36,7 +38,6 @@ And also add the following custom repository.
 
 ## Planned features ##
 
-* Discrete Fourier / Cosine Transformation
 * Discrete Wavelet Transformation
 * iSAX
 * adaptive SAX
