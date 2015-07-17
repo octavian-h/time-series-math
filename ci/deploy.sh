@@ -16,6 +16,9 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
 
         echo "Release artifacts"
         git branch -va
+        git symbolic-ref HEAD
+        git symbolic-ref HEAD refs/heads/master
+
         mvn --batch-mode release:prepare --settings ci/maven-settings.xml
         mvn --batch-mode release:perform --settings ci/maven-settings.xml
 
