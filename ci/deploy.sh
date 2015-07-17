@@ -15,6 +15,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
     elif [[ "$COMMIT_MESSAGE" == *"[start-release]"* ]]; then
 
         echo "Release artifacts"
+        git branch -va
         mvn --batch-mode release:prepare --settings ci/maven-settings.xml
         mvn --batch-mode release:perform --settings ci/maven-settings.xml
 
