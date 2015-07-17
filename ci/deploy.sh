@@ -15,8 +15,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
     elif [[ "$COMMIT_MESSAGE" == *"[start-release]"* ]]; then
 
         echo "Release artifacts"
-        git branch -va
-        git symbolic-ref HEAD
+        # point HEAD to master branch (this is needed by the maven release plugin)
         git symbolic-ref HEAD refs/heads/master
 
         mvn --batch-mode release:prepare --settings ci/maven-settings.xml
