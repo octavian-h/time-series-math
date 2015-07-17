@@ -1,18 +1,25 @@
 language: java
 jdk:
-#  - openjdk7
-  - oraclejdk8
-
+- oraclejdk8
+os:
+- linux
 sudo: false
 
-# cache between builds
 cache:
   directories:
-    - $HOME/.m2
-
+  - "$HOME/.m2"
 branches:
   only:
-    - master
+  - master
 
 after_success:
-  - mvn clean test jacoco:report coveralls:report
+- mvn clean test jacoco:report coveralls:report
+
+deploy:
+  provider: script
+  script: bash ./ci/deploy.sh
+
+env:
+  global:
+  - secure: CW9ezHXD6EUr42yRYP3H6+YVhW+thRhzPa29IUvx/7RdYD3lm3Pi4lqSK8z+El4J5Bw3BnrtrihXl/YTaEE5KCbm/SoPmXMnHxOH7PU6s4ovAtf4a9cmuZzhdDDX0CPzIyLwlq+47ww/U+Lt6qBWLJR4R+0TmR1rNk4MTcWPTBT9+lypQKd8D/nxOZCatqsHRbDXC2KPQXMsGdYPHu1f2hY0rifWD0ntsr/lqaBxnPmKjHuciIRKZLVRJ8CrJNsXEQ+U4tdEXiM+FN4jmA9T0D6uKFMC4FfBtn8zDkdL4MlhI3y9Mk3qBRfe9PHQqT676c2kZxA49U1gv5kL5lG68baxdPNXSYx5YGcWA6qpMNv/DGV0lJ0gPsfnzZPKD6Q2mS5JvGg0E9VvXv3mFAE6Z7aHiPmLb7Ti8VqHrWMUVjmBHh3Plf2fcmZ+l8sJq4LeyzY8CnCmtZgfKrbwBd9xizI5VVchbDPTXwPkDYuTwjVbQzObTmaE7ruSKmYDKlO7CnLWZG3pawjdIDcZgxOszycWNDUqmLhKz6QWP6CcaxB8SixT/ie6foLKdnLKdDIxSJz5qpPoPFRvYjAGu9ng9Uz14NjOPypswHEerl03C4iDj1T58Uinjs+QD4kDdpW9YbOf4QqOBdyfTw5S9OeiQBNuI2Yl52dkS7tYn5wnpaU=
+  - secure: Bj/uyGXL0vThFfw8ask2JCdabJeM6l7H/VGaqPeyjy24yzcfONY52nzU0hWP1vmyKUWBkoNnv45ZXw2poFq60QHL54wKL9XCIp3ErVc0r2bE2dl+RHN4kNiRERnCCWU2M/cuiNThotpGIRC8DMCuFGeBKtHrS0HQwLUd+pyJVyjyoLylp21Wzeh+ul/UPWXuqEBLM9K8aJnZ8DIPxL4CUCrTLdxJ/Gt8NlhPP6rrH0xUWM0vdCZpB2Sum4Osk2TY9Vb68eNWfRvDFo0CDpiTWXNOfCG/wC5obIEShGlXgeMKZ31Daa0eSQ1oUfr1p3vNm8VZ3PUQmU4z2q47SMi8xKGT3AAb1nGpPn1ZsBqmWN/+ndckwy/pO3aUEcIPsiuek3F+iB0sf6naP9z87WlsanCMBkdoyh+IDyZu34tkYo9si9rTJqH8qg+msJCyoXr6FcMShjVcqVtbGedC/hUAYl/6O4kt8c4DMDvFkhCkuLVZtrTbeh4hDA+CsC/3Y5GjMIeE7S2ywFn6OWESi2O+r8qmhY28EhPGrtWt+/Eou495E/HES5ouwaGQStYdiMU4MPtf+ocWHgYIC4CPe34OWYdIk3WW/JcOj4raofFHmOP3+Y9olLUXxAYR/xQV1yKpsWtZ/dt0/cI2S3gj1HR694LTnsSok92TFO77y5RYqBw=
