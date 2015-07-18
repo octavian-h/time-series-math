@@ -13,6 +13,7 @@ The goal of this library is to provide optimised algorithms for time-series anal
 * Symbolic Aggregate Approximation
 * Discrete Fourier Transformation
 * Discrete Cosine Transformation
+* Moving Average Filter
 
 ## Usage ##
 Add the following dependency to your maven project.
