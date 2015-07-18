@@ -43,15 +43,14 @@ public class DiscreteCosineTransform {
             copy[i] = 0;
         }
 
-        // run FCT
+        // run FCT (=> DCT-I)
         double[] transform = cosineTransformer.transform(copy, TransformType.FORWARD);
 
         // keep only the most important coefficients
         int outputLength = (powerOfTwo >> 1) + 1;
         double[] result = new double[outputLength];
-        result[0] = transform[0] / initialLength;
-        for (int i = 1; i < outputLength && i < transform.length; i++) {
-            result[i] = transform[i] / (2 * initialLength);
+        for (int i = 0; i < outputLength && i < transform.length; i++) {
+            result[i] = transform[i];
         }
         return result;
     }

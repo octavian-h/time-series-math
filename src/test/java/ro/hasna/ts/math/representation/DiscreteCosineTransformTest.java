@@ -51,37 +51,4 @@ public class DiscreteCosineTransformTest {
 
         Mockito.verify(fastCosineTransformer).transform(v, TransformType.FORWARD);
     }
-
-//    @Test
-//    public void testTransformSineWave() throws Exception {
-//        double signalFrequency = 100;
-//        double amplitude = 30;
-//        double displacement = 17;
-//        double samplingFrequency = signalFrequency * 8; //it should be at least double (Shannon Theorem)
-//        int len = 1000;
-//        double[] v = new double[len];
-//        for (int i = 0; i < len; i++) {
-//            v[i] = amplitude * Math.sin(2 * Math.PI * signalFrequency * i / samplingFrequency) + displacement;
-//        }
-//
-//        double[] result = new DiscreteCosineTransform().transformToDoubleArray(v);
-//
-//        double max = 0;
-//        int pos = 0;
-//        for (int i = 1; i < result.length; i++) {
-//            if (max < result[i]) {
-//                max = result[i];
-//                pos = i;
-//            }
-//        }
-//
-//        int powerOfTwo = Integer.highestOneBit(len);
-//        if (len != powerOfTwo) {
-//            powerOfTwo = powerOfTwo << 1;
-//        }
-//
-//        Assert.assertEquals(amplitude, max, TimeSeriesPrecision.EPSILON);
-//        Assert.assertEquals(signalFrequency, pos * samplingFrequency / powerOfTwo, TimeSeriesPrecision.EPSILON);
-//        Assert.assertEquals(displacement, result[0], TimeSeriesPrecision.EPSILON);
-//    }
 }

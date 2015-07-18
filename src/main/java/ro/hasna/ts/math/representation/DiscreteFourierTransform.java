@@ -47,10 +47,11 @@ public class DiscreteFourierTransform {
         // keep only the most important coefficients
         int outputLength = (powerOfTwo >> 1) + 1;
         double[] result = new double[outputLength];
+        double k = 2.0 / initialLength;
         result[0] = complexes[0].divide(initialLength).abs();
         for (int i = 1; i < outputLength && i < complexes.length; i++) {
             // multiply the values with 2/N
-            result[i] = complexes[i].multiply(2).divide(initialLength).abs();
+            result[i] = complexes[i].multiply(k).abs();
         }
         return result;
     }
