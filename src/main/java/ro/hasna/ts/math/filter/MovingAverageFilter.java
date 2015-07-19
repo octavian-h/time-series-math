@@ -8,9 +8,9 @@ import org.apache.commons.math3.exception.DimensionMismatchException;
  * @since 1.0
  */
 public class MovingAverageFilter implements Filter {
-    private int observations;
-    private boolean symmetric;
-    private double[] weights;
+    private final int observations;
+    private final boolean symmetric;
+    private final double[] weights;
 
     /**
      * Creates a new instance of this class with the given number of observations to smooth from both sides.

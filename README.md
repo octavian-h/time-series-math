@@ -14,6 +14,7 @@ The goal of this library is to provide optimised algorithms for time-series anal
 * Discrete Fourier Transformation
 * Discrete Cosine Transformation
 * Moving Average Filter
+* Exponential Moving Average Filter
 
 ## Usage ##
 Add the following dependency to your maven project.
