@@ -11,7 +11,7 @@ import org.apache.commons.math3.transform.TransformType;
  * @since 1.0
  */
 public class DiscreteFourierTransform {
-    private FastFourierTransformer fourierTransformer;
+    private final FastFourierTransformer fourierTransformer;
 
     public DiscreteFourierTransform() {
         this(new FastFourierTransformer(DftNormalization.STANDARD));

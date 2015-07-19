@@ -16,7 +16,7 @@ public class MovingAverageFilterTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void testException1() throws Exception {
+    public void testConstructor1() throws Exception {
         thrown.expect(DimensionMismatchException.class);
         thrown.expectMessage("0 != 5");
 
@@ -24,7 +24,7 @@ public class MovingAverageFilterTest {
     }
 
     @Test
-    public void testException2() throws Exception {
+    public void testConstructor2() throws Exception {
         thrown.expect(DimensionMismatchException.class);
         thrown.expectMessage("0 != 2");
 

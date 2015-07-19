@@ -10,7 +10,7 @@ import org.apache.commons.math3.transform.TransformType;
  * @since 1.0
  */
 public class DiscreteCosineTransform {
-    private FastCosineTransformer cosineTransformer;
+    private final FastCosineTransformer cosineTransformer;
 
     public DiscreteCosineTransform() {
         this(new FastCosineTransformer(DctNormalization.STANDARD_DCT_I));
