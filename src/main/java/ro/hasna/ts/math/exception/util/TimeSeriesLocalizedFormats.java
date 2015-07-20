@@ -12,7 +12,8 @@ import java.util.Locale;
  */
 public enum TimeSeriesLocalizedFormats implements Localizable {
     NUMBER_NOT_DIVISIBLE_WITH("{0} is not divisible with {1}"),
-    OUT_OF_RANGE_BOTH("{0} out of ({1}, {2}) range");
+    OUT_OF_RANGE_BOTH("{0} out of ({1}, {2}) range"),
+    UNSUPPORTED_STRATEGY("the strategy {0} is not supported in {1}");
 
     /**
      * Source English format.
