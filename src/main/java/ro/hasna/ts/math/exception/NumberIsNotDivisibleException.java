@@ -5,7 +5,7 @@ import org.apache.commons.math3.exception.util.Localizable;
 import ro.hasna.ts.math.exception.util.TimeSeriesLocalizedFormats;
 
 /**
- * Exception to be thrown when a number is not a factor of factor.
+ * Exception to be thrown when a number is not divisible with a given factor.
  *
  * @since 1.0
  */

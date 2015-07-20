@@ -41,7 +41,7 @@ public class PiecewiseAggregateApproximation {
     }
 
     /**
-     * Transform a given sequence of values using the algorithm Piecewise Aggregate Approximation (PAA).
+     * Transform a given sequence of values using the algorithm PAA.
      *
      * @param values the sequence of values
      * @return the result of the transformation
