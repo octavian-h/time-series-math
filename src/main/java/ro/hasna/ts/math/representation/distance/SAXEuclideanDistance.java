@@ -39,9 +39,9 @@ public class SAXEuclideanDistance implements DistanceMeasure {
     public double compute(int[] symbolsA, int[] symbolsB, int n) {
         double[] breakpoints = sax.getBreakpoints();
 
-        double d = 0.0;
-        int m = symbolsA.length;
-        for (int i = 0; i < m; i++) {
+        double sum = 0.0;
+        int w = symbolsA.length;
+        for (int i = 0; i < w; i++) {
             int sa = symbolsA[i];
             int sb = symbolsB[i];
             if (FastMath.abs(sa - sb) > 1) {
@@ -51,10 +51,10 @@ public class SAXEuclideanDistance implements DistanceMeasure {
                 } else {
                     aux = breakpoints[sb - 1] - breakpoints[sa];
                 }
-                d += aux * aux;
+                sum += aux * aux;
             }
         }
 
-        return Math.sqrt(n / m) * Math.sqrt(d);
+        return FastMath.sqrt(n * sum / w);
     }
 }

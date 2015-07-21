@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import ro.hasna.ts.math.normalization.Normalizer;
 import ro.hasna.ts.math.normalization.ZNormalizer;
-import ro.hasna.ts.math.representation.util.PaaStrategy;
+import ro.hasna.ts.math.representation.util.SegmentationStrategy;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
 /**
@@ -24,7 +24,7 @@ public class SymbolicAggregateApproximationTest {
         double[] breakpoints = {-0.4307272992954576, 0.4307272992954576};
         int[] expected = {0, 0, 1, 2, 2, 2, 1, 0, 0};
 
-        SymbolicAggregateApproximation sax = new SymbolicAggregateApproximation(new PiecewiseAggregateApproximation(9, PaaStrategy.FRACTIONAL_PARTITION), new ZNormalizer(), breakpoints);
+        SymbolicAggregateApproximation sax = new SymbolicAggregateApproximation(new PiecewiseAggregateApproximation(9, SegmentationStrategy.FRACTIONAL_PARTITION), new ZNormalizer(), breakpoints);
         int[] result = sax.transformToIntArray(list);
 
         Assert.assertArrayEquals(expected, result);
@@ -58,7 +58,7 @@ public class SymbolicAggregateApproximationTest {
             list[i] = i;
         }
         ZNormalizer normalizer = new ZNormalizer();
-        PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(segments, PaaStrategy.STRICT);
+        PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(segments, SegmentationStrategy.STRICT);
 
         double[] first = normalizer.normalize(paa.transformToDoubleArray(list));
         double[] second = paa.transformToDoubleArray(normalizer.normalize(list));
@@ -68,7 +68,7 @@ public class SymbolicAggregateApproximationTest {
 
     @Test
     public void testGetters() throws Exception {
-        PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(4, PaaStrategy.STRICT);
+        PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(4, SegmentationStrategy.STRICT);
         Normalizer normalizer = new ZNormalizer();
         double[] breakpoints = {-0.4307272992954576, 0.4307272992954576};
 

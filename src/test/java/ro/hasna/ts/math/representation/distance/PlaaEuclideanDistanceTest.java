@@ -4,7 +4,8 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import ro.hasna.ts.math.representation.SymbolicAggregateApproximation;
+import ro.hasna.ts.math.normalization.ZNormalizer;
+import ro.hasna.ts.math.representation.PiecewiseLinearAggregateApproximation;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
 import java.util.Random;
@@ -12,12 +13,13 @@ import java.util.Random;
 /**
  * @since 1.0
  */
-public class SAXEuclideanDistanceTest {
-    private SAXEuclideanDistance distance;
+public class PlaaEuclideanDistanceTest {
+
+    private PlaaEuclideanDistance distance;
 
     @Before
     public void setUp() throws Exception {
-        distance = new SAXEuclideanDistance(new SymbolicAggregateApproximation(8, 3));
+        distance = new PlaaEuclideanDistance(new PiecewiseLinearAggregateApproximation(8));
     }
 
     @After
@@ -58,8 +60,9 @@ public class SAXEuclideanDistanceTest {
             b[i] = 100 + i + random.nextDouble();
         }
 
-        double result = distance.compute(a, b);
+        ZNormalizer normalizer = new ZNormalizer();
+        double result = distance.compute(normalizer.normalize(a), normalizer.normalize(b));
 
-        Assert.assertEquals(0, result, TimeSeriesPrecision.EPSILON);
+        Assert.assertEquals(0, result, 0.1);
     }
 }

@@ -3,7 +3,7 @@ package ro.hasna.ts.math.exception;
 import org.junit.Assert;
 import org.junit.Test;
 import ro.hasna.ts.math.representation.PiecewiseLinearAggregateApproximation;
-import ro.hasna.ts.math.representation.util.PaaStrategy;
+import ro.hasna.ts.math.representation.util.SegmentationStrategy;
 
 /**
  * @since 1.0
@@ -13,7 +13,7 @@ public class UnsupportedStrategyExceptionTest {
     @Test
     public void testGetters() throws Exception {
         try {
-            new PiecewiseLinearAggregateApproximation(4, PaaStrategy.MEAN_PADDING);
+            new PiecewiseLinearAggregateApproximation(4, SegmentationStrategy.MEAN_PADDING);
         } catch (UnsupportedStrategyException e) {
             Assert.assertEquals("MEAN_PADDING", e.getStrategy());
             Assert.assertEquals("PLAA", e.getAlgorithm());

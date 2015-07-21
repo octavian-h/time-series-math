@@ -7,7 +7,7 @@ import org.junit.rules.ExpectedException;
 import ro.hasna.ts.math.exception.ArrayLengthIsNotDivisibleException;
 import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
 import ro.hasna.ts.math.exception.UnsupportedStrategyException;
-import ro.hasna.ts.math.representation.util.PaaStrategy;
+import ro.hasna.ts.math.representation.util.SegmentationStrategy;
 import ro.hasna.ts.math.type.MeanSlopePair;
 
 /**
@@ -23,7 +23,7 @@ public class PiecewiseLinearAggregateApproximationTest {
         thrown.expect(ArrayLengthIsTooSmallException.class);
         thrown.expectMessage("3 is smaller than the minimum (4)");
 
-        PiecewiseLinearAggregateApproximation plaa = new PiecewiseLinearAggregateApproximation(4, PaaStrategy.IGNORE_REMAINING);
+        PiecewiseLinearAggregateApproximation plaa = new PiecewiseLinearAggregateApproximation(4, SegmentationStrategy.IGNORE_REMAINING);
         double[] v = {1, 2, 3};
 
         plaa.transformToMeanSlopePairArray(v);
@@ -45,7 +45,7 @@ public class PiecewiseLinearAggregateApproximationTest {
         thrown.expect(UnsupportedStrategyException.class);
         thrown.expectMessage("the strategy FRACTIONAL_PARTITION is not supported in PLAA");
 
-        new PiecewiseLinearAggregateApproximation(4, PaaStrategy.FRACTIONAL_PARTITION);
+        new PiecewiseLinearAggregateApproximation(4, SegmentationStrategy.FRACTIONAL_PARTITION);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class PiecewiseLinearAggregateApproximationTest {
 
     @Test
     public void testTransformIgnoreRemaining() throws Exception {
-        PiecewiseLinearAggregateApproximation plaa = new PiecewiseLinearAggregateApproximation(2, PaaStrategy.IGNORE_REMAINING);
+        PiecewiseLinearAggregateApproximation plaa = new PiecewiseLinearAggregateApproximation(2, SegmentationStrategy.IGNORE_REMAINING);
         double[] v = {1, 2, 3, 3, 2, 1, 0};
         MeanSlopePair[] expected = {new MeanSlopePair(2.0, 1.0), new MeanSlopePair(2.0, -1.0)};
 
@@ -75,14 +75,14 @@ public class PiecewiseLinearAggregateApproximationTest {
         PiecewiseLinearAggregateApproximation plaa = new PiecewiseLinearAggregateApproximation(3);
 
         Assert.assertEquals(3, plaa.getSegments());
-        Assert.assertEquals(PaaStrategy.STRICT, plaa.getStrategy());
+        Assert.assertEquals(SegmentationStrategy.STRICT, plaa.getStrategy());
     }
 
     @Test
     public void testGetters2() throws Exception {
-        PiecewiseLinearAggregateApproximation plaa = new PiecewiseLinearAggregateApproximation(4, PaaStrategy.IGNORE_REMAINING);
+        PiecewiseLinearAggregateApproximation plaa = new PiecewiseLinearAggregateApproximation(4, SegmentationStrategy.IGNORE_REMAINING);
 
         Assert.assertEquals(4, plaa.getSegments());
-        Assert.assertEquals(PaaStrategy.IGNORE_REMAINING, plaa.getStrategy());
+        Assert.assertEquals(SegmentationStrategy.IGNORE_REMAINING, plaa.getStrategy());
     }
 }

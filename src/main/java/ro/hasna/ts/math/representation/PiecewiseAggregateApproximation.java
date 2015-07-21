@@ -3,7 +3,7 @@ package ro.hasna.ts.math.representation;
 import org.apache.commons.math3.util.Precision;
 import ro.hasna.ts.math.exception.ArrayLengthIsNotDivisibleException;
 import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
-import ro.hasna.ts.math.representation.util.PaaStrategy;
+import ro.hasna.ts.math.representation.util.SegmentationStrategy;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
 /**
@@ -18,7 +18,7 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
  */
 public class PiecewiseAggregateApproximation {
     private final int segments;
-    private final PaaStrategy strategy;
+    private final SegmentationStrategy strategy;
 
     /**
      * Creates a new instance of this class with default strategy.
@@ -26,7 +26,7 @@ public class PiecewiseAggregateApproximation {
      * @param segments the number of segments
      */
     public PiecewiseAggregateApproximation(int segments) {
-        this(segments, PaaStrategy.STRICT);
+        this(segments, SegmentationStrategy.STRICT);
     }
 
     /**
@@ -35,7 +35,7 @@ public class PiecewiseAggregateApproximation {
      * @param segments the number of segments
      * @param strategy the type of strategy to be applied to the sequence
      */
-    public PiecewiseAggregateApproximation(int segments, PaaStrategy strategy) {
+    public PiecewiseAggregateApproximation(int segments, SegmentationStrategy strategy) {
         this.strategy = strategy;
         this.segments = segments;
     }
@@ -53,12 +53,12 @@ public class PiecewiseAggregateApproximation {
         }
 
         int modulo = len % segments;
-        if (modulo != 0 && strategy == PaaStrategy.STRICT) {
+        if (modulo != 0 && strategy == SegmentationStrategy.STRICT) {
             throw new ArrayLengthIsNotDivisibleException(len, segments);
         }
 
         double[] reducedValues = new double[segments];
-        if (modulo == 0 || strategy == PaaStrategy.IGNORE_REMAINING) {
+        if (modulo == 0 || strategy == SegmentationStrategy.IGNORE_REMAINING) {
             int intervalSize = len / segments;
             double sum = 0;
             int n = 0;
@@ -71,7 +71,7 @@ public class PiecewiseAggregateApproximation {
                 }
             }
 
-        } else if (strategy == PaaStrategy.MEAN_PADDING) {
+        } else if (strategy == SegmentationStrategy.MEAN_PADDING) {
             int intervalSize = len / segments + 1;
             double sum = 0;
             int n = 0;
@@ -85,7 +85,7 @@ public class PiecewiseAggregateApproximation {
             modulo = len % intervalSize;
             reducedValues[n] = sum / modulo;
 
-        } else if (strategy == PaaStrategy.FRACTIONAL_PARTITION) {
+        } else if (strategy == SegmentationStrategy.FRACTIONAL_PARTITION) {
             double intervalSize = len * 1.0 / segments;
             double sum = 0;
             int i = 0;
@@ -125,7 +125,7 @@ public class PiecewiseAggregateApproximation {
         return segments;
     }
 
-    public PaaStrategy getStrategy() {
+    public SegmentationStrategy getStrategy() {
         return strategy;
     }
 }

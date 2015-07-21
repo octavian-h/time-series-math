@@ -1,13 +1,11 @@
 package ro.hasna.ts.math.representation.util;
 
-import ro.hasna.ts.math.representation.PiecewiseAggregateApproximation;
-
 /**
- * Strategies use by {@link PiecewiseAggregateApproximation}
+ * Strategies use by segmentation algorithms.
  *
  * @since 1.0
  */
-public enum PaaStrategy {
+public enum SegmentationStrategy {
     /**
      * The length of the sequence must be divisible with the number of segments.
      * Otherwise it will throw a {@code NumberIsNotDivisibleException}

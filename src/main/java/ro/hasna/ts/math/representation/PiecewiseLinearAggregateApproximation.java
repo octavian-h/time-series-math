@@ -6,7 +6,7 @@ import org.apache.commons.math3.stat.descriptive.moment.Variance;
 import ro.hasna.ts.math.exception.ArrayLengthIsNotDivisibleException;
 import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
 import ro.hasna.ts.math.exception.UnsupportedStrategyException;
-import ro.hasna.ts.math.representation.util.PaaStrategy;
+import ro.hasna.ts.math.representation.util.SegmentationStrategy;
 import ro.hasna.ts.math.type.MeanSlopePair;
 
 /**
@@ -21,7 +21,7 @@ import ro.hasna.ts.math.type.MeanSlopePair;
  */
 public class PiecewiseLinearAggregateApproximation {
     private final int segments;
-    private final PaaStrategy strategy;
+    private final SegmentationStrategy strategy;
 
     /**
      * Creates a new instance of this class with default strategy.
@@ -29,7 +29,7 @@ public class PiecewiseLinearAggregateApproximation {
      * @param segments the number of segments
      */
     public PiecewiseLinearAggregateApproximation(int segments) {
-        this(segments, PaaStrategy.STRICT);
+        this(segments, SegmentationStrategy.STRICT);
     }
 
     /**
@@ -39,8 +39,8 @@ public class PiecewiseLinearAggregateApproximation {
      * @param strategy the type of strategy to be applied to the sequence
      * @throws UnsupportedStrategyException is strategy is different than STRICT and IGNORE_REMAINING
      */
-    public PiecewiseLinearAggregateApproximation(int segments, PaaStrategy strategy) {
-        if (strategy != PaaStrategy.STRICT && strategy != PaaStrategy.IGNORE_REMAINING) {
+    public PiecewiseLinearAggregateApproximation(int segments, SegmentationStrategy strategy) {
+        if (strategy != SegmentationStrategy.STRICT && strategy != SegmentationStrategy.IGNORE_REMAINING) {
             throw new UnsupportedStrategyException(strategy.name(), "PLAA");
         }
         this.strategy = strategy;
@@ -60,7 +60,7 @@ public class PiecewiseLinearAggregateApproximation {
         }
 
         int modulo = len % segments;
-        if (modulo != 0 && strategy == PaaStrategy.STRICT) {
+        if (modulo != 0 && strategy == SegmentationStrategy.STRICT) {
             throw new ArrayLengthIsNotDivisibleException(len, segments);
         }
 
@@ -90,7 +90,7 @@ public class PiecewiseLinearAggregateApproximation {
         return segments;
     }
 
-    public PaaStrategy getStrategy() {
+    public SegmentationStrategy getStrategy() {
         return strategy;
     }
 }
