@@ -58,7 +58,7 @@ public class SymbolicAggregateApproximation {
     }
 
     /**
-     * Transform a given sequence of values using the algorithm Symbolic Aggregate Approximation (SAX).
+     * Transform a given sequence of values using the SAX algorithm.
      *
      * @param values the sequence of values
      * @return the result of the transformation

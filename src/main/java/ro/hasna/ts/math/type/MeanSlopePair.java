@@ -14,31 +14,27 @@ public class MeanSlopePair extends Pair<Double, Double> {
      * @param mean  the mean value for the segment
      * @param slope the slope of the segment
      */
-    public MeanSlopePair(Double mean, Double slope) {
+    public MeanSlopePair(double mean, double slope) {
         super(mean, slope);
     }
 
-    public Double getMean() {
+    public double getMean() {
         return getFirst();
     }
 
-    public Double getSlope() {
+    public double getSlope() {
         return getSecond();
     }
 
     /**
-     * Compare the specified object with this entry for equality.
-     *
-     * @param o Object.
-     * @return {@code true} if the given object is also a map entry and
-     * the two entries represent the same mapping.
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Pair)) {
+        if (!(o instanceof MeanSlopePair)) {
             return false;
         } else {
             MeanSlopePair msp = (MeanSlopePair) o;
