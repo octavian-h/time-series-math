@@ -9,10 +9,10 @@ import ro.hasna.ts.math.representation.SymbolicAggregateApproximation;
  *
  * @since 1.0
  */
-public class SAXEuclideanDistance1 implements DistanceMeasure {
+public class SaxEuclideanDistance implements DistanceMeasure {
     private final SymbolicAggregateApproximation sax;
 
-    public SAXEuclideanDistance1(SymbolicAggregateApproximation sax) {
+    public SaxEuclideanDistance(SymbolicAggregateApproximation sax) {
         this.sax = sax;
     }
 

@@ -12,12 +12,12 @@ import java.util.Random;
 /**
  * @since 1.0
  */
-public class SAXEuclideanDistance1Test {
-    private SAXEuclideanDistance1 distance;
+public class SaxEuclideanDistanceTest {
+    private SaxEuclideanDistance distance;
 
     @Before
     public void setUp() throws Exception {
-        distance = new SAXEuclideanDistance1(new SymbolicAggregateApproximation(8, 3));
+        distance = new SaxEuclideanDistance(new SymbolicAggregateApproximation(8, 3));
     }
 
     @After
