@@ -16,6 +16,7 @@ The goal of this library is to provide optimised algorithms for time-series anal
 * Moving Average Filter
 * Exponential Moving Average Filter
 * Piecewise Linear Aggregate Approximation
+* Indexable Symbolic Aggregate Approximation
 
 ## Usage ##
 Add the following dependency to your maven project.
@@ -41,8 +42,8 @@ And also add the following custom repository.
 
 ## Planned features ##
 
-* iSAX
 * adaptive SAX
+* TESPAR
 
 ## Contributing ##
 
