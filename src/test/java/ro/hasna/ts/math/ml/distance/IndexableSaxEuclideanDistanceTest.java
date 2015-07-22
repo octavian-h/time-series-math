@@ -1,4 +1,4 @@
-package ro.hasna.ts.math.representation.distance;
+package ro.hasna.ts.math.ml.distance;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -83,7 +83,7 @@ public class IndexableSaxEuclideanDistanceTest {
         b[2] = new SaxPair(5,8);
         b[3] = new SaxPair(1,2);
 
-        double result = distance.compute(a, b, 128);
+        double result = distance.compute(a, b, 128, Double.POSITIVE_INFINITY);
 
         Assert.assertEquals(0, result, TimeSeriesPrecision.EPSILON);
     }

@@ -1,4 +1,4 @@
-package ro.hasna.ts.math.representation.distance;
+package ro.hasna.ts.math.ml.distance;
 
 import org.apache.commons.math3.ml.distance.DistanceMeasure;
 import org.apache.commons.math3.util.FastMath;
@@ -6,27 +6,34 @@ import ro.hasna.ts.math.representation.IndexableSymbolicAggregateApproximation;
 import ro.hasna.ts.math.type.SaxPair;
 
 /**
- * Calculates the L<sub>2</sub> (Euclidean) distance between two points using the iSAX representation.
+ * Calculates the L<sub>2</sub> (Euclidean) distance between two vectors using the iSAX representation.
  *
  * @since 1.0
  */
-public class IndexableSaxEuclideanDistance implements DistanceMeasure {
+public class IndexableSaxEuclideanDistance extends AbstractTimeSeriesDistance implements DistanceMeasure, GenericDistanceMeasure<SaxPair[]> {
     private final IndexableSymbolicAggregateApproximation isax;
 
     public IndexableSaxEuclideanDistance(IndexableSymbolicAggregateApproximation isax) {
         this.isax = isax;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public double compute(double[] a, double[] b) {
         SaxPair[] symbolsA = isax.transformToSaxPairArray(a);
         SaxPair[] symbolsB = isax.transformToSaxPairArray(b);
         int n = a.length;
 
-        return compute(symbolsA, symbolsB, n);
+        return compute(symbolsA, symbolsB, n, Double.POSITIVE_INFINITY);
+    }
+
+    @Override
+    public double compute(SaxPair[] a, SaxPair[] b) {
+        return compute(a, b, initialVectorLength, Double.POSITIVE_INFINITY);
+    }
+
+    @Override
+    public double compute(SaxPair[] a, SaxPair[] b, double cutoff) {
+        return compute(a, b, initialVectorLength, cutoff);
     }
 
     /**
@@ -36,11 +43,13 @@ public class IndexableSaxEuclideanDistance implements DistanceMeasure {
      * @param symbolsA the first iSAX representation
      * @param symbolsB the second representation
      * @param n        the length of the initial vectors
+     * @param cutoff   if the distance being calculated is above this value stop computing the remaining distance
      * @return the distance between the two representations
      */
-    public double compute(SaxPair[] symbolsA, SaxPair[] symbolsB, int n) {
+    public double compute(SaxPair[] symbolsA, SaxPair[] symbolsB, int n, double cutoff) {
         double sum = 0.0;
         int w = symbolsA.length;
+        double transformedCutoff = cutoff * cutoff * w / n;
 
         for (int i = 0; i < w; i++) {
             double[] boundsA = getBounds(symbolsA[i]);
@@ -52,7 +61,11 @@ public class IndexableSaxEuclideanDistance implements DistanceMeasure {
             } else if (boundsA[0] != Double.NEGATIVE_INFINITY && boundsB[1] != Double.POSITIVE_INFINITY && boundsA[0] > boundsB[1]) {
                 diff = boundsA[0] - boundsB[1];
             }
+
             sum += diff * diff;
+            if (sum > transformedCutoff) {
+                return FastMath.sqrt(n * sum / w);
+            }
         }
 
         return FastMath.sqrt(n * sum / w);

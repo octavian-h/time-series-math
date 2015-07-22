@@ -1,4 +1,4 @@
-package ro.hasna.ts.math.representation.distance;
+package ro.hasna.ts.math.ml.distance;
 
 import org.junit.After;
 import org.junit.Assert;
