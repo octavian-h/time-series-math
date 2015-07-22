@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ro.hasna.ts.math.representation.IndexableSymbolicAggregateApproximation;
+import ro.hasna.ts.math.type.SaxPair;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
 import java.util.Random;
@@ -64,6 +65,25 @@ public class IndexableSaxEuclideanDistanceTest {
         }
 
         double result = distance.compute(a, b);
+
+        Assert.assertEquals(0, result, TimeSeriesPrecision.EPSILON);
+    }
+
+    @Test
+    public void testCompute3() throws Exception {
+        SaxPair[] a = new SaxPair[4];
+        a[0] = new SaxPair(0,8);
+        a[1] = new SaxPair(4,8);
+        a[2] = new SaxPair(5,8);
+        a[3] = new SaxPair(6,8);
+
+        SaxPair[] b = new SaxPair[4];
+        b[0] = new SaxPair(0,8);
+        b[1] = new SaxPair(2,4);
+        b[2] = new SaxPair(5,8);
+        b[3] = new SaxPair(1,2);
+
+        double result = distance.compute(a, b, 128);
 
         Assert.assertEquals(0, result, TimeSeriesPrecision.EPSILON);
     }

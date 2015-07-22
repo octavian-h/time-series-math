@@ -43,39 +43,36 @@ public class IndexableSaxEuclideanDistance implements DistanceMeasure {
         int w = symbolsA.length;
 
         for (int i = 0; i < w; i++) {
-            SaxPair spA = symbolsA[i];
-            SaxPair spB = symbolsB[i];
-            int sa = spA.getSymbol();
-            int sb = spB.getSymbol();
-            int alphabetSizeA = spA.getAlphabetSize();
-            int alphabetSizeB = spB.getAlphabetSize();
-            int alphabetSize;
+            double[] boundsA = getBounds(symbolsA[i]);
+            double[] boundsB = getBounds(symbolsB[i]);
+            double diff = 0.0;
 
-            if (alphabetSizeA == alphabetSizeB) {
-                alphabetSize = alphabetSizeA;
-            } else {
-                if (alphabetSizeA > alphabetSizeB) {
-                    alphabetSize = alphabetSizeB;
-                    sa = sa / (alphabetSizeA / alphabetSizeB);
-                } else {
-                    alphabetSize = alphabetSizeB;
-                    sb = sb / (alphabetSizeB / alphabetSizeA);
-                }
+            if (boundsA[1] != Double.POSITIVE_INFINITY && boundsB[0] != Double.NEGATIVE_INFINITY && boundsA[1] < boundsB[0]) {
+                diff = boundsA[1] - boundsB[0];
+            } else if (boundsA[0] != Double.NEGATIVE_INFINITY && boundsB[1] != Double.POSITIVE_INFINITY && boundsA[0] > boundsB[1]) {
+                diff = boundsA[0] - boundsB[1];
             }
-
-            double[] breakpoints = isax.getDistributionDivider().getBreakpoints(alphabetSize);
-
-            if (FastMath.abs(sa - sb) > 1) {
-                double aux;
-                if (sa > sb) {
-                    aux = breakpoints[sa - 1] - breakpoints[sb];
-                } else {
-                    aux = breakpoints[sb - 1] - breakpoints[sa];
-                }
-                sum += aux * aux;
-            }
+            sum += diff * diff;
         }
 
         return FastMath.sqrt(n * sum / w);
+    }
+
+    private double[] getBounds(SaxPair saxPair) {
+        double[] bounds = {Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY};
+
+        double[] breakpoints = isax.getDistributionDivider().getBreakpoints(saxPair.getAlphabetSize());
+
+        int symbol = saxPair.getSymbol();
+        if (symbol == 0) {
+            bounds[1] = breakpoints[0];
+        } else if (symbol == breakpoints.length) {
+            bounds[0] = breakpoints[symbol - 1];
+        } else {
+            bounds[0] = breakpoints[symbol - 1];
+            bounds[1] = breakpoints[symbol];
+        }
+
+        return bounds;
     }
 }
