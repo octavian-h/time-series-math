@@ -1,13 +1,11 @@
 package ro.hasna.ts.math.distribution;
 
-import org.apache.commons.math3.exception.NumberIsTooSmallException;
-
 /**
  * Implements the equal areas of probability for Uniform Distribution.
  *
  * @since 1.0
  */
-public class UniformDistributionDivider implements DistributionDivider {
+public class UniformDistributionDivider extends AbstractDistributionDivider {
     private final double lower;
     private final double upper;
 
@@ -18,19 +16,13 @@ public class UniformDistributionDivider implements DistributionDivider {
      * @param upper the maximum value from the distribution
      */
     public UniformDistributionDivider(double lower, double upper) {
+        super(true);
         this.lower = lower;
         this.upper = upper;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public double[] getBreakpoints(int areas) {
-        if (areas < 2) {
-            throw new NumberIsTooSmallException(areas, 2, true);
-        }
-
+    protected double[] computeBreakpoints(int areas) {
         int len = areas - 1;
         double[] result = new double[len];
         double intervalSize = (upper - lower) / areas;
