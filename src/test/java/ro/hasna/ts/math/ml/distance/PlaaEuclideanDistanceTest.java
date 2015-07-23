@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ro.hasna.ts.math.normalization.ZNormalizer;
 import ro.hasna.ts.math.representation.PiecewiseLinearAggregateApproximation;
+import ro.hasna.ts.math.type.MeanSlopePair;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
 import java.util.Random;
@@ -28,7 +29,7 @@ public class PlaaEuclideanDistanceTest {
     }
 
     @Test
-    public void testCompute1() throws Exception {
+    public void testTriangleInequality() throws Exception {
         int n = 128;
         double a[] = new double[n];
         double b[] = new double[n];
@@ -50,7 +51,7 @@ public class PlaaEuclideanDistanceTest {
     }
 
     @Test
-    public void testCompute2() throws Exception {
+    public void testEquality() throws Exception {
         int n = 128;
         double a[] = new double[n];
         double b[] = new double[n];
@@ -64,5 +65,24 @@ public class PlaaEuclideanDistanceTest {
         double result = distance.compute(normalizer.normalize(a), normalizer.normalize(b));
 
         Assert.assertEquals(0, result, 0.1);
+    }
+
+    @Test
+    public void testOverflow() throws Exception {
+        MeanSlopePair[] a = new MeanSlopePair[4];
+        a[0] = new MeanSlopePair(0, 8);
+        a[1] = new MeanSlopePair(4, 8);
+        a[2] = new MeanSlopePair(5, 8);
+        a[3] = new MeanSlopePair(6, 8);
+
+        MeanSlopePair[] b = new MeanSlopePair[4];
+        b[0] = new MeanSlopePair(7, 8);
+        b[1] = new MeanSlopePair(2, 4);
+        b[2] = new MeanSlopePair(5, 8);
+        b[3] = new MeanSlopePair(1, 2);
+
+        double result = distance.compute(a, b, 128, 3);
+
+        Assert.assertEquals(Double.POSITIVE_INFINITY, result, TimeSeriesPrecision.EPSILON);
     }
 }

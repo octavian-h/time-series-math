@@ -17,7 +17,7 @@ public class SaxEuclideanDistanceTest {
 
     @Before
     public void setUp() throws Exception {
-        distance = new SaxEuclideanDistance(new SymbolicAggregateApproximation(8, 3));
+        distance = new SaxEuclideanDistance(new SymbolicAggregateApproximation(8, 8));
     }
 
     @After
@@ -26,7 +26,7 @@ public class SaxEuclideanDistanceTest {
     }
 
     @Test
-    public void testCompute1() throws Exception {
+    public void testTriangleInequality() throws Exception {
         int n = 128;
         double a[] = new double[n];
         double b[] = new double[n];
@@ -48,7 +48,7 @@ public class SaxEuclideanDistanceTest {
     }
 
     @Test
-    public void testCompute2() throws Exception {
+    public void testEquality() throws Exception {
         int n = 128;
         double a[] = new double[n];
         double b[] = new double[n];
@@ -61,5 +61,15 @@ public class SaxEuclideanDistanceTest {
         double result = distance.compute(a, b);
 
         Assert.assertEquals(0, result, TimeSeriesPrecision.EPSILON);
+    }
+
+    @Test
+    public void testOverflow() throws Exception {
+        int a[] = {0, 4, 5, 6};
+        int b[] = {7, 2, 5, 1};
+
+        double result = distance.compute(a, b, 128, 3);
+
+        Assert.assertEquals(Double.POSITIVE_INFINITY, result, TimeSeriesPrecision.EPSILON);
     }
 }
