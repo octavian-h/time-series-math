@@ -14,7 +14,7 @@ import ro.hasna.ts.math.normalization.ZNormalizer;
  *
  * @since 1.0
  */
-public class SymbolicAggregateApproximation {
+public class SymbolicAggregateApproximation implements GenericTransformer<double[], int[]>{
     private final PiecewiseAggregateApproximation paa;
     private final Normalizer normalizer;
     private final double[] breakpoints;
@@ -63,8 +63,8 @@ public class SymbolicAggregateApproximation {
      * @param values the sequence of values
      * @return the result of the transformation
      */
-    public int[] transformToIntArray(double[] values) {
-        double[] copy = paa.transformToDoubleArray(values);
+    public int[] transform(double[] values) {
+        double[] copy = paa.transform(values);
 
         // NOTE: mathematically the order of PAA and normalisation doesn't matter, the result is the same,
         // but comparing the speed, running PAA and then normalisation is faster than in the reverse order

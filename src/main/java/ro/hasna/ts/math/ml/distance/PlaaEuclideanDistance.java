@@ -19,8 +19,8 @@ public class PlaaEuclideanDistance extends AbstractTimeSeriesDistance implements
 
     @Override
     public double compute(double[] a, double[] b) {
-        MeanSlopePair[] mspA = plaa.transformToMeanSlopePairArray(a);
-        MeanSlopePair[] mspB = plaa.transformToMeanSlopePairArray(b);
+        MeanSlopePair[] mspA = plaa.transform(a);
+        MeanSlopePair[] mspB = plaa.transform(b);
         int n = a.length;
 
         return compute(mspA, mspB, n, Double.POSITIVE_INFINITY);

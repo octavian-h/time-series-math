@@ -18,8 +18,8 @@ public class SaxEuclideanDistance extends AbstractTimeSeriesDistance implements 
 
     @Override
     public double compute(double[] a, double[] b) {
-        int[] symbolsA = sax.transformToIntArray(a);
-        int[] symbolsB = sax.transformToIntArray(b);
+        int[] symbolsA = sax.transform(a);
+        int[] symbolsB = sax.transform(b);
         int n = a.length;
 
         return compute(symbolsA, symbolsB, n, Double.POSITIVE_INFINITY);

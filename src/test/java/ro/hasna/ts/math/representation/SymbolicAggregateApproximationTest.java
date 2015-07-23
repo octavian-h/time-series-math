@@ -25,7 +25,7 @@ public class SymbolicAggregateApproximationTest {
         int[] expected = {0, 0, 1, 2, 2, 2, 1, 0, 0};
 
         SymbolicAggregateApproximation sax = new SymbolicAggregateApproximation(new PiecewiseAggregateApproximation(9, SegmentationStrategy.FRACTIONAL_PARTITION), new ZNormalizer(), breakpoints);
-        int[] result = sax.transformToIntArray(list);
+        int[] result = sax.transform(list);
 
         Assert.assertArrayEquals(expected, result);
     }
@@ -43,7 +43,7 @@ public class SymbolicAggregateApproximationTest {
         int[] expected = {0, 0, 1, 2, 2, 2, 1, 0};
 
         SymbolicAggregateApproximation sax = new SymbolicAggregateApproximation(8, breakpoints);
-        int[] result = sax.transformToIntArray(list);
+        int[] result = sax.transform(list);
 
         Assert.assertArrayEquals(expected, result);
     }
@@ -60,8 +60,8 @@ public class SymbolicAggregateApproximationTest {
         ZNormalizer normalizer = new ZNormalizer();
         PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(segments, SegmentationStrategy.STRICT);
 
-        double[] first = normalizer.normalize(paa.transformToDoubleArray(list));
-        double[] second = paa.transformToDoubleArray(normalizer.normalize(list));
+        double[] first = normalizer.normalize(paa.transform(list));
+        double[] second = paa.transform(normalizer.normalize(list));
 
         Assert.assertArrayEquals(first, second, 0.01);
     }

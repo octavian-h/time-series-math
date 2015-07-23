@@ -26,7 +26,7 @@ public class PiecewiseLinearAggregateApproximationTest {
         PiecewiseLinearAggregateApproximation plaa = new PiecewiseLinearAggregateApproximation(4, SegmentationStrategy.IGNORE_REMAINING);
         double[] v = {1, 2, 3};
 
-        plaa.transformToMeanSlopePairArray(v);
+        plaa.transform(v);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class PiecewiseLinearAggregateApproximationTest {
         PiecewiseLinearAggregateApproximation plaa = new PiecewiseLinearAggregateApproximation(4);
         double[] v = {1, 2, 3, 4, 5};
 
-        plaa.transformToMeanSlopePairArray(v);
+        plaa.transform(v);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class PiecewiseLinearAggregateApproximationTest {
         double[] v = {1, 2, 3, 3, 2, 1};
         MeanSlopePair[] expected = {new MeanSlopePair(2.0, 1.0), new MeanSlopePair(2.0, -1.0)};
 
-        MeanSlopePair[] result = plaa.transformToMeanSlopePairArray(v);
+        MeanSlopePair[] result = plaa.transform(v);
 
         Assert.assertArrayEquals(expected, result);
     }
@@ -65,7 +65,7 @@ public class PiecewiseLinearAggregateApproximationTest {
         double[] v = {1, 2, 3, 3, 2, 1, 0};
         MeanSlopePair[] expected = {new MeanSlopePair(2.0, 1.0), new MeanSlopePair(2.0, -1.0)};
 
-        MeanSlopePair[] result = plaa.transformToMeanSlopePairArray(v);
+        MeanSlopePair[] result = plaa.transform(v);
 
         Assert.assertArrayEquals(expected, result);
     }

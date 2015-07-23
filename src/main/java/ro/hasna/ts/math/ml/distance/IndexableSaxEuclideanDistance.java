@@ -19,8 +19,8 @@ public class IndexableSaxEuclideanDistance extends AbstractTimeSeriesDistance im
 
     @Override
     public double compute(double[] a, double[] b) {
-        SaxPair[] symbolsA = isax.transformToSaxPairArray(a);
-        SaxPair[] symbolsB = isax.transformToSaxPairArray(b);
+        SaxPair[] symbolsA = isax.transform(a);
+        SaxPair[] symbolsB = isax.transform(b);
         int n = a.length;
 
         return compute(symbolsA, symbolsB, n, Double.POSITIVE_INFINITY);

@@ -17,7 +17,7 @@ import ro.hasna.ts.math.type.SaxPair;
  *
  * @since 1.0
  */
-public class IndexableSymbolicAggregateApproximation {
+public class IndexableSymbolicAggregateApproximation implements GenericTransformer<double[], SaxPair[]> {
     private final PiecewiseAggregateApproximation paa;
     private final Normalizer normalizer;
     private final DistributionDivider distributionDivider;
@@ -64,8 +64,8 @@ public class IndexableSymbolicAggregateApproximation {
      * @param values the sequence of values
      * @return the result of the transformation
      */
-    public SaxPair[] transformToSaxPairArray(double[] values) {
-        double[] copy = paa.transformToDoubleArray(values);
+    public SaxPair[] transform(double[] values) {
+        double[] copy = paa.transform(values);
 
         // NOTE: mathematically the order of PAA and normalisation doesn't matter, the result is the same,
         // but comparing the speed, running PAA and then normalisation is faster than in the reverse order

@@ -37,7 +37,7 @@ public class DiscreteCosineTransformTest {
     @Test
     public void testTransform() throws Exception {
         double[] v = {1, 2, 3, 4};
-        discreteCosineTransform.transformToDoubleArray(v);
+        discreteCosineTransform.transform(v);
 
         Mockito.verify(fastCosineTransformer).transform(new double[]{1, 2, 3, 4, 0}, TransformType.FORWARD);
     }
@@ -45,7 +45,7 @@ public class DiscreteCosineTransformTest {
     @Test
     public void testTransformPowerOfTwoPlusOne() throws Exception {
         double[] v = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-        discreteCosineTransform.transformToDoubleArray(v);
+        discreteCosineTransform.transform(v);
 
         Mockito.verify(fastCosineTransformer).transform(v, TransformType.FORWARD);
     }

@@ -25,7 +25,7 @@ public class PiecewiseAggregateApproximationTest {
         PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(4, SegmentationStrategy.FRACTIONAL_PARTITION);
         double[] v = {1, 2, 3};
 
-        paa.transformToDoubleArray(v);
+        paa.transform(v);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class PiecewiseAggregateApproximationTest {
         PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(4);
         double[] v = {1, 2, 3, 4, 5};
 
-        paa.transformToDoubleArray(v);
+        paa.transform(v);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class PiecewiseAggregateApproximationTest {
         double[] v = {1, 2, 3, 4, 5, 6};
         double[] expected = {2.0, 5.0};
 
-        double[] result = paa.transformToDoubleArray(v);
+        double[] result = paa.transform(v);
 
         Assert.assertArrayEquals(expected, result, TimeSeriesPrecision.EPSILON);
     }
@@ -56,7 +56,7 @@ public class PiecewiseAggregateApproximationTest {
         double[] v = {1, 2, 3, 4, 5, 6, 7};
         double[] expected = {2.0, 5.0};
 
-        double[] result = paa.transformToDoubleArray(v);
+        double[] result = paa.transform(v);
 
         Assert.assertArrayEquals(expected, result, TimeSeriesPrecision.EPSILON);
     }
@@ -67,7 +67,7 @@ public class PiecewiseAggregateApproximationTest {
         double[] v = {1, 2, 3, 4, 5, 6, 7};
         double[] expected = {2.5, 6.0};
 
-        double[] result = paa.transformToDoubleArray(v);
+        double[] result = paa.transform(v);
 
         Assert.assertArrayEquals(expected, result, TimeSeriesPrecision.EPSILON);
     }
@@ -78,7 +78,7 @@ public class PiecewiseAggregateApproximationTest {
         double[] v = {1, 2, 3, 4, 5, 6, 7};
         double[] expected = {8 / 3.5, 20 / 3.5};
 
-        double[] result = paa.transformToDoubleArray(v);
+        double[] result = paa.transform(v);
 
         Assert.assertArrayEquals(expected, result, TimeSeriesPrecision.EPSILON);
     }
@@ -89,7 +89,7 @@ public class PiecewiseAggregateApproximationTest {
         double[] v = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
         double[] expected = {24.0 / 13, 57.0 / 13, 91.0 / 13, 125.0 / 13, 158.0 / 13};
 
-        double[] result = paa.transformToDoubleArray(v);
+        double[] result = paa.transform(v);
 
         Assert.assertArrayEquals(expected, result, TimeSeriesPrecision.EPSILON);
     }
@@ -103,7 +103,7 @@ public class PiecewiseAggregateApproximationTest {
         }
         double[] expected = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 
-        double[] result = paa.transformToDoubleArray(v);
+        double[] result = paa.transform(v);
 
         Assert.assertArrayEquals(expected, result, TimeSeriesPrecision.EPSILON);
     }

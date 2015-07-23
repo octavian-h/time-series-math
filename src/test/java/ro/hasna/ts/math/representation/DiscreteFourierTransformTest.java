@@ -40,7 +40,7 @@ public class DiscreteFourierTransformTest {
     @Test
     public void testTransform() throws Exception {
         double[] v = {1, 2, 3};
-        discreteFourierTransform.transformToDoubleArray(v);
+        discreteFourierTransform.transform(v);
 
 
         Mockito.verify(fastFourierTransformer).transform(new double[]{1, 2, 3, 0}, TransformType.FORWARD);
@@ -49,7 +49,7 @@ public class DiscreteFourierTransformTest {
     @Test
     public void testTransformPowerOfTwo() throws Exception {
         double[] v = {1, 2, 3, 4};
-        discreteFourierTransform.transformToDoubleArray(v);
+        discreteFourierTransform.transform(v);
 
         Mockito.verify(fastFourierTransformer).transform(v, TransformType.FORWARD);
     }
@@ -66,7 +66,7 @@ public class DiscreteFourierTransformTest {
             v[i] = amplitude * Math.sin(2 * Math.PI * signalFrequency * i / samplingFrequency) + displacement;
         }
 
-        double[] result = new DiscreteFourierTransform().transformToDoubleArray(v);
+        double[] result = new DiscreteFourierTransform().transform(v);
 
         double max = 0;
         int pos = 0;

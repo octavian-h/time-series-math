@@ -60,7 +60,7 @@ public class IndexableSymbolicAggregateApproximationTest {
                 new ZNormalizer(),
                 alphabetSizes,
                 new NormalDistributionDivider());
-        SaxPair[] result = isax.transformToSaxPairArray(list);
+        SaxPair[] result = isax.transform(list);
 
         Assert.assertArrayEquals(expected, result);
     }
@@ -89,7 +89,7 @@ public class IndexableSymbolicAggregateApproximationTest {
         expected[7] = new SaxPair(0, 3);
 
         IndexableSymbolicAggregateApproximation isax = new IndexableSymbolicAggregateApproximation(8, alphabetSizes);
-        SaxPair[] result = isax.transformToSaxPairArray(list);
+        SaxPair[] result = isax.transform(list);
 
         Assert.assertArrayEquals(expected, result);
     }
@@ -119,7 +119,7 @@ public class IndexableSymbolicAggregateApproximationTest {
         expected[7] = new SaxPair(0, 2);
 
         IndexableSymbolicAggregateApproximation isax = new IndexableSymbolicAggregateApproximation(8, alphabetSizes);
-        SaxPair[] result = isax.transformToSaxPairArray(list);
+        SaxPair[] result = isax.transform(list);
 
         Assert.assertArrayEquals(expected, result);
     }

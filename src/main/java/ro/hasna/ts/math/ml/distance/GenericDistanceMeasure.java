@@ -1,6 +1,8 @@
 package ro.hasna.ts.math.ml.distance;
 
 /**
+ * Interface for generic distance measures of n-dimensional vectors.
+ *
  * @since 1.0
  */
 public interface GenericDistanceMeasure<T> {

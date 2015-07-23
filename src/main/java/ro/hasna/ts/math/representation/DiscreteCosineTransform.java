@@ -9,7 +9,7 @@ import org.apache.commons.math3.transform.TransformType;
  *
  * @since 1.0
  */
-public class DiscreteCosineTransform {
+public class DiscreteCosineTransform implements GenericTransformer<double[], double[]>{
     private final FastCosineTransformer cosineTransformer;
 
     public DiscreteCosineTransform() {
@@ -27,7 +27,7 @@ public class DiscreteCosineTransform {
      * @param values the sequence of values
      * @return the result of the transformation
      */
-    public double[] transformToDoubleArray(double[] values) {
+    public double[] transform(double[] values) {
         // pad the input array with zeros so as to have a length == 2^k + 1
         int initialLength = values.length;
         int powerOfTwo = Integer.highestOneBit(initialLength);

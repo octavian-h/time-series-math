@@ -8,6 +8,7 @@ import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
 import ro.hasna.ts.math.exception.UnsupportedStrategyException;
 import ro.hasna.ts.math.representation.util.SegmentationStrategy;
 import ro.hasna.ts.math.type.MeanSlopePair;
+import ro.hasna.ts.math.type.SaxPair;
 
 /**
  * Implements the Piecewise Linear Aggregate Approximation (PLAA) algorithm.
@@ -19,7 +20,7 @@ import ro.hasna.ts.math.type.MeanSlopePair;
  *
  * @since 1.0
  */
-public class PiecewiseLinearAggregateApproximation {
+public class PiecewiseLinearAggregateApproximation implements GenericTransformer<double[], MeanSlopePair[]>{
     private final int segments;
     private final SegmentationStrategy strategy;
 
@@ -53,7 +54,7 @@ public class PiecewiseLinearAggregateApproximation {
      * @param values the sequence of values
      * @return the result of the transformation
      */
-    public MeanSlopePair[] transformToMeanSlopePairArray(double[] values) {
+    public MeanSlopePair[] transform(double[] values) {
         int len = values.length;
         if (len < segments) {
             throw new ArrayLengthIsTooSmallException(len, segments, true);
