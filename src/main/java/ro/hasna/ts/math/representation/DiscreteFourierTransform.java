@@ -10,7 +10,7 @@ import org.apache.commons.math3.transform.TransformType;
  *
  * @since 1.0
  */
-public class DiscreteFourierTransform implements GenericTransformer<double[], double[]>{
+public class DiscreteFourierTransform implements GenericTransformer<double[], double[]> {
     private final FastFourierTransformer fourierTransformer;
 
     public DiscreteFourierTransform() {

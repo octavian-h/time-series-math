@@ -31,7 +31,7 @@ public class SaxEuclideanDistance extends AbstractTimeSeriesDistance implements 
     }
 
     @Override
-    public double compute(int[] a, int[] b, double cutoff) {
+    public double compute(int[] a, int[] b, double cutOffValue) {
         return compute(a, b, initialVectorLength, Double.POSITIVE_INFINITY);
     }
 
@@ -64,7 +64,7 @@ public class SaxEuclideanDistance extends AbstractTimeSeriesDistance implements 
                 sum += aux * aux;
 
                 if (sum > transformedCutoff) {
-                    return FastMath.sqrt(n * sum / w);
+                    return Double.POSITIVE_INFINITY;
                 }
             }
         }

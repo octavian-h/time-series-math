@@ -32,7 +32,7 @@ public class PlaaEuclideanDistance extends AbstractTimeSeriesDistance implements
     }
 
     @Override
-    public double compute(MeanSlopePair[] a, MeanSlopePair[] b, double cutoff) {
+    public double compute(MeanSlopePair[] a, MeanSlopePair[] b, double cutOffValue) {
         return compute(a, b, initialVectorLength, Double.POSITIVE_INFINITY);
     }
 
@@ -61,7 +61,7 @@ public class PlaaEuclideanDistance extends AbstractTimeSeriesDistance implements
 
             double currentDistance = sum1 * k + sum2 * (k * k - 1) / 18;
             if (currentDistance > transformedCutoff) {
-                return FastMath.sqrt(currentDistance);
+                return Double.POSITIVE_INFINITY;
             }
         }
 

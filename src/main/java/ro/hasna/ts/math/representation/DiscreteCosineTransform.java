@@ -9,7 +9,7 @@ import org.apache.commons.math3.transform.TransformType;
  *
  * @since 1.0
  */
-public class DiscreteCosineTransform implements GenericTransformer<double[], double[]>{
+public class DiscreteCosineTransform implements GenericTransformer<double[], double[]> {
     private final FastCosineTransformer cosineTransformer;
 
     public DiscreteCosineTransform() {

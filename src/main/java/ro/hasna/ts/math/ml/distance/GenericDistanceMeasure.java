@@ -22,10 +22,11 @@ public interface GenericDistanceMeasure<T> {
      * <p>
      * The two vectors are required to have the same dimension.
      *
-     * @param a      the first vector
-     * @param b      the second vector
-     * @param cutoff if the distance being calculated is above this value stop computing the remaining distance
+     * @param a           the first vector
+     * @param b           the second vector
+     * @param cutOffValue if the distance being calculated is above this value
+     *                    stop computing the remaining distance
      * @return the distance between the two vectors
      */
-    double compute(T a, T b, double cutoff);
+    double compute(T a, T b, double cutOffValue);
 }

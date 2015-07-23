@@ -32,8 +32,8 @@ public class IndexableSaxEuclideanDistance extends AbstractTimeSeriesDistance im
     }
 
     @Override
-    public double compute(SaxPair[] a, SaxPair[] b, double cutoff) {
-        return compute(a, b, initialVectorLength, cutoff);
+    public double compute(SaxPair[] a, SaxPair[] b, double cutOffValue) {
+        return compute(a, b, initialVectorLength, cutOffValue);
     }
 
     /**
@@ -64,7 +64,7 @@ public class IndexableSaxEuclideanDistance extends AbstractTimeSeriesDistance im
 
             sum += diff * diff;
             if (sum > transformedCutoff) {
-                return FastMath.sqrt(n * sum / w);
+                return Double.POSITIVE_INFINITY;
             }
         }
 

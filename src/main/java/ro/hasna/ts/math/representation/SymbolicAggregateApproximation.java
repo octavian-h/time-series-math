@@ -14,7 +14,7 @@ import ro.hasna.ts.math.normalization.ZNormalizer;
  *
  * @since 1.0
  */
-public class SymbolicAggregateApproximation implements GenericTransformer<double[], int[]>{
+public class SymbolicAggregateApproximation implements GenericTransformer<double[], int[]> {
     private final PiecewiseAggregateApproximation paa;
     private final Normalizer normalizer;
     private final double[] breakpoints;

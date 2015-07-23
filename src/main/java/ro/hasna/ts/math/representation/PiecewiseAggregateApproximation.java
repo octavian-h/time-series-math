@@ -4,7 +4,6 @@ import org.apache.commons.math3.util.Precision;
 import ro.hasna.ts.math.exception.ArrayLengthIsNotDivisibleException;
 import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
 import ro.hasna.ts.math.representation.util.SegmentationStrategy;
-import ro.hasna.ts.math.type.SaxPair;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
 /**
@@ -17,7 +16,7 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
  *
  * @since 1.0
  */
-public class PiecewiseAggregateApproximation implements GenericTransformer<double[], double[]>{
+public class PiecewiseAggregateApproximation implements GenericTransformer<double[], double[]> {
     private final int segments;
     private final SegmentationStrategy strategy;
 
