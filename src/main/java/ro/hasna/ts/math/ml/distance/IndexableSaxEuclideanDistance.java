@@ -10,7 +10,7 @@ import ro.hasna.ts.math.type.SaxPair;
  *
  * @since 1.0
  */
-public class IndexableSaxEuclideanDistance extends AbstractTimeSeriesDistance implements DistanceMeasure, GenericDistanceMeasure<SaxPair[]> {
+public class IndexableSaxEuclideanDistance implements DistanceMeasure, GenericDistanceMeasure<SaxPair[]> {
     private final IndexableSymbolicAggregateApproximation isax;
 
     public IndexableSaxEuclideanDistance(IndexableSymbolicAggregateApproximation isax) {
@@ -28,24 +28,15 @@ public class IndexableSaxEuclideanDistance extends AbstractTimeSeriesDistance im
 
     @Override
     public double compute(SaxPair[] a, SaxPair[] b) {
-        return compute(a, b, initialVectorLength, Double.POSITIVE_INFINITY);
+        return compute(a, b, a.length, Double.POSITIVE_INFINITY);
     }
 
     @Override
     public double compute(SaxPair[] a, SaxPair[] b, double cutOffValue) {
-        return compute(a, b, initialVectorLength, cutOffValue);
+        return compute(a, b, a.length, cutOffValue);
     }
 
-    /**
-     * Compute the distance between two iSAX representations.
-     * The alphabet sizes must be powers of two.
-     *
-     * @param symbolsA the first iSAX representation
-     * @param symbolsB the second representation
-     * @param n        the length of the initial vectors
-     * @param cutoff   if the distance being calculated is above this value stop computing the remaining distance
-     * @return the distance between the two representations
-     */
+    @Override
     public double compute(SaxPair[] symbolsA, SaxPair[] symbolsB, int n, double cutoff) {
         double sum = 0.0;
         int w = symbolsA.length;

@@ -28,4 +28,9 @@ public class EuclideanDistanceAdapter implements GenericDistanceMeasure<double[]
         }
         return FastMath.sqrt(sum);
     }
+
+    @Override
+    public double compute(double[] a, double[] b, int n, double cutOffValue) {
+        return compute(a, b, cutOffValue);
+    }
 }

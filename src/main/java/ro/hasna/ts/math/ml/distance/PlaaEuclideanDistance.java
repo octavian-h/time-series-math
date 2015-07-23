@@ -10,7 +10,7 @@ import ro.hasna.ts.math.type.MeanSlopePair;
  *
  * @since 1.0
  */
-public class PlaaEuclideanDistance extends AbstractTimeSeriesDistance implements DistanceMeasure, GenericDistanceMeasure<MeanSlopePair[]> {
+public class PlaaEuclideanDistance implements DistanceMeasure, GenericDistanceMeasure<MeanSlopePair[]> {
     private final PiecewiseLinearAggregateApproximation plaa;
 
     public PlaaEuclideanDistance(PiecewiseLinearAggregateApproximation plaa) {
@@ -28,23 +28,15 @@ public class PlaaEuclideanDistance extends AbstractTimeSeriesDistance implements
 
     @Override
     public double compute(MeanSlopePair[] a, MeanSlopePair[] b) {
-        return compute(a, b, initialVectorLength, Double.POSITIVE_INFINITY);
+        return compute(a, b, a.length, Double.POSITIVE_INFINITY);
     }
 
     @Override
     public double compute(MeanSlopePair[] a, MeanSlopePair[] b, double cutOffValue) {
-        return compute(a, b, initialVectorLength, Double.POSITIVE_INFINITY);
+        return compute(a, b, a.length, cutOffValue);
     }
 
-    /**
-     * Compute the distance between two PLAA representations.
-     *
-     * @param a      the first PLAA representation
-     * @param b      the second representation
-     * @param n      the length of the initial vectors
-     * @param cutoff if the distance being calculated is above this value stop computing the remaining distance
-     * @return the distance between the two representations
-     */
+    @Override
     public double compute(MeanSlopePair[] a, MeanSlopePair[] b, int n, double cutoff) {
         double sum1 = 0.0;
         double sum2 = 0.0;

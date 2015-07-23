@@ -9,7 +9,7 @@ import ro.hasna.ts.math.representation.SymbolicAggregateApproximation;
  *
  * @since 1.0
  */
-public class SaxEuclideanDistance extends AbstractTimeSeriesDistance implements DistanceMeasure, GenericDistanceMeasure<int[]> {
+public class SaxEuclideanDistance implements DistanceMeasure, GenericDistanceMeasure<int[]> {
     private final SymbolicAggregateApproximation sax;
 
     public SaxEuclideanDistance(SymbolicAggregateApproximation sax) {
@@ -27,23 +27,15 @@ public class SaxEuclideanDistance extends AbstractTimeSeriesDistance implements 
 
     @Override
     public double compute(int[] a, int[] b) {
-        return compute(a, b, initialVectorLength, Double.POSITIVE_INFINITY);
+        return compute(a, b, a.length, Double.POSITIVE_INFINITY);
     }
 
     @Override
     public double compute(int[] a, int[] b, double cutOffValue) {
-        return compute(a, b, initialVectorLength, Double.POSITIVE_INFINITY);
+        return compute(a, b, a.length, cutOffValue);
     }
 
-    /**
-     * Compute the distance between two SAX representations.
-     *
-     * @param symbolsA the first SAX representation
-     * @param symbolsB the second representation
-     * @param n        the length of the initial vectors
-     * @param cutoff   if the distance being calculated is above this value stop computing the remaining distance
-     * @return the distance between the two representations
-     */
+    @Override
     public double compute(int[] symbolsA, int[] symbolsB, int n, double cutoff) {
         double[] breakpoints = sax.getBreakpoints();
 
