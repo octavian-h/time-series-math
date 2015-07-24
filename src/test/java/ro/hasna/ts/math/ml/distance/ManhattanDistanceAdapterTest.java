@@ -9,12 +9,12 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
 /**
  * @since 1.0
  */
-public class EuclideanDistanceAdapterTest {
-    private EuclideanDistanceAdapter distance;
+public class ManhattanDistanceAdapterTest {
+    private ManhattanDistanceAdapter distance;
 
     @Before
     public void setUp() throws Exception {
-        distance = new EuclideanDistanceAdapter();
+        distance = new ManhattanDistanceAdapter();
     }
 
     @After
@@ -69,7 +69,7 @@ public class EuclideanDistanceAdapterTest {
             b[i] = i + 100;
         }
 
-        double result = distance.compute(a, b, 100);
+        double result = distance.compute(a, b, 99);
 
         Assert.assertEquals(Double.POSITIVE_INFINITY, result, TimeSeriesPrecision.EPSILON);
     }
@@ -86,6 +86,6 @@ public class EuclideanDistanceAdapterTest {
 
         double result = distance.compute(a, b);
 
-        Assert.assertEquals(20, result, TimeSeriesPrecision.EPSILON);
+        Assert.assertEquals(200, result, TimeSeriesPrecision.EPSILON);
     }
 }

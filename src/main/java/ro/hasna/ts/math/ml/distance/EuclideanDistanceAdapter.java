@@ -1,19 +1,14 @@
 package ro.hasna.ts.math.ml.distance;
 
+import org.apache.commons.math3.ml.distance.EuclideanDistance;
 import org.apache.commons.math3.util.FastMath;
 
 /**
- * Adapter class for {@link org.apache.commons.math3.ml.distance.EuclideanDistance} that
- * implements {@link GenericDistanceMeasure}.
+ * Adapter class for {@link EuclideanDistance} that implements {@link GenericDistanceMeasure}.
  *
  * @since 1.0
  */
-public class EuclideanDistanceAdapter implements GenericDistanceMeasure<double[]> {
-
-    @Override
-    public double compute(double[] a, double[] b) {
-        return compute(a, b, Double.POSITIVE_INFINITY);
-    }
+public class EuclideanDistanceAdapter extends EuclideanDistance implements GenericDistanceMeasure<double[]> {
 
     @Override
     public double compute(double[] a, double[] b, double cutOffValue) {
