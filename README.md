@@ -19,6 +19,7 @@ The goal of this library is to provide optimised algorithms for time-series anal
 * Indexable Symbolic Aggregate Approximation
 * Adaptive Distribution Divider used for (adaptive SAX/iSAX)
 * TESPAR DZ
+* Discrete Chebyshev Transform
 
 ## Usage ##
 Add the following dependency to your maven project.
@@ -26,7 +27,7 @@ Add the following dependency to your maven project.
 <dependency>
     <groupId>ro.hasna.ts</groupId>
     <artifactId>time-series-math</artifactId>
-    <version>0.6</version>
+    <version>0.7</version>
 </dependency>
 ```
 
@@ -41,10 +42,6 @@ And also add the following custom repository.
     <url>http://jcenter.bintray.com</url>
 </repository>
 ```
-
-## Planned features ##
-
-* Discrete Chebyshev Transform
 
 ## Contributing ##
 
