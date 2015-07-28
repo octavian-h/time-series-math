@@ -39,9 +39,6 @@ public class DiscreteCosineTransform implements GenericTransformer<double[], dou
         }
         double[] copy = new double[requiredLength];
         System.arraycopy(values, 0, copy, 0, initialLength);
-        for (int i = initialLength; i < requiredLength; i++) {
-            copy[i] = 0;
-        }
 
         // run FCT (=> DCT-I)
         double[] transform = cosineTransformer.transform(copy, TransformType.FORWARD);

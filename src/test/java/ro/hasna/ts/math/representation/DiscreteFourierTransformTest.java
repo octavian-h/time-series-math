@@ -42,7 +42,6 @@ public class DiscreteFourierTransformTest {
         double[] v = {1, 2, 3};
         discreteFourierTransform.transform(v);
 
-
         Mockito.verify(fastFourierTransformer).transform(new double[]{1, 2, 3, 0}, TransformType.FORWARD);
     }
 

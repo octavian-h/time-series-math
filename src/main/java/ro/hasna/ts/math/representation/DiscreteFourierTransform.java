@@ -37,9 +37,6 @@ public class DiscreteFourierTransform implements GenericTransformer<double[], do
         }
         double[] copy = new double[powerOfTwo];
         System.arraycopy(values, 0, copy, 0, initialLength);
-        for (int i = initialLength; i < powerOfTwo; i++) {
-            copy[i] = 0;
-        }
 
         // run FFT
         Complex[] complexes = fourierTransformer.transform(copy, TransformType.FORWARD);

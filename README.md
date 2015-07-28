@@ -8,18 +8,18 @@ The goal of this library is to provide optimised algorithms for time-series anal
 
 ## Features ##
 
-* Piecewise Aggregate Approximation
+* Piecewise Aggregate Approximation (PAA)
 * Z-Normalization
-* Symbolic Aggregate Approximation
-* Discrete Fourier Transform
-* Discrete Cosine Transform
+* Symbolic Aggregate Approximation (SAX)
+* Discrete Fourier Transform (DFT)
+* Discrete Cosine Transform (DCT)
 * Moving Average Filter
 * Exponential Moving Average Filter
-* Piecewise Linear Aggregate Approximation
-* Indexable Symbolic Aggregate Approximation
+* Piecewise Linear Aggregate Approximation (PLAA)
+* Indexable Symbolic Aggregate Approximation (iSAX)
 * Adaptive Distribution Divider used for (adaptive SAX/iSAX)
 * TESPAR DZ
-* Discrete Chebyshev Transform
+* Discrete Chebyshev Transform (DChT)
 
 ## Usage ##
 Add the following dependency to your maven project.
@@ -42,6 +42,13 @@ And also add the following custom repository.
     <url>http://jcenter.bintray.com</url>
 </repository>
 ```
+
+## Planned features ##
+
+* Discrete Haar Wavelet Transform
+* Adaptive Piecewise Constant Approximation
+* Dynamic Time Warping
+* Longest Common Subsequence
 
 ## Contributing ##
 
