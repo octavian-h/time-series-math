@@ -64,8 +64,8 @@ public class DiscreteChebyshevTransformTest {
     public void testTransformConcrete() throws Exception {
         double[] v = {98, 100}; // 99 * x^2 - x
         double[] expected = {99, -1};
-        double[] results = new DiscreteChebyshevTransform().transform(v);
+        double[] result = new DiscreteChebyshevTransform().transform(v);
 
-        Assert.assertArrayEquals(expected, results, TimeSeriesPrecision.EPSILON);
+        Assert.assertArrayEquals(expected, result, TimeSeriesPrecision.EPSILON);
     }
 }
