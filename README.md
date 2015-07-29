@@ -21,6 +21,7 @@ The goal of this library is to provide optimised algorithms for time-series anal
 * TESPAR DZ
 * Discrete Chebyshev Transform (DChT)
 * Discrete Haar Wavelet Transform (DWT)
+* Adaptive Piecewise Constant Approximation (APCA)
 
 ## Usage ##
 Add the following dependency to your maven project.
@@ -28,7 +29,7 @@ Add the following dependency to your maven project.
 <dependency>
     <groupId>ro.hasna.ts</groupId>
     <artifactId>time-series-math</artifactId>
-    <version>0.7</version>
+    <version>0.8</version>
 </dependency>
 ```
 
@@ -46,7 +47,6 @@ And also add the following custom repository.
 
 ## Planned features ##
 
-* Adaptive Piecewise Constant Approximation
 * Dynamic Time Warping
 * Longest Common Subsequence
 
