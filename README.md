@@ -20,6 +20,7 @@ The goal of this library is to provide optimised algorithms for time-series anal
 * Adaptive Distribution Divider used for (adaptive SAX/iSAX)
 * TESPAR DZ
 * Discrete Chebyshev Transform (DChT)
+* Discrete Haar Wavelet Transform (DWT)
 
 ## Usage ##
 Add the following dependency to your maven project.
@@ -45,7 +46,6 @@ And also add the following custom repository.
 
 ## Planned features ##
 
-* Discrete Haar Wavelet Transform
 * Adaptive Piecewise Constant Approximation
 * Dynamic Time Warping
 * Longest Common Subsequence
