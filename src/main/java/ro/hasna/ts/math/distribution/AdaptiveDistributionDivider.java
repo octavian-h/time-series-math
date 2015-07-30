@@ -43,12 +43,18 @@ public class AdaptiveDistributionDivider extends AbstractDistributionDivider {
     @Override
     protected double[] computeBreakpoints(int areas) {
         double[] breakpoints = baseDivider.getBreakpoints(areas);
+
         boolean stop = false;
         double oldDelta = Double.MAX_VALUE;
+        double[] sum = new double[breakpoints.length + 1];
+        int[] count = new int[breakpoints.length + 1];
+        double[] r = new double[breakpoints.length + 1];
 
         while (!stop) {
-            double[] sum = new double[breakpoints.length + 1];
-            int[] count = new int[breakpoints.length + 1];
+            for (int i = 0; i < breakpoints.length + 1; i++) {
+                sum[i] = 0;
+                count[i] = 0;
+            }
 
             for (int i = 0; i < trainingSet.length; i++) {
                 for (int j = 0; j < trainingSet[i].length; j++) {
@@ -67,7 +73,6 @@ public class AdaptiveDistributionDivider extends AbstractDistributionDivider {
                     }
                 }
             }
-            double[] r = new double[breakpoints.length + 1];
             for (int i = 0; i < breakpoints.length + 1; i++) {
                 r[i] = sum[i] / count[i];
             }
