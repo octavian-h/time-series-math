@@ -18,10 +18,10 @@ public class AdaptivePiecewiseConstantApproximationTest {
         MeanLastPair[] result = apca.transform(v);
 
         Assert.assertEquals(1, result[0].getMean(), TimeSeriesPrecision.EPSILON);
-        Assert.assertEquals(1, result[0].getLast());
+        Assert.assertEquals(2, result[0].getLast());
         Assert.assertEquals(4.5, result[1].getMean(), TimeSeriesPrecision.EPSILON);
-        Assert.assertEquals(3, result[1].getLast());
+        Assert.assertEquals(4, result[1].getLast());
         Assert.assertEquals(1, result[2].getMean(), TimeSeriesPrecision.EPSILON);
-        Assert.assertEquals(7, result[2].getLast());
+        Assert.assertEquals(8, result[2].getLast());
     }
 }

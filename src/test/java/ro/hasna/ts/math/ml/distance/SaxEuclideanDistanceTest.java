@@ -17,7 +17,7 @@ public class SaxEuclideanDistanceTest {
 
     @Before
     public void setUp() throws Exception {
-        distance = new SaxEuclideanDistance(new SymbolicAggregateApproximation(8, 8));
+        distance = new SaxEuclideanDistance(new SymbolicAggregateApproximation(8, 16));
     }
 
     @After
@@ -45,6 +45,8 @@ public class SaxEuclideanDistanceTest {
 
         Assert.assertEquals(ab, ba, TimeSeriesPrecision.EPSILON);
         Assert.assertTrue(ab + bc >= ac);
+        Assert.assertTrue(ab + ac >= bc);
+        Assert.assertTrue(ac + bc >= ab);
     }
 
     @Test

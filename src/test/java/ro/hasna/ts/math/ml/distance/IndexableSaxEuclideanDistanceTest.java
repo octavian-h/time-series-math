@@ -46,6 +46,8 @@ public class IndexableSaxEuclideanDistanceTest {
 
         Assert.assertEquals(ab, ba, TimeSeriesPrecision.EPSILON);
         Assert.assertTrue(ab + bc >= ac);
+        Assert.assertTrue(ab + ac >= bc);
+        Assert.assertTrue(ac + bc >= ab);
     }
 
     @Test

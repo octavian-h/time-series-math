@@ -110,7 +110,7 @@ public class AdaptivePiecewiseConstantApproximation implements GenericTransforme
         MeanLastPair[] result = new MeanLastPair[initialSegments];
         int i = 0;
         while (first != null) {
-            result[i] = new MeanLastPair(first.mean, first.end - 1);
+            result[i] = new MeanLastPair(first.mean, first.end);
             first = first.next;
             i++;
         }
