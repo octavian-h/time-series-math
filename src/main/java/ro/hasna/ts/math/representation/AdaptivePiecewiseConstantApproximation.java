@@ -1,6 +1,7 @@
 package ro.hasna.ts.math.representation;
 
 import org.apache.commons.math3.util.FastMath;
+import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
 import ro.hasna.ts.math.type.MeanLastPair;
 
 /**
@@ -22,11 +23,16 @@ public class AdaptivePiecewiseConstantApproximation implements GenericTransforme
 
     @Override
     public MeanLastPair[] transform(double[] values) {
+        int length = values.length;
+        if (length < 2) {
+            throw new ArrayLengthIsTooSmallException(length, 2, true);
+        }
+
+        // create segments with two values
         Segment first = null, last = null;
-        int length = values.length / 2;
-        for (int i = 0; i < values.length - 1; i += 2) {
+        for (int i = 0; i < length - 1; i += 2) {
             double mean = (values[i] + values[i + 1]) / 2;
-            Segment segment = new Segment(null, i, i + 2, mean, null);
+            Segment segment = new Segment(i, i + 2, mean);
             if (first == null) {
                 first = segment;
                 last = first;
@@ -37,44 +43,71 @@ public class AdaptivePiecewiseConstantApproximation implements GenericTransforme
             }
         }
 
-        while (length > segments) {
-            Segment minSegment = null;
-            double minError = Double.POSITIVE_INFINITY;
+        assert first != null;
 
+        // compute error by unifying current segment with the next segment
+        int initialSegments = length / 2;
+        if (initialSegments > segments) {
             Segment current = first;
             while (current.next != null) {
-                double mean = (current.mean * (current.end - current.start) +
-                        current.next.mean * (current.next.end - current.next.start)) /
-                        (current.next.end - current.start);
-                // TODO use some approximation
+                double mean = getUnifiedMean(current, current.next);
                 double error = 0.0;
                 for (int i = current.start; i < current.next.end; i++) {
                     error += FastMath.abs(values[i] - mean);
                 }
-                if (error < minError) {
-                    minError = error;
+                current.error = error;
+                current = current.next;
+            }
+        }
+
+        // unify concurrent segments with minimum error
+        while (initialSegments > segments) {
+            Segment minSegment = first;
+            Segment current = first;
+            while (current.next != null) {
+                if (current.error < minSegment.error) {
                     minSegment = current;
                 }
-                if (minError == 0) {
+                if (minSegment.error == 0) {
                     break;
                 }
                 current = current.next;
             }
 
-            minSegment.mean = (minSegment.mean * (minSegment.end - minSegment.start) +
-                    minSegment.next.mean * (minSegment.next.end - minSegment.next.start)) /
-                    (minSegment.next.end - minSegment.start);
-            minSegment.end = minSegment.next.end;
-
             Segment toBeDeleted = minSegment.next;
+            minSegment.mean = getUnifiedMean(minSegment, toBeDeleted);
+            minSegment.end = toBeDeleted.end;
             minSegment.next = toBeDeleted.next;
             if (toBeDeleted.next != null) {
                 toBeDeleted.next.prev = minSegment;
             }
-            length--;
+
+            // update error for the previous segment
+            if (minSegment.prev != null) {
+                double mean = getUnifiedMean(minSegment.prev, minSegment);
+                double error = 0.0;
+                for (int i = minSegment.prev.start; i < minSegment.end; i++) {
+                    error += FastMath.abs(values[i] - mean);
+                }
+                minSegment.prev.error = error;
+            }
+
+            // update error for the minSegment
+            if (minSegment.next != null) {
+                double mean = getUnifiedMean(minSegment, minSegment.next);
+                double error = 0.0;
+                for (int i = minSegment.start; i < minSegment.next.end; i++) {
+                    error += FastMath.abs(values[i] - mean);
+                }
+                minSegment.error = error;
+            } else {
+                minSegment.error = Double.POSITIVE_INFINITY;
+            }
+
+            initialSegments--;
         }
 
-        MeanLastPair[] result = new MeanLastPair[length];
+        MeanLastPair[] result = new MeanLastPair[initialSegments];
         int i = 0;
         while (first != null) {
             result[i] = new MeanLastPair(first.mean, first.end - 1);
@@ -85,19 +118,25 @@ public class AdaptivePiecewiseConstantApproximation implements GenericTransforme
         return result;
     }
 
+    private double getUnifiedMean(Segment first, Segment second) {
+        return (first.mean * (first.end - first.start)
+                + second.mean * (second.end - second.start))
+                / (second.end - first.start);
+    }
+
     private static class Segment {
         int start; //inclusive
         int end; //exclusive
         double mean;
+        double error;
         Segment next;
         Segment prev;
 
-        Segment(Segment prev, int start, int end, double mean, Segment next) {
+        Segment(int start, int end, double mean) {
             this.start = start;
             this.end = end;
             this.mean = mean;
-            this.next = next;
-            this.prev = prev;
+            this.error = Double.POSITIVE_INFINITY;
         }
     }
 }
