@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 
 /**
  * Implements the equal areas of probability for Unit Normal Distribution.
@@ -55,7 +56,7 @@ public class NormalDistributionDivider extends AbstractDistributionDivider {
     private void readBreakpoints() throws IOException {
         InputStream stream = getClass().getResourceAsStream(RESOURCE_NAME);
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(stream))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(stream, Charset.forName("utf-8")))) {
             String read = br.readLine();
 
             int n = 1;
