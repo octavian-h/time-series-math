@@ -47,8 +47,12 @@ And also add the following custom repository.
 
 ## Planned features ##
 
+* Piecewise Linear Approximation (PLA)
+* Piecewise Quadratic Approximation (PQA)
 * Dynamic Time Warping
 * Longest Common Subsequence
+* Uniform Scaling
+* Scaled and Warped Matching
 
 ## Contributing ##
 
