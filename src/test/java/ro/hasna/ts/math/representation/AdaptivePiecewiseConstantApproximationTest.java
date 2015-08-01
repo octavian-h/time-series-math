@@ -15,8 +15,12 @@
  */
 package ro.hasna.ts.math.representation;
 
+import org.apache.commons.math3.exception.NumberIsTooSmallException;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
 import ro.hasna.ts.math.type.MeanLastPair;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
@@ -24,6 +28,27 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
  * @since 1.0
  */
 public class AdaptivePiecewiseConstantApproximationTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void testConstructor() throws Exception {
+        thrown.expect(NumberIsTooSmallException.class);
+        thrown.expectMessage("0 is smaller than the minimum (1)");
+
+        new AdaptivePiecewiseConstantApproximation(0);
+    }
+
+    @Test
+    public void testTransformMoreSegmentsThanValues() throws Exception {
+        thrown.expect(ArrayLengthIsTooSmallException.class);
+        thrown.expectMessage("3 is smaller than the minimum (8)");
+
+        AdaptivePiecewiseConstantApproximation apca = new AdaptivePiecewiseConstantApproximation(4);
+        double[] v = {1, 2, 3};
+
+        apca.transform(v);
+    }
 
     @Test
     public void testTransform() throws Exception {
@@ -38,5 +63,12 @@ public class AdaptivePiecewiseConstantApproximationTest {
         Assert.assertEquals(4, result[1].getLast());
         Assert.assertEquals(1, result[2].getMean(), TimeSeriesPrecision.EPSILON);
         Assert.assertEquals(8, result[2].getLast());
+    }
+
+    @Test
+    public void testGetters() throws Exception {
+        AdaptivePiecewiseConstantApproximation apca = new AdaptivePiecewiseConstantApproximation(3);
+
+        Assert.assertEquals(3, apca.getSegments());
     }
 }

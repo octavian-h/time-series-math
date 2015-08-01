@@ -15,6 +15,7 @@
  */
 package ro.hasna.ts.math.representation;
 
+import org.apache.commons.math3.exception.NumberIsTooSmallException;
 import org.apache.commons.math3.util.Precision;
 import ro.hasna.ts.math.exception.ArrayLengthIsNotDivisibleException;
 import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
@@ -49,18 +50,18 @@ public class PiecewiseAggregateApproximation implements GenericTransformer<doubl
      *
      * @param segments the number of segments
      * @param strategy the type of strategy to be applied to the sequence
+     * @throws NumberIsTooSmallException if segments < 1
      */
     public PiecewiseAggregateApproximation(int segments, SegmentationStrategy strategy) {
+        if (segments < 1) {
+            throw new NumberIsTooSmallException(segments, 1, true);
+        }
+
         this.strategy = strategy;
         this.segments = segments;
     }
 
-    /**
-     * Transform a given sequence of values using the algorithm PAA.
-     *
-     * @param values the sequence of values
-     * @return the result of the transformation
-     */
+    @Override
     public double[] transform(double[] values) {
         int len = values.length;
         if (len < segments) {
@@ -85,20 +86,6 @@ public class PiecewiseAggregateApproximation implements GenericTransformer<doubl
                     sum = 0;
                 }
             }
-
-        } else if (strategy == SegmentationStrategy.MEAN_PADDING) {
-            int intervalSize = len / segments + 1;
-            double sum = 0;
-            int n = 0;
-            for (int i = 0; i < len; i++) {
-                sum += values[i];
-                if ((i + 1) % intervalSize == 0) {
-                    reducedValues[n++] = sum / intervalSize;
-                    sum = 0;
-                }
-            }
-            modulo = len % intervalSize;
-            reducedValues[n] = sum / modulo;
 
         } else if (strategy == SegmentationStrategy.FRACTIONAL_PARTITION) {
             double intervalSize = len * 1.0 / segments;

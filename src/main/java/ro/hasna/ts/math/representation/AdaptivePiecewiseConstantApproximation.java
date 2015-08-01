@@ -15,6 +15,7 @@
  */
 package ro.hasna.ts.math.representation;
 
+import org.apache.commons.math3.exception.NumberIsTooSmallException;
 import org.apache.commons.math3.util.FastMath;
 import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
 import ro.hasna.ts.math.type.MeanLastPair;
@@ -32,15 +33,25 @@ import ro.hasna.ts.math.type.MeanLastPair;
 public class AdaptivePiecewiseConstantApproximation implements GenericTransformer<double[], MeanLastPair[]> {
     private int segments;
 
+    /**
+     * Creates a new instance of this class.
+     *
+     * @param segments the number of segments
+     * @throws NumberIsTooSmallException if segments < 1
+     */
     public AdaptivePiecewiseConstantApproximation(int segments) {
+        if (segments < 1) {
+            throw new NumberIsTooSmallException(segments, 1, true);
+        }
+
         this.segments = segments;
     }
 
     @Override
     public MeanLastPair[] transform(double[] values) {
         int length = values.length;
-        if (length < 2) {
-            throw new ArrayLengthIsTooSmallException(length, 2, true);
+        if (length < 2 * segments) {
+            throw new ArrayLengthIsTooSmallException(length, 2 * segments, true);
         }
 
         // create segments with two values
@@ -131,6 +142,10 @@ public class AdaptivePiecewiseConstantApproximation implements GenericTransforme
         }
 
         return result;
+    }
+
+    public int getSegments() {
+        return segments;
     }
 
     private double getUnifiedMean(Segment first, Segment second) {

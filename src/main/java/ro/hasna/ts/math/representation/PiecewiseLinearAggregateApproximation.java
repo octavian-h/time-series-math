@@ -15,6 +15,7 @@
  */
 package ro.hasna.ts.math.representation;
 
+import org.apache.commons.math3.exception.NumberIsTooSmallException;
 import org.apache.commons.math3.stat.correlation.Covariance;
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
 import org.apache.commons.math3.stat.descriptive.moment.Variance;
@@ -52,14 +53,19 @@ public class PiecewiseLinearAggregateApproximation implements GenericTransformer
      *
      * @param segments the number of segments
      * @param strategy the type of strategy to be applied to the sequence
-     * @throws UnsupportedStrategyException is strategy is different than STRICT and IGNORE_REMAINING
+     * @throws UnsupportedStrategyException if strategy is different than STRICT and IGNORE_REMAINING
+     * @throws NumberIsTooSmallException if segments < 1
      */
     public PiecewiseLinearAggregateApproximation(int segments, SegmentationStrategy strategy) {
+        if (segments < 1) {
+            throw new NumberIsTooSmallException(segments, 1, true);
+        }
         if (strategy != SegmentationStrategy.STRICT && strategy != SegmentationStrategy.IGNORE_REMAINING) {
             throw new UnsupportedStrategyException(strategy.name(), "PLAA");
         }
-        this.strategy = strategy;
+
         this.segments = segments;
+        this.strategy = strategy;
     }
 
     /**

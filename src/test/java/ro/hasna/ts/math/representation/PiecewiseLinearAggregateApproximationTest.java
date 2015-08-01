@@ -15,6 +15,7 @@
  */
 package ro.hasna.ts.math.representation;
 
+import org.apache.commons.math3.exception.NumberIsTooSmallException;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,6 +33,14 @@ public class PiecewiseLinearAggregateApproximationTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void testConstructor() throws Exception {
+        thrown.expect(NumberIsTooSmallException.class);
+        thrown.expectMessage("0 is smaller than the minimum (1)");
+
+        new PiecewiseLinearAggregateApproximation(0);
+    }
 
     @Test
     public void testTransformMoreSegmentsThanValues() throws Exception {

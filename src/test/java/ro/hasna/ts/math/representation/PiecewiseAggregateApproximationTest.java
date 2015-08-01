@@ -15,6 +15,7 @@
  */
 package ro.hasna.ts.math.representation;
 
+import org.apache.commons.math3.exception.NumberIsTooSmallException;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,6 +32,14 @@ public class PiecewiseAggregateApproximationTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void testConstructor() throws Exception {
+        thrown.expect(NumberIsTooSmallException.class);
+        thrown.expectMessage("0 is smaller than the minimum (1)");
+
+        new PiecewiseAggregateApproximation(0);
+    }
 
     @Test
     public void testTransformMoreSegmentsThanValues() throws Exception {
@@ -70,17 +79,6 @@ public class PiecewiseAggregateApproximationTest {
         PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(2, SegmentationStrategy.IGNORE_REMAINING);
         double[] v = {1, 2, 3, 4, 5, 6, 7};
         double[] expected = {2.0, 5.0};
-
-        double[] result = paa.transform(v);
-
-        Assert.assertArrayEquals(expected, result, TimeSeriesPrecision.EPSILON);
-    }
-
-    @Test
-    public void testTransformMeanPadding() throws Exception {
-        PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(2, SegmentationStrategy.MEAN_PADDING);
-        double[] v = {1, 2, 3, 4, 5, 6, 7};
-        double[] expected = {2.5, 6.0};
 
         double[] result = paa.transform(v);
 
@@ -133,9 +131,9 @@ public class PiecewiseAggregateApproximationTest {
 
     @Test
     public void testGetters2() throws Exception {
-        PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(4, SegmentationStrategy.MEAN_PADDING);
+        PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(4, SegmentationStrategy.IGNORE_REMAINING);
 
         Assert.assertEquals(4, paa.getSegments());
-        Assert.assertEquals(SegmentationStrategy.MEAN_PADDING, paa.getStrategy());
+        Assert.assertEquals(SegmentationStrategy.IGNORE_REMAINING, paa.getStrategy());
     }
 }
