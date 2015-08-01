@@ -93,20 +93,4 @@ public class PiecewiseLinearAggregateApproximationTest {
 
         Assert.assertArrayEquals(expected, result);
     }
-
-    @Test
-    public void testGetters1() throws Exception {
-        PiecewiseLinearAggregateApproximation plaa = new PiecewiseLinearAggregateApproximation(3);
-
-        Assert.assertEquals(3, plaa.getSegments());
-        Assert.assertEquals(SegmentationStrategy.STRICT, plaa.getStrategy());
-    }
-
-    @Test
-    public void testGetters2() throws Exception {
-        PiecewiseLinearAggregateApproximation plaa = new PiecewiseLinearAggregateApproximation(4, SegmentationStrategy.IGNORE_REMAINING);
-
-        Assert.assertEquals(4, plaa.getSegments());
-        Assert.assertEquals(SegmentationStrategy.IGNORE_REMAINING, plaa.getStrategy());
-    }
 }

@@ -23,6 +23,7 @@ import org.apache.commons.math3.exception.DimensionMismatchException;
  * @since 1.0
  */
 public class MovingAverageFilter implements Filter {
+    private static final long serialVersionUID = -7876483245195295513L;
     private final int observations;
     private final boolean symmetric;
     private final double[] weights;

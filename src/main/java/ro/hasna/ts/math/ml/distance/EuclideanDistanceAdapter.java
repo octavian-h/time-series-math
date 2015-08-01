@@ -24,6 +24,7 @@ import org.apache.commons.math3.util.FastMath;
  * @since 1.0
  */
 public class EuclideanDistanceAdapter extends EuclideanDistance implements GenericDistanceMeasure<double[]> {
+    private static final long serialVersionUID = 2803606298141242772L;
 
     @Override
     public double compute(double[] a, double[] b, double cutOffValue) {

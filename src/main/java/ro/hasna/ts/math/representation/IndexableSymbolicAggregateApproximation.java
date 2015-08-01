@@ -33,6 +33,7 @@ import ro.hasna.ts.math.type.SaxPair;
  * @since 1.0
  */
 public class IndexableSymbolicAggregateApproximation implements GenericTransformer<double[], SaxPair[]> {
+    private static final long serialVersionUID = -1652621695908903282L;
     private final PiecewiseAggregateApproximation paa;
     private final Normalizer normalizer;
     private final DistributionDivider distributionDivider;
@@ -112,19 +113,7 @@ public class IndexableSymbolicAggregateApproximation implements GenericTransform
         return result;
     }
 
-    public PiecewiseAggregateApproximation getPaa() {
-        return paa;
-    }
-
-    public Normalizer getNormalizer() {
-        return normalizer;
-    }
-
-    public DistributionDivider getDistributionDivider() {
-        return distributionDivider;
-    }
-
-    public int[] getAlphabetSizes() {
-        return alphabetSizes;
+    public double[] getBreakpoints(int areas) {
+        return distributionDivider.getBreakpoints(areas);
     }
 }

@@ -29,6 +29,7 @@ import ro.hasna.ts.math.type.TesparSymbol;
  * @since 1.0
  */
 public class TesparDzCoding implements GenericTransformer<double[], int[]> {
+    private static final long serialVersionUID = 7734158131264856074L;
 
     @Override
     public int[] transform(double[] values) {
@@ -100,11 +101,9 @@ public class TesparDzCoding implements GenericTransformer<double[], int[]> {
         return result;
     }
 
-    /**
-     * @return true if is local minimum for positive values or
-     * local maximum for negative values otherwise false
-     */
     private boolean isShape(double a, double b, double c) {
+        /* true if is local minimum for positive values or
+        local maximum for negative values otherwise false */
         if (a > 0 && b > 0 && c > 0 && a > b && b < c) {
             return true;
         } else if (a < 0 && b < 0 && c < 0 && a < b && b > c) {

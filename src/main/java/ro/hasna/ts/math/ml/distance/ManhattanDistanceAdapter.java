@@ -24,6 +24,7 @@ import org.apache.commons.math3.util.FastMath;
  * @since 1.0
  */
 public class ManhattanDistanceAdapter extends ManhattanDistance implements GenericDistanceMeasure<double[]> {
+    private static final long serialVersionUID = -8048423591199782828L;
 
     @Override
     public double compute(double[] a, double[] b, double cutOffValue) {

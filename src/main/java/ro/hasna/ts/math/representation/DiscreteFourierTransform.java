@@ -26,6 +26,7 @@ import org.apache.commons.math3.transform.TransformType;
  * @since 1.0
  */
 public class DiscreteFourierTransform implements GenericTransformer<double[], double[]> {
+    private static final long serialVersionUID = -9081297024486191358L;
     private final FastFourierTransformer fourierTransformer;
 
     public DiscreteFourierTransform() {

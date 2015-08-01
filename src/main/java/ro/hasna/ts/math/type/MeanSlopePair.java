@@ -23,6 +23,7 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
  * @since 1.0
  */
 public class MeanSlopePair extends Pair<Double, Double> {
+
     /**
      * Create an entry of type (mean, slope).
      *

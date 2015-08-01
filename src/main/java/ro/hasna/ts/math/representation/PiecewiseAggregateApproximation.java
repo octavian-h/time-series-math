@@ -33,6 +33,7 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
  * @since 1.0
  */
 public class PiecewiseAggregateApproximation implements GenericTransformer<double[], double[]> {
+    private static final long serialVersionUID = -8199587096227874425L;
     private final int segments;
     private final SegmentationStrategy strategy;
 
@@ -125,9 +126,5 @@ public class PiecewiseAggregateApproximation implements GenericTransformer<doubl
 
     public int getSegments() {
         return segments;
-    }
-
-    public SegmentationStrategy getStrategy() {
-        return strategy;
     }
 }

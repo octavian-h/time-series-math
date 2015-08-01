@@ -36,6 +36,7 @@ import ro.hasna.ts.math.type.MeanSlopePair;
  * @since 1.0
  */
 public class PiecewiseLinearAggregateApproximation implements GenericTransformer<double[], MeanSlopePair[]> {
+    private static final long serialVersionUID = -4073250977010141095L;
     private final int segments;
     private final SegmentationStrategy strategy;
 
@@ -105,13 +106,5 @@ public class PiecewiseLinearAggregateApproximation implements GenericTransformer
         }
 
         return reducedValues;
-    }
-
-    public int getSegments() {
-        return segments;
-    }
-
-    public SegmentationStrategy getStrategy() {
-        return strategy;
     }
 }

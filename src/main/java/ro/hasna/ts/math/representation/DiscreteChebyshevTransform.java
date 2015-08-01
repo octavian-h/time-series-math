@@ -27,6 +27,7 @@ import org.apache.commons.math3.util.FastMath;
  * @since 1.0
  */
 public class DiscreteChebyshevTransform implements GenericTransformer<double[], double[]> {
+    private static final long serialVersionUID = 574122627898745036L;
     private final FastFourierTransformer fourierTransformer;
 
     public DiscreteChebyshevTransform() {

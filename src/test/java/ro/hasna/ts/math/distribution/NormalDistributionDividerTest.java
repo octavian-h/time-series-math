@@ -38,13 +38,6 @@ public class NormalDistributionDividerTest {
     }
 
     @Test
-    public void testConstructor() throws Exception {
-        divider = new NormalDistributionDivider(false);
-
-        Assert.assertFalse(divider.isCachingEnabled());
-    }
-
-    @Test
     public void testGetBreakpoints1() throws Exception {
         double[] expected = {-0.4307272992954576, 0.4307272992954576};
         double[] v = divider.getBreakpoints(3);

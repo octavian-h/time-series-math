@@ -141,21 +141,4 @@ public class PiecewiseCurveFitterApproximationTest {
 
         assertMatrixEquals(expected, result, TimeSeriesPrecision.EPSILON);
     }
-
-    @Test
-    public void testGetters1() throws Exception {
-        PiecewiseCurveFitterApproximation pcfa = new PiecewiseCurveFitterApproximation(3, curveFitter);
-
-        Assert.assertEquals(3, pcfa.getSegments());
-        Assert.assertEquals(SegmentationStrategy.STRICT, pcfa.getStrategy());
-        Assert.assertEquals(curveFitter, pcfa.getCurveFitter());
-    }
-
-    @Test
-    public void testGetters2() throws Exception {
-        PiecewiseCurveFitterApproximation pcfa = new PiecewiseCurveFitterApproximation(4, SegmentationStrategy.IGNORE_REMAINING, curveFitter);
-
-        Assert.assertEquals(4, pcfa.getSegments());
-        Assert.assertEquals(SegmentationStrategy.IGNORE_REMAINING, pcfa.getStrategy());
-    }
 }

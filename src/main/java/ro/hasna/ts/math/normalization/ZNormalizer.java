@@ -25,12 +25,10 @@ import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
  * @since 1.0
  */
 public class ZNormalizer implements Normalizer {
+    private static final long serialVersionUID = 6446811014325682141L;
     private final Mean mean;
     private final StandardDeviation standardDeviation;
 
-    /**
-     * Creates a new instance of this class.
-     */
     public ZNormalizer() {
         this(new Mean(), new StandardDeviation(false));
     }

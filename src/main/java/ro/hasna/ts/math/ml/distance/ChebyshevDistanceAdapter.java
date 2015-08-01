@@ -24,6 +24,7 @@ import org.apache.commons.math3.util.FastMath;
  * @since 1.0
  */
 public class ChebyshevDistanceAdapter extends ChebyshevDistance implements GenericDistanceMeasure<double[]> {
+    private static final long serialVersionUID = 3282698054494240303L;
 
     @Override
     public double compute(double[] a, double[] b, double cutOffValue) {

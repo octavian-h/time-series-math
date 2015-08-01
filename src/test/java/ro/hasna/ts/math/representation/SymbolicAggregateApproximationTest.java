@@ -17,10 +17,8 @@ package ro.hasna.ts.math.representation;
 
 import org.junit.Assert;
 import org.junit.Test;
-import ro.hasna.ts.math.normalization.Normalizer;
 import ro.hasna.ts.math.normalization.ZNormalizer;
 import ro.hasna.ts.math.representation.util.SegmentationStrategy;
-import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
 /**
  * @since 1.0
@@ -79,19 +77,5 @@ public class SymbolicAggregateApproximationTest {
         double[] second = paa.transform(normalizer.normalize(list));
 
         Assert.assertArrayEquals(first, second, 0.01);
-    }
-
-    @Test
-    public void testGetters() throws Exception {
-        PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(4, SegmentationStrategy.STRICT);
-        Normalizer normalizer = new ZNormalizer();
-        double[] breakpoints = {-0.4307272992954576, 0.4307272992954576};
-
-        SymbolicAggregateApproximation sax = new SymbolicAggregateApproximation(paa, normalizer, breakpoints);
-
-        Assert.assertEquals(paa, sax.getPaa());
-        Assert.assertEquals(normalizer, sax.getNormalizer());
-        Assert.assertArrayEquals(breakpoints, sax.getBreakpoints(), TimeSeriesPrecision.EPSILON);
-        Assert.assertEquals(3, sax.getAlphabetSize());
     }
 }

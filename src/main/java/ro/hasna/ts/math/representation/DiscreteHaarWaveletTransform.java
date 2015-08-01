@@ -25,6 +25,7 @@ package ro.hasna.ts.math.representation;
  * @since 1.0
  */
 public class DiscreteHaarWaveletTransform implements GenericTransformer<double[], double[]> {
+    private static final long serialVersionUID = -7596019215266231225L;
 
     @Override
     public double[] transform(double[] values) {

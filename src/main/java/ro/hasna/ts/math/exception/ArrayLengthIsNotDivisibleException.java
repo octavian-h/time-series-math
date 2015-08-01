@@ -21,6 +21,8 @@ import org.apache.commons.math3.exception.util.Localizable;
  * @since 1.0
  */
 public class ArrayLengthIsNotDivisibleException extends NumberIsNotDivisibleException {
+    private static final long serialVersionUID = 1652407890465175618L;
+
     /**
      * Construct the exception.
      *

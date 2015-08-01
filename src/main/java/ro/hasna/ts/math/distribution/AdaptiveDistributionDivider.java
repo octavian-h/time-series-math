@@ -25,7 +25,8 @@ package ro.hasna.ts.math.distribution;
  *
  * @since 1.0
  */
-public class AdaptiveDistributionDivider extends AbstractDistributionDivider {
+public class AdaptiveDistributionDivider implements DistributionDivider {
+    private static final long serialVersionUID = -4952292138370739914L;
     private final double[][] trainingSet;
     private final DistributionDivider baseDivider;
     private final double threshold;
@@ -37,26 +38,24 @@ public class AdaptiveDistributionDivider extends AbstractDistributionDivider {
      * @param threshold   the threshold used for terminating the algorithm
      */
     public AdaptiveDistributionDivider(double[][] trainingSet, double threshold) {
-        this(true, trainingSet, threshold, new NormalDistributionDivider());
+        this(trainingSet, threshold, new NormalDistributionDivider());
     }
 
     /**
      * Creates a new instance of this class.
      *
-     * @param cachingEnabled flag to enable or not the caching
      * @param trainingSet    the set of normalized PAA segments for improving the breakpoints
      * @param threshold      the threshold used for terminating the algorithm
      * @param baseDivider    the base distribution divider used for initial breakpoints
      */
-    public AdaptiveDistributionDivider(boolean cachingEnabled, double[][] trainingSet, double threshold, DistributionDivider baseDivider) {
-        super(cachingEnabled);
+    public AdaptiveDistributionDivider(double[][] trainingSet, double threshold, DistributionDivider baseDivider) {
         this.trainingSet = trainingSet;
         this.threshold = threshold;
         this.baseDivider = baseDivider;
     }
 
     @Override
-    protected double[] computeBreakpoints(int areas) {
+    public double[] getBreakpoints(int areas) {
         double[] breakpoints = baseDivider.getBreakpoints(areas);
 
         boolean stop = false;

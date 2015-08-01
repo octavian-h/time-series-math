@@ -26,6 +26,7 @@ import ro.hasna.ts.math.type.MeanSlopePair;
  * @since 1.0
  */
 public class PlaaEuclideanDistance implements DistanceMeasure, GenericDistanceMeasure<MeanSlopePair[]> {
+    private static final long serialVersionUID = -2987558975696360228L;
     private final PiecewiseLinearAggregateApproximation plaa;
 
     public PlaaEuclideanDistance(PiecewiseLinearAggregateApproximation plaa) {

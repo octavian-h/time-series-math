@@ -22,6 +22,8 @@ import org.apache.commons.math3.exception.util.Localizable;
  * @since 1.0
  */
 public class ArrayLengthIsTooSmallException extends NumberIsTooSmallException {
+    private static final long serialVersionUID = -2633584088507009304L;
+
     /**
      * Construct the exception.
      *

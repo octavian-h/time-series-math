@@ -25,6 +25,7 @@ import ro.hasna.ts.math.representation.SymbolicAggregateApproximation;
  * @since 1.0
  */
 public class SaxEuclideanDistance implements DistanceMeasure, GenericDistanceMeasure<int[]> {
+    private static final long serialVersionUID = -2580188567848020545L;
     private final SymbolicAggregateApproximation sax;
 
     public SaxEuclideanDistance(SymbolicAggregateApproximation sax) {

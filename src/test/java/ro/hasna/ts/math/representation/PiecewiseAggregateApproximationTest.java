@@ -120,20 +120,4 @@ public class PiecewiseAggregateApproximationTest {
 
         Assert.assertArrayEquals(expected, result, TimeSeriesPrecision.EPSILON);
     }
-
-    @Test
-    public void testGetters1() throws Exception {
-        PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(3);
-
-        Assert.assertEquals(3, paa.getSegments());
-        Assert.assertEquals(SegmentationStrategy.STRICT, paa.getStrategy());
-    }
-
-    @Test
-    public void testGetters2() throws Exception {
-        PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(4, SegmentationStrategy.IGNORE_REMAINING);
-
-        Assert.assertEquals(4, paa.getSegments());
-        Assert.assertEquals(SegmentationStrategy.IGNORE_REMAINING, paa.getStrategy());
-    }
 }

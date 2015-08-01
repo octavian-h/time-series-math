@@ -20,10 +20,7 @@ import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import ro.hasna.ts.math.distribution.DistributionDivider;
 import ro.hasna.ts.math.distribution.NormalDistributionDivider;
-import ro.hasna.ts.math.distribution.UniformDistributionDivider;
-import ro.hasna.ts.math.normalization.Normalizer;
 import ro.hasna.ts.math.normalization.ZNormalizer;
 import ro.hasna.ts.math.representation.util.SegmentationStrategy;
 import ro.hasna.ts.math.type.SaxPair;
@@ -137,21 +134,5 @@ public class IndexableSymbolicAggregateApproximationTest {
         SaxPair[] result = isax.transform(list);
 
         Assert.assertArrayEquals(expected, result);
-    }
-
-    @Test
-    public void testGetters() throws Exception {
-        PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(8, SegmentationStrategy.STRICT);
-        Normalizer normalizer = new ZNormalizer();
-        int[] alphabetSizes = {2, 2, 2, 4, 4, 2, 2, 2};
-        DistributionDivider distributionDivider = new UniformDistributionDivider(-1, 1);
-
-        IndexableSymbolicAggregateApproximation isax = new IndexableSymbolicAggregateApproximation(
-                paa, normalizer, alphabetSizes, distributionDivider);
-
-        Assert.assertEquals(paa, isax.getPaa());
-        Assert.assertEquals(normalizer, isax.getNormalizer());
-        Assert.assertArrayEquals(alphabetSizes, isax.getAlphabetSizes());
-        Assert.assertEquals(distributionDivider, isax.getDistributionDivider());
     }
 }

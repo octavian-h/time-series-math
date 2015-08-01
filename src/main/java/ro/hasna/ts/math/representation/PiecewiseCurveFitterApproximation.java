@@ -34,6 +34,7 @@ import java.util.List;
  * @since 1.0
  */
 public class PiecewiseCurveFitterApproximation implements GenericTransformer<double[], double[][]> {
+    private static final long serialVersionUID = -410430777798956046L;
     private final int segments;
     private final SegmentationStrategy strategy;
     private final AbstractCurveFitter curveFitter;
@@ -131,17 +132,5 @@ public class PiecewiseCurveFitterApproximation implements GenericTransformer<dou
         }
 
         return reducedValues;
-    }
-
-    public int getSegments() {
-        return segments;
-    }
-
-    public SegmentationStrategy getStrategy() {
-        return strategy;
-    }
-
-    public AbstractCurveFitter getCurveFitter() {
-        return curveFitter;
     }
 }

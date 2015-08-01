@@ -64,11 +64,4 @@ public class AdaptivePiecewiseConstantApproximationTest {
         Assert.assertEquals(1, result[2].getMean(), TimeSeriesPrecision.EPSILON);
         Assert.assertEquals(8, result[2].getLast());
     }
-
-    @Test
-    public void testGetters() throws Exception {
-        AdaptivePiecewiseConstantApproximation apca = new AdaptivePiecewiseConstantApproximation(3);
-
-        Assert.assertEquals(3, apca.getSegments());
-    }
 }

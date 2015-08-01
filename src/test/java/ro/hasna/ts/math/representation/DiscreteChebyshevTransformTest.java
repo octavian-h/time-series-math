@@ -34,6 +34,7 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class DiscreteChebyshevTransformTest {
+
     @InjectMocks
     private DiscreteChebyshevTransform discreteChebyshevTransform;
 

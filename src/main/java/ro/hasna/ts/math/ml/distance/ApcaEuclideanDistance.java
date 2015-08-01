@@ -27,6 +27,7 @@ import ro.hasna.ts.math.type.MeanLastPair;
  * @since 1.0
  */
 public class ApcaEuclideanDistance implements DistanceMeasure, GenericDistanceMeasure<MeanLastPair[]> {
+    private static final long serialVersionUID = -5281044546933045617L;
     private final AdaptivePiecewiseConstantApproximation apca;
 
     public ApcaEuclideanDistance(AdaptivePiecewiseConstantApproximation apca) {

@@ -17,7 +17,7 @@ package ro.hasna.ts.math.exception;
 
 import org.apache.commons.math3.exception.MathIllegalNumberException;
 import org.apache.commons.math3.exception.util.Localizable;
-import ro.hasna.ts.math.exception.util.TimeSeriesLocalizedFormats;
+import ro.hasna.ts.math.exception.util.LocalizableMessages;
 
 /**
  * Exception to be thrown when a number is not divisible with a given factor.
@@ -25,6 +25,7 @@ import ro.hasna.ts.math.exception.util.TimeSeriesLocalizedFormats;
  * @since 1.0
  */
 public class NumberIsNotDivisibleException extends MathIllegalNumberException {
+    private static final long serialVersionUID = -3573144648031073903L;
     /**
      * The factor for the number.
      */
@@ -38,7 +39,7 @@ public class NumberIsNotDivisibleException extends MathIllegalNumberException {
      */
     public NumberIsNotDivisibleException(Number wrong,
                                          Integer factor) {
-        this(TimeSeriesLocalizedFormats.NUMBER_NOT_DIVISIBLE_WITH, wrong, factor);
+        this(LocalizableMessages.NUMBER_NOT_DIVISIBLE_WITH, wrong, factor);
     }
 
     /**

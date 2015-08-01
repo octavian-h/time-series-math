@@ -31,7 +31,8 @@ import ro.hasna.ts.math.type.MeanLastPair;
  * @since 1.0
  */
 public class AdaptivePiecewiseConstantApproximation implements GenericTransformer<double[], MeanLastPair[]> {
-    private int segments;
+    private static final long serialVersionUID = 5071554004881637993L;
+    private final int segments;
 
     /**
      * Creates a new instance of this class.
@@ -53,8 +54,30 @@ public class AdaptivePiecewiseConstantApproximation implements GenericTransforme
         if (length < 2 * segments) {
             throw new ArrayLengthIsTooSmallException(length, 2 * segments, true);
         }
+        int numberOfSegments = length / 2;
 
         // create segments with two values
+        Segment first = createSegments(values, length);
+
+        if (numberOfSegments > segments) {
+            // compute error by unifying current segment with the next segment
+            computeRepresentationErrors(values, first);
+        }
+
+        // unify concurrent segments with minimum error
+        while (numberOfSegments > segments) {
+            Segment minSegment = getSegmentWithMinError(first);
+            deleteSubsequentSegment(minSegment);
+            updateErrorForThePreviousSegment(values, minSegment);
+            updateErrorForMinSegment(values, minSegment);
+
+            numberOfSegments--;
+        }
+
+        return getMeanLastPairs(first, numberOfSegments);
+    }
+
+    private Segment createSegments(double[] values, int length) {
         Segment first = null, last = null;
         for (int i = 0; i < length - 1; i += 2) {
             double mean = (values[i] + values[i + 1]) / 2;
@@ -68,84 +91,80 @@ public class AdaptivePiecewiseConstantApproximation implements GenericTransforme
                 last = last.next;
             }
         }
+        return first;
+    }
 
-        assert first != null;
-
-        // compute error by unifying current segment with the next segment
-        int initialSegments = length / 2;
-        if (initialSegments > segments) {
-            Segment current = first;
-            while (current.next != null) {
-                double mean = getUnifiedMean(current, current.next);
-                double error = 0.0;
-                for (int i = current.start; i < current.next.end; i++) {
-                    error += FastMath.abs(values[i] - mean);
-                }
-                current.error = error;
-                current = current.next;
+    private void computeRepresentationErrors(double[] values, Segment first) {
+        Segment current = first;
+        while (current.next != null) {
+            double mean = getUnifiedMean(current, current.next);
+            double error = 0.0;
+            for (int i = current.start; i < current.next.end; i++) {
+                error += FastMath.abs(values[i] - mean);
             }
+            current.error = error;
+            current = current.next;
         }
+    }
 
-        // unify concurrent segments with minimum error
-        while (initialSegments > segments) {
-            Segment minSegment = first;
-            Segment current = first;
-            while (current.next != null) {
-                if (current.error < minSegment.error) {
-                    minSegment = current;
-                }
-                if (minSegment.error == 0) {
-                    break;
-                }
-                current = current.next;
+    private Segment getSegmentWithMinError(Segment first) {
+        Segment minSegment = first;
+        Segment current = first;
+        while (current.next != null) {
+            if (current.error < minSegment.error) {
+                minSegment = current;
             }
-
-            Segment toBeDeleted = minSegment.next;
-            minSegment.mean = getUnifiedMean(minSegment, toBeDeleted);
-            minSegment.end = toBeDeleted.end;
-            minSegment.next = toBeDeleted.next;
-            if (toBeDeleted.next != null) {
-                toBeDeleted.next.prev = minSegment;
+            if (minSegment.error == 0) {
+                break;
             }
-
-            // update error for the previous segment
-            if (minSegment.prev != null) {
-                double mean = getUnifiedMean(minSegment.prev, minSegment);
-                double error = 0.0;
-                for (int i = minSegment.prev.start; i < minSegment.end; i++) {
-                    error += FastMath.abs(values[i] - mean);
-                }
-                minSegment.prev.error = error;
-            }
-
-            // update error for the minSegment
-            if (minSegment.next != null) {
-                double mean = getUnifiedMean(minSegment, minSegment.next);
-                double error = 0.0;
-                for (int i = minSegment.start; i < minSegment.next.end; i++) {
-                    error += FastMath.abs(values[i] - mean);
-                }
-                minSegment.error = error;
-            } else {
-                minSegment.error = Double.POSITIVE_INFINITY;
-            }
-
-            initialSegments--;
+            current = current.next;
         }
+        return minSegment;
+    }
 
-        MeanLastPair[] result = new MeanLastPair[initialSegments];
+    private void deleteSubsequentSegment(Segment minSegment) {
+        Segment toBeDeleted = minSegment.next;
+        minSegment.mean = getUnifiedMean(minSegment, toBeDeleted);
+        minSegment.end = toBeDeleted.end;
+        minSegment.next = toBeDeleted.next;
+        if (toBeDeleted.next != null) {
+            toBeDeleted.next.prev = minSegment;
+        }
+    }
+
+    private void updateErrorForMinSegment(double[] values, Segment minSegment) {
+        if (minSegment.next != null) {
+            double mean = getUnifiedMean(minSegment, minSegment.next);
+            double error = 0.0;
+            for (int i = minSegment.start; i < minSegment.next.end; i++) {
+                error += FastMath.abs(values[i] - mean);
+            }
+            minSegment.error = error;
+        } else {
+            minSegment.error = Double.POSITIVE_INFINITY;
+        }
+    }
+
+    private void updateErrorForThePreviousSegment(double[] values, Segment minSegment) {
+        if (minSegment.prev != null) {
+            double mean = getUnifiedMean(minSegment.prev, minSegment);
+            double error = 0.0;
+            for (int i = minSegment.prev.start; i < minSegment.end; i++) {
+                error += FastMath.abs(values[i] - mean);
+            }
+            minSegment.prev.error = error;
+        }
+    }
+
+    private MeanLastPair[] getMeanLastPairs(Segment first, int numberOfSegments) {
+        MeanLastPair[] result = new MeanLastPair[numberOfSegments];
         int i = 0;
         while (first != null) {
             result[i] = new MeanLastPair(first.mean, first.end);
             first = first.next;
             i++;
         }
-
         return result;
-    }
-
-    public int getSegments() {
-        return segments;
     }
 
     private double getUnifiedMean(Segment first, Segment second) {

@@ -16,7 +16,7 @@
 package ro.hasna.ts.math.exception;
 
 import org.apache.commons.math3.exception.MathUnsupportedOperationException;
-import ro.hasna.ts.math.exception.util.TimeSeriesLocalizedFormats;
+import ro.hasna.ts.math.exception.util.LocalizableMessages;
 
 /**
  * Exception to be thrown when a strategy is invalid for a given algorithm.
@@ -24,6 +24,7 @@ import ro.hasna.ts.math.exception.util.TimeSeriesLocalizedFormats;
  * @since 1.0
  */
 public class UnsupportedStrategyException extends MathUnsupportedOperationException {
+    private static final long serialVersionUID = 5160643698191149943L;
     private String strategy;
     private String algorithm;
 
@@ -31,7 +32,7 @@ public class UnsupportedStrategyException extends MathUnsupportedOperationExcept
      * Default constructor.
      */
     public UnsupportedStrategyException(String strategy, String algorithm) {
-        super(TimeSeriesLocalizedFormats.UNSUPPORTED_STRATEGY, strategy, algorithm);
+        super(LocalizableMessages.UNSUPPORTED_STRATEGY, strategy, algorithm);
         this.strategy = strategy;
         this.algorithm = algorithm;
     }

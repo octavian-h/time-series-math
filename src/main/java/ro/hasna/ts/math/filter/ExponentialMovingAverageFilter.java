@@ -16,7 +16,7 @@
 package ro.hasna.ts.math.filter;
 
 import org.apache.commons.math3.exception.OutOfRangeException;
-import ro.hasna.ts.math.exception.util.TimeSeriesLocalizedFormats;
+import ro.hasna.ts.math.exception.util.LocalizableMessages;
 
 /**
  * Implements the exponential moving average filter (exponential smoothing).
@@ -24,12 +24,14 @@ import ro.hasna.ts.math.exception.util.TimeSeriesLocalizedFormats;
  * @since 1.0
  */
 public class ExponentialMovingAverageFilter implements Filter {
+    private static final long serialVersionUID = -5033372522209156302L;
     private final double smoothingFactor;
 
     public ExponentialMovingAverageFilter(double smoothingFactor) {
         if (smoothingFactor <= 0 || smoothingFactor >= 1) {
-            throw new OutOfRangeException(TimeSeriesLocalizedFormats.OUT_OF_RANGE_BOTH, smoothingFactor, 0, 1);
+            throw new OutOfRangeException(LocalizableMessages.OUT_OF_RANGE_BOTH, smoothingFactor, 0, 1);
         }
+
         this.smoothingFactor = smoothingFactor;
     }
 

@@ -25,6 +25,7 @@ import org.apache.commons.math3.transform.TransformType;
  * @since 1.0
  */
 public class DiscreteCosineTransform implements GenericTransformer<double[], double[]> {
+    private static final long serialVersionUID = -100136722639862251L;
     private final FastCosineTransformer cosineTransformer;
 
     public DiscreteCosineTransform() {

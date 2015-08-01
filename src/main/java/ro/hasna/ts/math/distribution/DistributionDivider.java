@@ -15,6 +15,8 @@
  */
 package ro.hasna.ts.math.distribution;
 
+import org.apache.commons.math3.exception.NumberIsTooSmallException;
+
 import java.io.Serializable;
 
 /**
@@ -29,6 +31,7 @@ public interface DistributionDivider extends Serializable {
      *
      * @param areas the number of areas
      * @return the list of breakpoints
+     * @throws NumberIsTooSmallException if areas is smaller than 2
      */
     double[] getBreakpoints(int areas);
 }

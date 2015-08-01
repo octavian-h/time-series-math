@@ -26,6 +26,7 @@ import ro.hasna.ts.math.type.SaxPair;
  * @since 1.0
  */
 public class IndexableSaxEuclideanDistance implements DistanceMeasure, GenericDistanceMeasure<SaxPair[]> {
+    private static final long serialVersionUID = -4740907293933039859L;
     private final IndexableSymbolicAggregateApproximation isax;
 
     public IndexableSaxEuclideanDistance(IndexableSymbolicAggregateApproximation isax) {
@@ -80,7 +81,7 @@ public class IndexableSaxEuclideanDistance implements DistanceMeasure, GenericDi
     private double[] getBounds(SaxPair saxPair) {
         double[] bounds = {Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY};
 
-        double[] breakpoints = isax.getDistributionDivider().getBreakpoints(saxPair.getAlphabetSize());
+        double[] breakpoints = isax.getBreakpoints(saxPair.getAlphabetSize());
 
         int symbol = saxPair.getSymbol();
         if (symbol == 0) {

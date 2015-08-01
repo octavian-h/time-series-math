@@ -30,6 +30,7 @@ import ro.hasna.ts.math.normalization.ZNormalizer;
  * @since 1.0
  */
 public class SymbolicAggregateApproximation implements GenericTransformer<double[], int[]> {
+    private static final long serialVersionUID = -2951279057715694424L;
     private final PiecewiseAggregateApproximation paa;
     private final Normalizer normalizer;
     private final double[] breakpoints;
@@ -107,19 +108,7 @@ public class SymbolicAggregateApproximation implements GenericTransformer<double
         return result;
     }
 
-    public PiecewiseAggregateApproximation getPaa() {
-        return paa;
-    }
-
-    public Normalizer getNormalizer() {
-        return normalizer;
-    }
-
     public double[] getBreakpoints() {
         return breakpoints;
-    }
-
-    public int getAlphabetSize() {
-        return breakpoints.length + 1;
     }
 }
