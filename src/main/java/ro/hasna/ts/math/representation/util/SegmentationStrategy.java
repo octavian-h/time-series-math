@@ -32,11 +32,6 @@ public enum SegmentationStrategy {
      */
     IGNORE_REMAINING,
     /**
-     * The sequence is padded with the mean of the values from the last segment
-     * so as the length of the sequence to be divisible with the number of segments.
-     */
-    MEAN_PADDING,
-    /**
      * The sequence is divided in fractional partitions.
      * The value from one edge of a segment can contribute in a given fraction to both segments.
      */

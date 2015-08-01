@@ -28,11 +28,11 @@ public class UnsupportedStrategyExceptionTest {
     @Test
     public void testGetters() throws Exception {
         try {
-            new PiecewiseLinearAggregateApproximation(4, SegmentationStrategy.MEAN_PADDING);
+            new PiecewiseLinearAggregateApproximation(4, SegmentationStrategy.FRACTIONAL_PARTITION);
         } catch (UnsupportedStrategyException e) {
-            Assert.assertEquals("MEAN_PADDING", e.getStrategy());
+            Assert.assertEquals("FRACTIONAL_PARTITION", e.getStrategy());
             Assert.assertEquals("PLAA", e.getAlgorithm());
-            Assert.assertEquals("the strategy MEAN_PADDING is not supported in PLAA", e.getMessage());
+            Assert.assertEquals("the strategy FRACTIONAL_PARTITION is not supported in PLAA", e.getMessage());
         }
     }
 }
