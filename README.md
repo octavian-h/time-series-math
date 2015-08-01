@@ -22,6 +22,7 @@ The goal of this library is to provide optimised algorithms for time-series anal
 * Discrete Chebyshev Transform (DChT)
 * Discrete Haar Wavelet Transform (DWT)
 * Adaptive Piecewise Constant Approximation (APCA)
+* Piecewise Curve Fitting Approximation with linear (PLA), quadratic (PQA) or other types of curve fitting function
 
 ## Usage ##
 Add the following dependency to your maven project.
@@ -47,8 +48,6 @@ And also add the following custom repository.
 
 ## Planned features ##
 
-* Piecewise Linear Approximation (PLA)
-* Piecewise Quadratic Approximation (PQA)
 * Dynamic Time Warping
 * Longest Common Subsequence
 * Uniform Scaling
@@ -62,4 +61,4 @@ And also add the following custom repository.
 
 ## Licensing ##
 Time-Series Math library is licensed under the Apache License, Version 2.0.
-See [LICENSE](LICENSE) for the full license text. 
+See [LICENSE](LICENSE.txt) for the full license text. 
