@@ -133,4 +133,8 @@ public class PiecewiseCurveFitterApproximation implements GenericTransformer<dou
 
         return reducedValues;
     }
+
+    public int getSegments() {
+        return segments;
+    }
 }
