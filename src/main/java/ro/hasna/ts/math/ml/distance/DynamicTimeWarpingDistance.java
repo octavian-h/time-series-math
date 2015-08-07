@@ -26,11 +26,11 @@ import org.apache.commons.math3.util.FastMath;
  *
  * @since 1.0
  */
-public class DynamicTimeWarping implements GenericDistanceMeasure<double[]> {
+public class DynamicTimeWarpingDistance implements GenericDistanceMeasure<double[]> {
     private static final long serialVersionUID = 1154818905340336905L;
     private final int radius;
 
-    public DynamicTimeWarping(int radius) {
+    public DynamicTimeWarpingDistance(int radius) {
         this.radius = radius;
     }
 

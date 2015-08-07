@@ -21,17 +21,15 @@ import org.junit.Before;
 import org.junit.Test;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
-import static org.junit.Assert.*;
-
 /**
  * @since 1.0
  */
-public class DynamicTimeWarpingTest {
-    private DynamicTimeWarping distance;
+public class DynamicTimeWarpingDistanceTest {
+    private DynamicTimeWarpingDistance distance;
 
     @Before
     public void setUp() throws Exception {
-        distance = new DynamicTimeWarping(5);
+        distance = new DynamicTimeWarpingDistance(5);
     }
 
     @After
