@@ -68,7 +68,7 @@ public class DynamicTimeWarpingDistanceTest {
         double b[] = new double[n];
         for (int i = 0; i < n; i++) {
             a[i] = i;
-            b[i] = i;
+            b[i] = i + 4;
         }
 
         double result = distance.compute(a, b);
@@ -83,10 +83,10 @@ public class DynamicTimeWarpingDistanceTest {
         double b[] = new double[n];
         for (int i = 0; i < n; i++) {
             a[i] = i;
-            b[i] = i + 6;
+            b[i] = i * i;
         }
 
-        double result = distance.compute(a, b, 99);
+        double result = distance.compute(a, b, 2);
 
         Assert.assertEquals(Double.POSITIVE_INFINITY, result, TimeSeriesPrecision.EPSILON);
     }
@@ -98,11 +98,11 @@ public class DynamicTimeWarpingDistanceTest {
         double b[] = new double[n];
         for (int i = 0; i < n; i++) {
             a[i] = i;
-            b[i] = i + 2;
+            b[i] = i * i * i;
         }
 
         double result = distance.compute(a, b);
 
-        Assert.assertEquals(6, result, TimeSeriesPrecision.EPSILON);
+        Assert.assertEquals(3.318791555054906, result, TimeSeriesPrecision.EPSILON);
     }
 }
