@@ -85,12 +85,12 @@ public class DynamicTimeWarpingDistance implements GenericDistanceMeasure<double
             return Double.POSITIVE_INFINITY;
         }
 
-        double[] cumulativeLowerBound = lemireLowerBound.distances;
-        for (int i = cumulativeLowerBound.length - 2; i >= 0; i--) {
-            cumulativeLowerBound[i] += cumulativeLowerBound[i + 1];
+        double[] cumulativeErrorMargins = lemireLowerBound.errorMargins;
+        for (int i = cumulativeErrorMargins.length - 2; i >= 0; i--) {
+            cumulativeErrorMargins[i] += cumulativeErrorMargins[i + 1];
         }
 
-        return computeDtw(a, b, n, radius, cumulativeLowerBound, transformedCutOff);
+        return computeDtw(a, b, n, radius, cumulativeErrorMargins, transformedCutOff);
     }
 
     /**
@@ -144,13 +144,13 @@ public class DynamicTimeWarpingDistance implements GenericDistanceMeasure<double
      * <i>Faster Sequential Search with a Two-Pass Dynamic-Time-Warping Lower Bound</i>
      * </p>
      *
-     * @return LB_Improved value
+     * @return LB_Improved value, projection of b on the Keogh envelope and error margins (= distance from b to the Keogh envelope)
      */
     protected LowerBound computeLemireLowerBound(double[] b, LowerBound keoghLowerBound, int n, int radius, double transformedCutOff) {
         LowerBound improvedLowerBound = computeKeoghLowerBound(b, keoghLowerBound.projection, n, radius, transformedCutOff - keoghLowerBound.value);
         if (improvedLowerBound.value != Double.POSITIVE_INFINITY) {
-            for (int i = 0; i < improvedLowerBound.distances.length; i++) {
-                improvedLowerBound.distances[i] += keoghLowerBound.distances[i];
+            for (int i = 0; i < improvedLowerBound.errorMargins.length; i++) {
+                improvedLowerBound.errorMargins[i] += keoghLowerBound.errorMargins[i];
             }
             improvedLowerBound.value += keoghLowerBound.value;
         }
@@ -164,13 +164,13 @@ public class DynamicTimeWarpingDistance implements GenericDistanceMeasure<double
      * <i>Exact indexing of dynamic time warping</i>
      * </p>
      *
-     * @return LB_Keogh value and projection
+     * @return LB_Keogh value, projection of a on the envelope of b and error margins (= distance from a to the envelope of b)
      */
     protected LowerBound computeKeoghLowerBound(double[] a, double[] b, int n, int radius, double transformedCutOff) {
         int i;
         double value = 0, min, max, d;
         double[] projection = new double[n];
-        double[] distances = new double[n];
+        double[] errorMargins = new double[n];
 
         Envelope envelope = computeLemireEnvelope(b, n, radius);
 
@@ -187,17 +187,26 @@ public class DynamicTimeWarpingDistance implements GenericDistanceMeasure<double
             } else {
                 projection[i] = a[i];
             }
-            distances[i] = d;
+            errorMargins[i] = d;
             value += d;
 
             if (value >= transformedCutOff) {
-                return new LowerBound(Double.POSITIVE_INFINITY, projection, distances);
+                return new LowerBound(Double.POSITIVE_INFINITY, projection, errorMargins);
             }
         }
 
-        return new LowerBound(value, projection, distances);
+        return new LowerBound(value, projection, errorMargins);
     }
 
+    /**
+     * <p>
+     * Reference:
+     * Daniel Lemire (2008)
+     * <i>Faster Sequential Search with a Two-Pass Dynamic-Time-Warping Lower Bound</i>
+     * </p>
+     *
+     * @return time series envelope
+     */
     protected Envelope computeLemireEnvelope(double[] v, int n, int radius) {
         int w = 2 * radius + 1;
         double[] upper = new double[n];
@@ -247,7 +256,7 @@ public class DynamicTimeWarpingDistance implements GenericDistanceMeasure<double
         return new Envelope(lower, upper);
     }
 
-    protected double computeDtw(double[] a, double[] b, int n, int radius, double[] cumulativeLowerBound, double transformedCutOff) {
+    protected double computeDtw(double[] a, double[] b, int n, int radius, double[] cumulativeErrorMargins, double transformedCutOff) {
         int w = 2 * radius + 1;
         double[] cost = new double[w];
         double[] prevCost = new double[w];
@@ -289,8 +298,8 @@ public class DynamicTimeWarpingDistance implements GenericDistanceMeasure<double
                 }
             }
 
-            // abandon early if the current cumulative distance with lower bound together are larger than cutOff
-            if (i + radius < n - 1 && min + cumulativeLowerBound[i + radius + 1] >= transformedCutOff) {
+            // abandon early if the current distance with cumulative error margins are larger than cutOff
+            if (i + radius < n - 1 && min + cumulativeErrorMargins[i + radius + 1] >= transformedCutOff) {
                 return Double.POSITIVE_INFINITY;
             }
 
@@ -299,6 +308,8 @@ public class DynamicTimeWarpingDistance implements GenericDistanceMeasure<double
 
         return postProcessDistance(prevCost[k - 1]);
     }
+
+    // Overrides these methods for using other norms
 
     protected double distance(double a, double b) {
         return (a - b) * (a - b);
@@ -311,12 +322,12 @@ public class DynamicTimeWarpingDistance implements GenericDistanceMeasure<double
     protected static class LowerBound {
         double value;
         double[] projection;
-        double[] distances;
+        double[] errorMargins;
 
-        public LowerBound(double value, double[] projection, double[] distances) {
+        public LowerBound(double value, double[] projection, double[] errorMargins) {
             this.value = value;
             this.projection = projection;
-            this.distances = distances;
+            this.errorMargins = errorMargins;
         }
     }
 
