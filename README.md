@@ -23,7 +23,8 @@ The goal of this library is to provide optimised algorithms for time-series anal
 * Discrete Haar Wavelet Transform (DWT)
 * Adaptive Piecewise Constant Approximation (APCA)
 * Piecewise Curve Fitting Approximation with linear (PLA), quadratic (PQA) or other types of curve fitting function
-* Dynamic Time Warping
+* Dynamic Time Warping (DTW)
+* Longest Common Subsequence (LCSS)
 
 ## Usage ##
 Add the following dependency to your maven project.
@@ -49,7 +50,6 @@ And also add the following custom repository.
 
 ## Planned features ##
 
-* Longest Common Subsequence
 * Uniform Scaling
 * Scaled and Warped Matching
 
