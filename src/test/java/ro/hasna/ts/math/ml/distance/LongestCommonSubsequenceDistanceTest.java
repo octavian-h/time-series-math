@@ -93,16 +93,12 @@ public class LongestCommonSubsequenceDistanceTest {
 
     @Test
     public void testResult() throws Exception {
-        int n = 100;
-        double a[] = new double[n];
-        double b[] = new double[n];
-        for (int i = 0; i < n; i++) {
-            a[i] = i;
-            b[i] = i * i;
-        }
+        double a[] = {3, 2, 5, 7, 4, 8, 10, 7};
+        double b[] = {2, 5, 4, 7, 3, 10, 8, 6};
 
         double result = distance.compute(a, b);
 
-        Assert.assertEquals(0.94, result, TimeSeriesPrecision.EPSILON);
+        // 1 - |{2,5,7,10}| / 8
+        Assert.assertEquals(0.5, result, TimeSeriesPrecision.EPSILON);
     }
 }
