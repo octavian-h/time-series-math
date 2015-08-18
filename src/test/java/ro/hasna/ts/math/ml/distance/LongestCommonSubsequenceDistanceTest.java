@@ -29,7 +29,7 @@ public class LongestCommonSubsequenceDistanceTest {
 
     @Before
     public void setUp() throws Exception {
-        distance = new LongestCommonSubsequenceDistance(0.25, 4);
+        distance = new LongestCommonSubsequenceDistance(0.25, 0.25);
     }
 
     @After
@@ -68,7 +68,7 @@ public class LongestCommonSubsequenceDistanceTest {
         double b[] = new double[n];
         for (int i = 0; i < n; i++) {
             a[i] = i;
-            b[i] = i + 4;
+            b[i] = i + 0.20;
         }
 
         double result = distance.compute(a, b);
@@ -86,7 +86,7 @@ public class LongestCommonSubsequenceDistanceTest {
             b[i] = i * i;
         }
 
-        double result = distance.compute(a, b, 2);
+        double result = distance.compute(a, b, 0.3);
 
         Assert.assertEquals(Double.POSITIVE_INFINITY, result, TimeSeriesPrecision.EPSILON);
     }
@@ -98,11 +98,11 @@ public class LongestCommonSubsequenceDistanceTest {
         double b[] = new double[n];
         for (int i = 0; i < n; i++) {
             a[i] = i;
-            b[i] = i*i;
+            b[i] = i * i;
         }
 
         double result = distance.compute(a, b);
 
-        Assert.assertEquals(2.0, result, TimeSeriesPrecision.EPSILON);
+        Assert.assertEquals(0.94, result, TimeSeriesPrecision.EPSILON);
     }
 }

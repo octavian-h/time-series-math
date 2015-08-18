@@ -16,6 +16,7 @@
 package ro.hasna.ts.math.ml.distance;
 
 import org.apache.commons.math3.util.FastMath;
+import org.apache.commons.math3.util.Precision;
 
 /**
  * Calculates the distance between two vectors using Longest Common Subsequence.
@@ -29,12 +30,12 @@ import org.apache.commons.math3.util.FastMath;
  */
 public class LongestCommonSubsequenceDistance implements GenericDistanceMeasure<double[]> {
     private static final long serialVersionUID = 4542559569313251930L;
-    private double epsilon;
-    private int delta;
+    private final double epsilon;
+    private final double radiusPercentage;
 
-    public LongestCommonSubsequenceDistance(double epsilon, int delta) {
+    public LongestCommonSubsequenceDistance(double epsilon, double radiusPercentage) {
         this.epsilon = epsilon;
-        this.delta = delta;
+        this.radiusPercentage = radiusPercentage;
     }
 
     @Override
@@ -44,66 +45,56 @@ public class LongestCommonSubsequenceDistance implements GenericDistanceMeasure<
 
     @Override
     public double compute(double[] a, double[] b, double cutOffValue) {
-        int na = a.length;
-        int nb = b.length;
-        double[][] m = new double[na][nb];
-        for (int i = 0; i < na; i++) {
-            for (int j = 0; j < nb; j++) {
-                m[i][j] = -1;
-            }
+        int n = a.length;
+        int radius = (int) (n * radiusPercentage);
+        double d = 1 - computeLcs(a, b, n, radius) * 1.0 / n;
+        if (d >= cutOffValue) {
+            return Double.POSITIVE_INFINITY;
         }
-        return lcss(a, na - 1, b, nb - 1, m, cutOffValue);
-    }
-
-    private double lcss(double[] a, int na, double[] b, int nb, double[][] m, double cutOffValue) {
-        if (na < 0 || nb < 0)
-            return 0d;
-
-        if (FastMath.abs(a[na] - b[nb]) < epsilon && FastMath.abs(na - nb) <= delta) {
-            if (na < 1 || nb < 1)
-                return 1d;
-
-            if (m[na - 1][nb - 1] == -1) {
-                double d = lcss(a, na - 1, b, nb - 1, m, cutOffValue) + 1;
-                if (d >= cutOffValue) {
-                    return Double.POSITIVE_INFINITY;
-                }
-                m[na - 1][nb - 1] = d;
-            }
-
-            return m[na - 1][nb - 1];
-        }
-
-        if (na < 1 || nb < 1)
-            return 0d;
-
-        double d1;
-        if (m[na - 1][nb] == -1) {
-            d1 = lcss(a, na - 1, b, nb, m, cutOffValue);
-            if (d1 >= cutOffValue) {
-                return Double.POSITIVE_INFINITY;
-            }
-            m[na - 1][nb] = d1;
-        } else {
-            d1 = m[na - 1][nb];
-        }
-
-        double d2;
-        if (m[na][nb - 1] == -1) {
-            d2 = lcss(a, na, b, nb - 1, m, cutOffValue);
-            if (d2 >= cutOffValue) {
-                return Double.POSITIVE_INFINITY;
-            }
-            m[na - 1][nb] = d2;
-        } else {
-            d2 = m[na][nb - 1];
-        }
-
-        return FastMath.max(d1, d2);
+        return d;
     }
 
     @Override
     public double compute(double[] a, double[] b, int n, double cutOffValue) {
-        return compute(a, b, Double.POSITIVE_INFINITY);
+        return compute(a, b);
+    }
+
+    private int computeLcs(double[] a, double b[], int n, int radius) {
+        boolean equals = true;
+        for (int i = 0; i < n && equals; i++) {
+            if (!Precision.equals(a[i], b[i], epsilon)) {
+                equals = false;
+            }
+        }
+        if (equals) {
+            return n;
+        }
+
+        int[] prev = new int[n];
+        int[] current = new int[n];
+        int start, end;
+        for (int i = 0; i < n; i++) {
+            start = FastMath.max(0, i - radius);
+            end = FastMath.min(n - 1, i + radius);
+            for (int j = start; j <= end; j++) {
+                if (Precision.equals(a[i], b[j], epsilon)) {
+                    if (j == 0) {
+                        current[j] = 1;
+                    } else {
+                        current[j] = prev[j - 1] + 1;
+                    }
+                } else {
+                    if (j == 0) {
+                        current[j] = prev[j];
+                    } else {
+                        current[j] = FastMath.max(current[j - 1], prev[j]);
+                    }
+                }
+            }
+
+            System.arraycopy(current, 0, prev, 0, n);
+        }
+
+        return current[n - 1];
     }
 }
