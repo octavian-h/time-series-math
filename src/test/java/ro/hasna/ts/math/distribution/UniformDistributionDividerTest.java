@@ -15,16 +15,19 @@
  */
 package ro.hasna.ts.math.distribution;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.apache.commons.math3.exception.NumberIsTooLargeException;
+import org.apache.commons.math3.exception.NumberIsTooSmallException;
+import org.junit.*;
+import org.junit.rules.ExpectedException;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
 /**
  * @since 1.0
  */
 public class UniformDistributionDividerTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     private UniformDistributionDivider divider;
 
     @Before
@@ -35,6 +38,22 @@ public class UniformDistributionDividerTest {
     @After
     public void tearDown() throws Exception {
         divider = null;
+    }
+
+    @Test
+    public void testConstructor() throws Exception {
+        thrown.expect(NumberIsTooLargeException.class);
+        thrown.expectMessage("4 is larger than the maximum (3)");
+
+        new UniformDistributionDivider(4, 3);
+    }
+
+    @Test
+    public void testGetBreakpointsWithException() throws Exception {
+        thrown.expect(NumberIsTooSmallException.class);
+        thrown.expectMessage("1 is smaller than the minimum (2)");
+
+        divider.getBreakpoints(1);
     }
 
     @Test

@@ -68,7 +68,7 @@ public class PlaaEuclideanDistance implements DistanceMeasure, GenericDistanceMe
             sum2 += aux * aux;
 
             double currentDistance = sum1 * k + sum2 * (k * k - 1) / 18;
-            if (currentDistance > transformedCutoff) {
+            if (currentDistance >= transformedCutoff) {
                 return Double.POSITIVE_INFINITY;
             }
         }

@@ -51,10 +51,10 @@ public class DiscreteCosineTransformTest {
 
     @Test
     public void testTransform() throws Exception {
-        double[] v = {1, 2, 3, 4};
+        double[] v = {1, 2, 3, 4, 5, 6};
         discreteCosineTransform.transform(v);
 
-        Mockito.verify(fastCosineTransformer).transform(new double[]{1, 2, 3, 4, 0}, TransformType.FORWARD);
+        Mockito.verify(fastCosineTransformer).transform(new double[]{1, 2, 3, 4, 5, 6, 0, 0, 0}, TransformType.FORWARD);
     }
 
     @Test

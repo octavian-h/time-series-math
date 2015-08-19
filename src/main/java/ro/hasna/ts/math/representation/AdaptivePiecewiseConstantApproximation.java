@@ -23,7 +23,6 @@ import ro.hasna.ts.math.type.MeanLastPair;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
 import java.util.Comparator;
-import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -211,22 +210,6 @@ public class AdaptivePiecewiseConstantApproximation implements GenericTransforme
             this.mean = mean;
             this.error = error;
             this.errorWithNext = Double.POSITIVE_INFINITY;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Segment segment = (Segment) o;
-            return Objects.equals(start, segment.start) &&
-                    Objects.equals(end, segment.end) &&
-                    Objects.equals(mean, segment.mean) &&
-                    Objects.equals(error, segment.error);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(start, end, mean, error);
         }
     }
 }

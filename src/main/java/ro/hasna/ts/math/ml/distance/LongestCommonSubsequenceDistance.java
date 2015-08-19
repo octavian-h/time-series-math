@@ -56,7 +56,7 @@ public class LongestCommonSubsequenceDistance implements GenericDistanceMeasure<
 
     @Override
     public double compute(double[] a, double[] b, int n, double cutOffValue) {
-        return compute(a, b);
+        return compute(a, b, Double.POSITIVE_INFINITY);
     }
 
     private int computeLcs(double[] a, double b[], int n, int radius) {

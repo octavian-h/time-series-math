@@ -33,7 +33,7 @@ public class EuclideanDistanceAdapter extends EuclideanDistance implements Gener
         for (int i = 0; i < a.length; i++) {
             double aux = a[i] - b[i];
             sum += aux * aux;
-            if (sum > transformedCutoff) {
+            if (sum >= transformedCutoff) {
                 return Double.POSITIVE_INFINITY;
             }
         }

@@ -31,7 +31,7 @@ public class ChebyshevDistanceAdapter extends ChebyshevDistance implements Gener
         double max = 0;
         for (int i = 0; i < a.length; i++) {
             max = FastMath.max(max, FastMath.abs(a[i] - b[i]));
-            if (max > cutOffValue) {
+            if (max >= cutOffValue) {
                 return Double.POSITIVE_INFINITY;
             }
         }

@@ -81,7 +81,7 @@ public class ApcaEuclideanDistance implements DistanceMeasure, GenericDistanceMe
 
             sum += aux;
 
-            if (sum > transformedCutoff) {
+            if (sum >= transformedCutoff) {
                 return Double.POSITIVE_INFINITY;
             }
         }

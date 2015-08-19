@@ -101,7 +101,7 @@ public class ChebyshevDistanceAdapterTest {
             b[i] = i + 2;
         }
 
-        double result = distance.compute(a, b);
+        double result = distance.compute(a, b, 3);
 
         Assert.assertEquals(2, result, TimeSeriesPrecision.EPSILON);
     }

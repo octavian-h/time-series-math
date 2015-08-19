@@ -70,7 +70,7 @@ public class IndexableSaxEuclideanDistance implements DistanceMeasure, GenericDi
             }
 
             sum += diff * diff;
-            if (sum > transformedCutoff) {
+            if (sum >= transformedCutoff) {
                 return Double.POSITIVE_INFINITY;
             }
         }

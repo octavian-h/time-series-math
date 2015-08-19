@@ -71,7 +71,7 @@ public class SaxEuclideanDistance implements DistanceMeasure, GenericDistanceMea
                 }
                 sum += aux * aux;
 
-                if (sum > transformedCutoff) {
+                if (sum >= transformedCutoff) {
                     return Double.POSITIVE_INFINITY;
                 }
             }

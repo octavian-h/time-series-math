@@ -101,7 +101,7 @@ public class EuclideanDistanceAdapterTest {
             b[i] = i + 2;
         }
 
-        double result = distance.compute(a, b);
+        double result = distance.compute(a, b, 30);
 
         Assert.assertEquals(20, result, TimeSeriesPrecision.EPSILON);
     }

@@ -101,7 +101,7 @@ public class ManhattanDistanceAdapterTest {
             b[i] = i + 2;
         }
 
-        double result = distance.compute(a, b);
+        double result = distance.compute(a, b, 300);
 
         Assert.assertEquals(200, result, TimeSeriesPrecision.EPSILON);
     }

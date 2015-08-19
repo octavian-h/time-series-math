@@ -31,7 +31,7 @@ public class ManhattanDistanceAdapter extends ManhattanDistance implements Gener
         double sum = 0;
         for (int i = 0; i < a.length; i++) {
             sum += FastMath.abs(a[i] - b[i]);
-            if (sum > cutOffValue) {
+            if (sum >= cutOffValue) {
                 return Double.POSITIVE_INFINITY;
             }
         }

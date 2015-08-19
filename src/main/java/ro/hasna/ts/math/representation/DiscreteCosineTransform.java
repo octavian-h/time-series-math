@@ -48,11 +48,10 @@ public class DiscreteCosineTransform implements GenericTransformer<double[], dou
         int initialLength = values.length;
         int powerOfTwo = Integer.highestOneBit(initialLength);
         int requiredLength = powerOfTwo + 1;
-        if (initialLength != requiredLength) {
-            if (initialLength != powerOfTwo) {
-                requiredLength = (powerOfTwo << 1) + 1;
-            }
+        if (initialLength != requiredLength && initialLength != powerOfTwo) {
+            requiredLength = (powerOfTwo << 1) + 1;
         }
+
         double[] copy = new double[requiredLength];
         System.arraycopy(values, 0, copy, 0, initialLength);
 
