@@ -25,20 +25,22 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
  * Reference:
  * Wagner Robert A. and Michael J. Fischer (1974)
  * <i>The string-to-string correction problem</i>
+ * Chen Lei and Raymond Ng
+ * <i>On the marriage of lp-norms and edit distance</i>
  * </p>
  *
  * @since 1.0
  */
-public class EditDistance implements GenericDistanceMeasure<double[]> {
+public class RealSequenceEditDistance implements GenericDistanceMeasure<double[]> {
     private static final long serialVersionUID = -373272813771443967L;
     private final double epsilon;
     private final double radiusPercentage;
 
-    public EditDistance() {
+    public RealSequenceEditDistance() {
         this(TimeSeriesPrecision.EPSILON, 1.0);
     }
 
-    public EditDistance(double epsilon, double radiusPercentage) {
+    public RealSequenceEditDistance(double epsilon, double radiusPercentage) {
         this.epsilon = epsilon;
         this.radiusPercentage = radiusPercentage;
     }

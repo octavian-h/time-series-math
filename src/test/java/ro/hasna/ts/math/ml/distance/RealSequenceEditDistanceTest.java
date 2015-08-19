@@ -24,12 +24,12 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
 /**
  * @since 1.0
  */
-public class EditDistanceTest {
-    private EditDistance distance;
+public class RealSequenceEditDistanceTest {
+    private RealSequenceEditDistance distance;
 
     @Before
     public void setUp() throws Exception {
-        distance = new EditDistance();
+        distance = new RealSequenceEditDistance();
     }
 
     @After
