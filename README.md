@@ -27,6 +27,7 @@ The goal of this library is to provide optimised algorithms for time-series anal
 * Longest Common Subsequence (LCSS)
 * Edit Distance on Real sequence (EDR)
 * Edit distance with Real Penalty (ERP)
+* Uniform Scaling
 
 ## Usage ##
 Add the following dependency to your maven project.
@@ -52,7 +53,6 @@ And also add the following custom repository.
 
 ## Planned features ##
 
-* Uniform Scaling
 * Scaled and Warped Matching
 
 ## Contributing ##
