@@ -28,6 +28,7 @@ import org.apache.commons.math3.util.FastMath;
  * @since 1.0
  */
 public class RealPenaltyEditDistance implements GenericDistanceMeasure<double[]> {
+    private static final long serialVersionUID = 7419503714378886631L;
     private final double gap;
     private final double radiusPercentage;
 

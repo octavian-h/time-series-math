@@ -57,11 +57,6 @@ public class ApcaEuclideanDistanceTest {
         double ba = distance.compute(b, a);
         double bc = distance.compute(b, c);
         double ac = distance.compute(a, c);
-        PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(8);
-        EuclideanDistanceAdapter distanceAdapter = new EuclideanDistanceAdapter();
-        double pab = 4 * distanceAdapter.compute(paa.transform(a), paa.transform(b));
-        double pbc = 4 * distanceAdapter.compute(paa.transform(b), paa.transform(c));
-        double pac = 4 * distanceAdapter.compute(paa.transform(a), paa.transform(c));
 
         Assert.assertEquals(ab, ba, TimeSeriesPrecision.EPSILON);
         Assert.assertTrue(ab + bc >= ac);

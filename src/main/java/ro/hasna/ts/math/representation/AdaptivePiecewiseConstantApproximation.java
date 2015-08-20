@@ -78,38 +78,38 @@ public class AdaptivePiecewiseConstantApproximation implements GenericTransforme
         // create segments with two values
         Segment first = createSegments(values, length);
 
-        TreeSet<Segment> set = null;
         if (numberOfSegments > segments) {
             // compute error by unifying current segment with the next segment
-            set = createSegmentsSet(values, first);
-        }
+            TreeSet<Segment> set = createSegmentsSet(values, first);
 
-        // unify concurrent segments with minimum error
-        while (numberOfSegments > segments) {
-            Segment minSegment = set.pollFirst();
-            minSegment.mean = getUnifiedMean(minSegment, minSegment.next);
-            minSegment.error = getUnifiedError(minSegment, minSegment.next, values, minSegment.mean);
-            minSegment.end = minSegment.next.end;
 
-            deleteSubsequentSegment(minSegment, set);
+            // unify concurrent segments with minimum error
+            while (numberOfSegments > segments) {
+                Segment minSegment = set.pollFirst();
+                minSegment.mean = getUnifiedMean(minSegment, minSegment.next);
+                minSegment.error = getUnifiedError(minSegment, minSegment.next, values, minSegment.mean);
+                minSegment.end = minSegment.next.end;
 
-            if (minSegment.next != null) {
-                double mean = getUnifiedMean(minSegment, minSegment.next);
-                minSegment.errorWithNext = getUnifiedError(minSegment, minSegment.next, values, mean);
-                set.add(minSegment);
+                deleteSubsequentSegment(minSegment, set);
+
+                if (minSegment.next != null) {
+                    double mean = getUnifiedMean(minSegment, minSegment.next);
+                    minSegment.errorWithNext = getUnifiedError(minSegment, minSegment.next, values, mean);
+                    set.add(minSegment);
+                }
+
+                if (minSegment.prev != null) {
+                    set.remove(minSegment.prev);
+
+                    double mean = getUnifiedMean(minSegment.prev, minSegment);
+                    minSegment.prev.errorWithNext = getUnifiedError(minSegment.prev, minSegment, values, mean);
+
+                    set.add(minSegment.prev);
+                }
+
+
+                numberOfSegments--;
             }
-
-            if (minSegment.prev != null) {
-                set.remove(minSegment.prev);
-
-                double mean = getUnifiedMean(minSegment.prev, minSegment);
-                minSegment.prev.errorWithNext = getUnifiedError(minSegment.prev, minSegment, values, mean);
-
-                set.add(minSegment.prev);
-            }
-
-
-            numberOfSegments--;
         }
 
         return getMeanLastPairs(first, numberOfSegments);

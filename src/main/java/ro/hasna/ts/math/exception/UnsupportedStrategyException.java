@@ -25,8 +25,8 @@ import ro.hasna.ts.math.exception.util.LocalizableMessages;
  */
 public class UnsupportedStrategyException extends MathUnsupportedOperationException {
     private static final long serialVersionUID = 5160643698191149943L;
-    private String strategy;
-    private String algorithm;
+    private final String strategy;
+    private final String algorithm;
 
     /**
      * Default constructor.

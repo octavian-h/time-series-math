@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 
-COMMIT_MESSAGE="$(git log --format=%B -n 1 $TRAVIS_COMMIT)"
+COMMIT_MESSAGE="$(git log --format=%B -n 1 ${TRAVIS_COMMIT})"
 
 if [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
    [ "$TRAVIS_TAG" == "" ] &&
