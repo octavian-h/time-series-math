@@ -30,6 +30,7 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
  * @since 1.0
  */
 public class UniformScalingDistance implements GenericDistanceMeasure<double[]> {
+    private static final long serialVersionUID = -596315329786672046L;
     private final double minScalingFactor;
     private final double maxScalingFactor;
     private final int steps;
