@@ -28,6 +28,7 @@ The goal of this library is to provide optimised algorithms for time-series anal
 * Edit Distance on Real sequence (EDR)
 * Edit distance with Real Penalty (ERP)
 * Uniform Scaling
+* Scaled and Warped Matching (use DTW in Uniform Scaling)
 
 ## Usage ##
 Add the following dependency to your maven project.
@@ -53,7 +54,8 @@ And also add the following custom repository.
 
 ## Planned features ##
 
-* Scaled and Warped Matching
+* FastDTW
+* SparseDTW
 
 ## Contributing ##
 
