@@ -67,12 +67,17 @@ public class UniformScalingDistance implements GenericDistanceMeasure<double[]> 
     @Override
     public double compute(double[] a, double[] b, double cutOffValue) {
         double min = Double.POSITIVE_INFINITY;
-        double interval = (maxScalingFactor - minScalingFactor) / steps;
-        if (Precision.equals(interval, 0.0, TimeSeriesPrecision.EPSILON)) {
-            return computeDistance(a, b, null, minScalingFactor, cutOffValue);
+        double[] aux = new double[a.length];
+        if (steps == 1) {
+            double scalingFactor = (minScalingFactor + maxScalingFactor) / 2;
+            return computeDistance(a, b, aux, scalingFactor, cutOffValue);
         }
 
-        double[] aux = new double[a.length];
+        double interval = (maxScalingFactor - minScalingFactor) / (steps - 1);
+        if (Precision.equals(interval, 0.0, TimeSeriesPrecision.EPSILON)) {
+            return computeDistance(a, b, aux, minScalingFactor, cutOffValue);
+        }
+
         for (double i = minScalingFactor; i <= maxScalingFactor; i += interval) {
             double d = computeDistance(a, b, aux, i, cutOffValue);
             if (d < min) {
