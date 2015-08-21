@@ -55,7 +55,7 @@ public class PiecewiseLinearAggregateApproximation implements GenericTransformer
      * @param segments the number of segments
      * @param strategy the type of strategy to be applied to the sequence
      * @throws UnsupportedStrategyException if strategy is different than STRICT and IGNORE_REMAINING
-     * @throws NumberIsTooSmallException if segments < 1
+     * @throws NumberIsTooSmallException if segments lower than 1
      */
     public PiecewiseLinearAggregateApproximation(int segments, SegmentationStrategy strategy) {
         if (segments < 1) {

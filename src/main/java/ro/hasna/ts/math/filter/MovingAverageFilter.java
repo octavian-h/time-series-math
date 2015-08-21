@@ -30,6 +30,8 @@ public class MovingAverageFilter implements Filter {
 
     /**
      * Creates a new instance of this class with the given number of observations to smooth from both sides.
+     *
+     * @param observations the number of observations
      */
     public MovingAverageFilter(int observations) {
         this(observations, true, null);

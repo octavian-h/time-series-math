@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Implements Piecewise Approximation using a curve fitting function (ex: linear -> PLA, quadratic -> PQA etc.).
+ * Implements Piecewise Approximation using a curve fitting function (ex: linear = PLA, quadratic = PQA etc.).
  * An optimised implementation for the mean function is the class {@code PiecewiseAggregateApproximation}.
  *
  * @since 1.0
@@ -55,7 +55,7 @@ public class PiecewiseCurveFitterApproximation implements GenericTransformer<dou
      * @param segments    the number of segments
      * @param strategy    the type of strategy to be applied to the sequence
      * @param curveFitter the curve fitting function
-     * @throws NumberIsTooSmallException if segments < 1
+     * @throws NumberIsTooSmallException if segments lower than 1
      */
     public PiecewiseCurveFitterApproximation(int segments, SegmentationStrategy strategy, AbstractCurveFitter curveFitter) {
         if (segments < 1) {

@@ -51,7 +51,7 @@ public class PiecewiseAggregateApproximation implements GenericTransformer<doubl
      *
      * @param segments the number of segments
      * @param strategy the type of strategy to be applied to the sequence
-     * @throws NumberIsTooSmallException if segments < 1
+     * @throws NumberIsTooSmallException if segments lower than 1
      */
     public PiecewiseAggregateApproximation(int segments, SegmentationStrategy strategy) {
         if (segments < 1) {

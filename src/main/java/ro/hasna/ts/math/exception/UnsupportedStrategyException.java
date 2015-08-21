@@ -29,7 +29,10 @@ public class UnsupportedStrategyException extends MathUnsupportedOperationExcept
     private final String algorithm;
 
     /**
-     * Default constructor.
+     * Construct the exception.
+     *
+     * @param strategy  the strategy used in the algorithm
+     * @param algorithm the algorithm name
      */
     public UnsupportedStrategyException(String strategy, String algorithm) {
         super(LocalizableMessages.UNSUPPORTED_STRATEGY, strategy, algorithm);

@@ -82,9 +82,9 @@ public class UniformScalingDistance implements GenericDistanceMeasure<double[]> 
             double d = computeDistance(a, b, aux, i, cutOffValue);
             if (d < min) {
                 min = d;
-            }
-            if (Precision.equals(min, 0.0, TimeSeriesPrecision.EPSILON)) {
-                return min;
+                if (Precision.equals(min, 0.0, TimeSeriesPrecision.EPSILON)) {
+                    return min;
+                }
             }
         }
         return min;

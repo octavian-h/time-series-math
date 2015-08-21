@@ -20,7 +20,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ro.hasna.ts.math.representation.AdaptivePiecewiseConstantApproximation;
-import ro.hasna.ts.math.representation.PiecewiseAggregateApproximation;
 import ro.hasna.ts.math.type.MeanLastPair;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 

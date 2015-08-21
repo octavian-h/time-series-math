@@ -102,6 +102,11 @@ public class DynamicTimeWarpingDistance implements GenericDistanceMeasure<double
      * <i>Addressing big data time series: Mining trillions of time series subsequences under dynamic time warping</i>
      * </p>
      *
+     * @param a                 the first vector
+     * @param b                 the second vector
+     * @param n                 the length of the vectors
+     * @param transformedCutOff if the distance being calculated is above this value
+     *                          stop computing the remaining distance
      * @return modified LB_Kim value
      */
     protected double computeModifiedKimLowerBound(double[] a, double[] b, int n, double transformedCutOff) {
@@ -144,10 +149,16 @@ public class DynamicTimeWarpingDistance implements GenericDistanceMeasure<double
      * <i>Faster Sequential Search with a Two-Pass Dynamic-Time-Warping Lower Bound</i>
      * </p>
      *
-     * @return LB_Improved value, projection of b on the Keogh envelope and error margins (= distance from b to the Keogh envelope)
+     * @param v                 the first vector
+     * @param keoghLowerBound   the bound for the second vector
+     * @param n                 the length of the vectors
+     * @param radius            the Sakoe-Chiba band radius
+     * @param transformedCutOff if the distance being calculated is above this value
+     *                          stop computing the remaining distance
+     * @return LB_Improved value, projection of v on the Keogh envelope and error margins (= distance from v to the Keogh envelope)
      */
-    protected LowerBound computeLemireLowerBound(double[] b, LowerBound keoghLowerBound, int n, int radius, double transformedCutOff) {
-        LowerBound improvedLowerBound = computeKeoghLowerBound(b, keoghLowerBound.projection, n, radius, transformedCutOff - keoghLowerBound.value);
+    protected LowerBound computeLemireLowerBound(double[] v, LowerBound keoghLowerBound, int n, int radius, double transformedCutOff) {
+        LowerBound improvedLowerBound = computeKeoghLowerBound(v, keoghLowerBound.projection, n, radius, transformedCutOff - keoghLowerBound.value);
         if (improvedLowerBound.value != Double.POSITIVE_INFINITY) {
             for (int i = 0; i < improvedLowerBound.errorMargins.length; i++) {
                 improvedLowerBound.errorMargins[i] += keoghLowerBound.errorMargins[i];
@@ -164,6 +175,12 @@ public class DynamicTimeWarpingDistance implements GenericDistanceMeasure<double
      * <i>Exact indexing of dynamic time warping</i>
      * </p>
      *
+     * @param a                 the first vector
+     * @param b                 the second vector
+     * @param n                 the length of the vectors
+     * @param radius            the Sakoe-Chiba band radius
+     * @param transformedCutOff if the distance being calculated is above this value
+     *                          stop computing the remaining distance
      * @return LB_Keogh value, projection of a on the envelope of b and error margins (= distance from a to the envelope of b)
      */
     protected LowerBound computeKeoghLowerBound(double[] a, double[] b, int n, int radius, double transformedCutOff) {
@@ -205,6 +222,9 @@ public class DynamicTimeWarpingDistance implements GenericDistanceMeasure<double
      * <i>Faster Sequential Search with a Two-Pass Dynamic-Time-Warping Lower Bound</i>
      * </p>
      *
+     * @param v      the vector
+     * @param n      the length of the vector
+     * @param radius the Sakoe-Chiba band radius
      * @return time series envelope
      */
     protected Envelope computeLemireEnvelope(double[] v, int n, int radius) {

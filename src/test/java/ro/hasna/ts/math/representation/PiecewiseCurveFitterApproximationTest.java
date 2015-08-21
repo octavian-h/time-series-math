@@ -29,10 +29,11 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
  * @since 1.0
  */
 public class PiecewiseCurveFitterApproximationTest {
-    private AbstractCurveFitter curveFitter;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    private AbstractCurveFitter curveFitter;
 
     private static void assertMatrixEquals(double[][] expected, double[][] actual, double precision) {
         Assert.assertEquals(expected.length, actual.length);

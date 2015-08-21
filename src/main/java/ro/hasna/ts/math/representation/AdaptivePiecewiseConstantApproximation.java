@@ -45,7 +45,7 @@ public class AdaptivePiecewiseConstantApproximation implements GenericTransforme
      * Creates a new instance of this class with approximation enabled.
      *
      * @param segments the number of segments
-     * @throws NumberIsTooSmallException if segments < 1
+     * @throws NumberIsTooSmallException if segments lower than 1
      */
     public AdaptivePiecewiseConstantApproximation(int segments) {
         this(segments, true);
@@ -56,7 +56,7 @@ public class AdaptivePiecewiseConstantApproximation implements GenericTransforme
      *
      * @param segments         the number of segments
      * @param approximateError compute the error of unified segments using approximation
-     * @throws NumberIsTooSmallException if segments < 1
+     * @throws NumberIsTooSmallException if segments lower than 1
      */
     public AdaptivePiecewiseConstantApproximation(int segments, boolean approximateError) {
         if (segments < 1) {
