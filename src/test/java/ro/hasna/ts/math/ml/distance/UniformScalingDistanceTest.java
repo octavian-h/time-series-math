@@ -31,7 +31,7 @@ public class UniformScalingDistanceTest {
 
     @Before
     public void setUp() throws Exception {
-        distance = new UniformScalingDistance(0.5, 1.5, 10);
+        distance = new UniformScalingDistance(0.5, 1.5, 11);
     }
 
     @After
@@ -130,5 +130,42 @@ public class UniformScalingDistanceTest {
         double result = distance.compute(a, b, 11);
 
         Assert.assertEquals(10, result, TimeSeriesPrecision.EPSILON);
+    }
+
+    @Test
+    public void testResult2() throws Exception {
+        int n = 100;
+        double a[] = new double[n];
+        double b[] = new double[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = i * 1.3 + 1;
+            b[i] = i;
+        }
+
+        double result = distance.compute(a, b, 11);
+
+        Assert.assertEquals(10, result, TimeSeriesPrecision.EPSILON);
+    }
+
+    @Test
+    public void testResult3() throws Exception {
+        UniformScalingDistance dist = new UniformScalingDistance(1.5, 2.5, 1);
+        double a[] = {1, 2, 3, 4, 5, 6};
+        double b[] = {1, 1.5, 2, 2.5, 3, 3.5};
+
+        double result = dist.compute(a, b, 11);
+
+        Assert.assertEquals(0, result, TimeSeriesPrecision.EPSILON);
+    }
+
+    @Test
+    public void testResult4() throws Exception {
+        UniformScalingDistance dist = new UniformScalingDistance(2, 2, 10);
+        double a[] = {1, 2, 3, 4, 5, 6};
+        double b[] = {1, 1.5, 2, 2.5, 3, 3.5};
+
+        double result = dist.compute(a, b, 11);
+
+        Assert.assertEquals(0, result, TimeSeriesPrecision.EPSILON);
     }
 }
