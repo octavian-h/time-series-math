@@ -20,12 +20,12 @@ import org.apache.commons.math3.util.Precision;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
 /**
- * Calculates the distance between two vectors using Longest Common Subsequence.
+ * Calculates the distance between two vectors using Edit Distance on Real Sequence.
  * <p>
  * Reference:
  * Wagner Robert A. and Michael J. Fischer (1974)
  * <i>The string-to-string correction problem</i>
- * Chen Lei and Raymond Ng
+ * Chen Lei and Raymond Ng (2004)
  * <i>On the marriage of lp-norms and edit distance</i>
  * </p>
  *

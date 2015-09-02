@@ -18,10 +18,10 @@ package ro.hasna.ts.math.ml.distance;
 import org.apache.commons.math3.util.FastMath;
 
 /**
- * Calculates the distance between two vectors using Longest Common Subsequence.
+ * Calculates the distance between two vectors using Edit Distance with Real Penalty.
  * <p>
  * Reference:
- * Chen Lei, M. Tamer Özsu and Vincent Oria
+ * Chen Lei, M. Tamer Özsu and Vincent Oria (2005)
  * <i>Robust and fast similarity search for moving object trajectories</i>
  * </p>
  *
