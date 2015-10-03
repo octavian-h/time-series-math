@@ -116,14 +116,14 @@ public class DynamicTimeWarpingDistanceTest {
         int m = 128;
         ZNormalizer normalizer = new ZNormalizer();
 
-        Scanner dataScanner = new Scanner(getClass().getResourceAsStream("data-100000.txt")).useDelimiter(" ").useLocale(Locale.ENGLISH);
+        Scanner dataScanner = new Scanner(getClass().getResourceAsStream("data-1m.txt")).useLocale(Locale.ENGLISH);
         double[] data = new double[m];
         double[] copy = new double[m];
         for (int i = 0; i < m && dataScanner.hasNextDouble(); i++) {
             data[i] = dataScanner.nextDouble();
         }
 
-        Scanner queryScanner = new Scanner(getClass().getResourceAsStream("query-128.txt")).useDelimiter(" ").useLocale(Locale.ENGLISH);
+        Scanner queryScanner = new Scanner(getClass().getResourceAsStream("query-128.txt")).useLocale(Locale.ENGLISH);
         double[] query = new double[m];
         for (int i = 0; i < m && queryScanner.hasNextDouble(); i++) {
             query[i] = queryScanner.nextDouble();
@@ -147,7 +147,7 @@ public class DynamicTimeWarpingDistanceTest {
             n++;
         }
 
-        Assert.assertEquals(41364, posMin);
-        Assert.assertEquals(5.5107376701354776, min, TimeSeriesPrecision.EPSILON);
+        Assert.assertEquals(756561, posMin);
+        Assert.assertEquals(3.775620905705185, min, TimeSeriesPrecision.EPSILON);
     }
 }
