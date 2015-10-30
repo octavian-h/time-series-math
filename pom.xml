@@ -16,7 +16,8 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ro.hasna.ts</groupId>
@@ -28,6 +29,51 @@
     <description>Java library for analysing time series.</description>
     <url>https://github.com/octavian-h/time-series-math</url>
     <inceptionYear>2015</inceptionYear>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Octavian Hasna</name>
+            <id>octavian-h</id>
+        </developer>
+    </developers>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/octavian-h/time-series-math/issues</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>Travis CI</system>
+        <url>https://travis-ci.org/octavian-h/time-series-math</url>
+    </ciManagement>
+
+    <scm>
+        <connection>scm:git:https://github.com/octavian-h/time-series-math.git</connection>
+        <developerConnection>scm:git:https://github.com/octavian-h/time-series-math.git</developerConnection>
+        <url>https://github.com/octavian-h/time-series-math</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+        <!-- Release repository -->
+        <repository>
+            <id>bintray</id>
+            <url>https://api.bintray.com/maven/octavian-h/maven/time-series-math/;publish=1</url>
+        </repository>
+        <!-- Snapshot repository -->
+        <snapshotRepository>
+            <id>jfrog-snapshots</id>
+            <url>http://oss.jfrog.org/artifactory/oss-snapshot-local</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -85,7 +131,7 @@
             <plugin>
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>4.0.0</version>
             </plugin>
 
             <!-- Code coverage plugin -->
@@ -119,7 +165,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.2</version>
+                <version>2.5.3</version>
                 <configuration>
                     <useReleaseProfile>false</useReleaseProfile>
                     <releaseProfiles>release</releaseProfiles>
@@ -142,7 +188,7 @@
                             <execution>
                                 <id>attach-sources</id>
                                 <goals>
-                                    <goal>jar</goal>
+                                    <goal>jar-no-fork</goal>
                                 </goals>
                             </execution>
                         </executions>
@@ -164,49 +210,4 @@
             </build>
         </profile>
     </profiles>
-
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <issueManagement>
-        <system>GitHub</system>
-        <url>https://github.com/octavian-h/time-series-math/issues</url>
-    </issueManagement>
-
-    <ciManagement>
-        <system>Travis CI</system>
-        <url>https://travis-ci.org/octavian-h/time-series-math</url>
-    </ciManagement>
-
-    <developers>
-        <developer>
-            <name>Octavian Hasna</name>
-            <id>octavian-h</id>
-        </developer>
-    </developers>
-
-    <scm>
-        <connection>scm:git:https://github.com/octavian-h/time-series-math.git</connection>
-        <developerConnection>scm:git:https://github.com/octavian-h/time-series-math.git</developerConnection>
-        <url>https://github.com/octavian-h/time-series-math</url>
-        <tag>HEAD</tag>
-    </scm>
-
-    <distributionManagement>
-        <!-- Release repository -->
-        <repository>
-            <id>bintray</id>
-            <url>https://api.bintray.com/maven/octavian-h/maven/time-series-math/;publish=1</url>
-        </repository>
-        <!-- Snapshot repository -->
-        <snapshotRepository>
-            <id>jfrog-snapshots</id>
-            <url>http://oss.jfrog.org/artifactory/oss-snapshot-local</url>
-        </snapshotRepository>
-    </distributionManagement>
 </project>
