@@ -73,19 +73,21 @@ public class LongestCommonSubsequenceDistance implements GenericDistanceMeasure<
         int w = 2 * radius + 1;
         int[] prev = new int[w];
         int[] current = new int[w];
-        int start, end;
+        int start, end, x, y;
         for (int i = 0; i < n; i++) {
             start = FastMath.max(0, i - radius);
             end = FastMath.min(n - 1, i + radius) - start;
             for (int k = 0; k <= end; k++) {
                 if (Precision.equals(a[i], b[k + start], epsilon)) {
                     current[k] = prev[k] + 1;
-                } else if (k == 0) {
-                    current[0] = prev[1];
-                } else if (k == w - 1) {
-                    current[w - 1] = current[w - 2];
                 } else {
-                    current[k] = FastMath.max(current[k - 1], prev[k + 1]);
+                    if (k - 1 >= 0) x = current[k - 1];
+                    else x = 0;
+
+                    if (k + 1 < w) y = prev[k + 1];
+                    else y = 0;
+
+                    current[k] = FastMath.max(x, y);
                 }
             }
 
