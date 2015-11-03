@@ -19,6 +19,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ro.hasna.ts.math.ml.distance.util.DistanceTester;
 import ro.hasna.ts.math.normalization.ZNormalizer;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
@@ -43,75 +44,35 @@ public class DynamicTimeWarpingDistanceTest {
 
     @Test
     public void testTriangleInequality() throws Exception {
-        int n = 128;
-        double a[] = new double[n];
-        double b[] = new double[n];
-        double c[] = new double[n];
-
-        for (int i = 0; i < n; i++) {
-            a[i] = i;
-            b[i] = n - i;
-            c[i] = i * i;
-        }
-
-        double ab = distance.compute(a, b);
-        double ba = distance.compute(b, a);
-        double bc = distance.compute(b, c);
-        double ac = distance.compute(a, c);
-
-        Assert.assertEquals(ab, ba, TimeSeriesPrecision.EPSILON);
-        Assert.assertTrue(ab + bc >= ac);
-        Assert.assertTrue(ab + ac >= bc);
-        Assert.assertTrue(ac + bc >= ab);
+        new DistanceTester().withGenericDistanceMeasure(distance)
+                .testTriangleInequality();
     }
 
     @Test
     public void testEquality() throws Exception {
-        int n = 128;
-        double a[] = new double[n];
-        double b[] = new double[n];
-        for (int i = 0; i < n; i++) {
-            a[i] = i;
-            b[i] = i + 4;
-        }
-
-        double result = distance.compute(a, b);
-
-        Assert.assertEquals(0, result, TimeSeriesPrecision.EPSILON);
+        new DistanceTester().withGenericDistanceMeasure(distance)
+                .testEquality();
     }
 
     @Test
     public void testOverflow() throws Exception {
-        int n = 128;
-        double a[] = new double[n];
-        double b[] = new double[n];
-        for (int i = 0; i < n; i++) {
-            a[i] = i;
-            b[i] = i * i;
-        }
-
-        double result = distance.compute(a, b, 2);
-
-        Assert.assertEquals(Double.POSITIVE_INFINITY, result, TimeSeriesPrecision.EPSILON);
+        new DistanceTester().withGenericDistanceMeasure(distance)
+                .withVectorLength(128)
+                .withCutOffValue(2)
+                .testOverflowSquare();
     }
 
     @Test
     public void testResult() throws Exception {
-        int n = 100;
-        double a[] = new double[n];
-        double b[] = new double[n];
-        for (int i = 0; i < n; i++) {
-            a[i] = i;
-            b[i] = i * i * i;
-        }
-
-        double result = distance.compute(a, b);
-
-        Assert.assertEquals(3.318791555054906, result, TimeSeriesPrecision.EPSILON);
+        new DistanceTester().withGenericDistanceMeasure(distance)
+                .withVectorLength(128)
+                .withCutOffValue(3)
+                .withExpectedResult(2.0840142540417594)
+                .testResultSquare();
     }
 
     @Test
-    public void testMethodCalls() throws Exception {
+    public void testResult2() throws Exception {
         DynamicTimeWarpingDistance dtw = new DynamicTimeWarpingDistance(0.05, null);
         int m = 128;
         ZNormalizer normalizer = new ZNormalizer();
@@ -133,11 +94,16 @@ public class DynamicTimeWarpingDistanceTest {
         double min = Double.POSITIVE_INFINITY;
         int posMin = 0;
         int n = 0;
+//        long duration = 0;
         while (dataScanner.hasNextDouble()) {
             System.arraycopy(data, 1, copy, 0, m - 1);
             copy[m - 1] = dataScanner.nextDouble();
+            double[] normalizedCopy = normalizer.normalize(copy);
 
-            double d = dtw.compute(normalizer.normalize(copy), query, min);
+//            long start = System.currentTimeMillis();
+            double d = dtw.compute(normalizedCopy, query, min);
+//            duration += System.currentTimeMillis() - start;
+
             if (d < min) {
                 min = d;
                 posMin = n;
@@ -146,6 +112,8 @@ public class DynamicTimeWarpingDistanceTest {
             data = copy;
             n++;
         }
+
+//        System.out.println("duration=" + duration);
 
         Assert.assertEquals(756561, posMin);
         Assert.assertEquals(3.775620905705185, min, TimeSeriesPrecision.EPSILON);
