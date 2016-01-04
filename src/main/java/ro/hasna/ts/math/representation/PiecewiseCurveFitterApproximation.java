@@ -113,39 +113,6 @@ public class PiecewiseCurveFitterApproximation implements GenericTransformer<dou
                 index++;
             }
             reducedValues[segments - 1] = curveFitter.fit(segment);
-//
-//
-//            double segmentSize = len * 1.0 / segments;
-//            int maxSegmentSize = (int) segmentSize + 2;
-//            int i = 0;
-//            double x = 1.0;
-//            int y = (int) (segmentSize - 1);
-//            double z = segmentSize - 1 - y;
-//            int n = 0;
-//            while (i < len) {
-//                int m = 0;
-//                List<WeightedObservedPoint> segment = new ArrayList<>(maxSegmentSize);
-//
-//                if (!Precision.equals(x, 0, TimeSeriesPrecision.EPSILON)) {
-//                    segment.add(new WeightedObservedPoint(x, m++, values[i]));
-//                }
-//                int k = i + 1 + y;
-//                for (int j = i + 1; j < k; j++) {
-//                    segment.add(new WeightedObservedPoint(1, m++, values[j]));
-//                }
-//                if (!Precision.equals(z, 0, TimeSeriesPrecision.EPSILON)) {
-//                    segment.add(new WeightedObservedPoint(z, m, values[k]));
-//                }
-//
-//                reducedValues[n++] = curveFitter.fit(segment);
-//                if (n == segments) break;
-//
-//                x = 1 - z;
-//                y = (int) (segmentSize - x);
-//                z = segmentSize - x - y;
-//
-//                i = k;
-//            }
         }
 
         return reducedValues;
