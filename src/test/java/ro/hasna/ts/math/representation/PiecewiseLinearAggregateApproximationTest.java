@@ -22,8 +22,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import ro.hasna.ts.math.exception.ArrayLengthIsNotDivisibleException;
 import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
-import ro.hasna.ts.math.exception.UnsupportedStrategyException;
-import ro.hasna.ts.math.representation.util.SegmentationStrategy;
 import ro.hasna.ts.math.type.MeanSlopePair;
 
 /**
@@ -47,7 +45,7 @@ public class PiecewiseLinearAggregateApproximationTest {
         thrown.expect(ArrayLengthIsTooSmallException.class);
         thrown.expectMessage("3 is smaller than the minimum (4)");
 
-        PiecewiseLinearAggregateApproximation plaa = new PiecewiseLinearAggregateApproximation(4, SegmentationStrategy.IGNORE_REMAINING);
+        PiecewiseLinearAggregateApproximation plaa = new PiecewiseLinearAggregateApproximation(4);
         double[] v = {1, 2, 3};
 
         plaa.transform(v);
@@ -65,28 +63,9 @@ public class PiecewiseLinearAggregateApproximationTest {
     }
 
     @Test
-    public void testTransformUnsupportedStrategy() throws Exception {
-        thrown.expect(UnsupportedStrategyException.class);
-        thrown.expectMessage("the strategy FRACTIONAL_PARTITION is not supported in PLAA");
-
-        new PiecewiseLinearAggregateApproximation(4, SegmentationStrategy.FRACTIONAL_PARTITION);
-    }
-
-    @Test
     public void testTransformStrict() throws Exception {
         PiecewiseLinearAggregateApproximation plaa = new PiecewiseLinearAggregateApproximation(2);
         double[] v = {1, 2, 3, 3, 2, 1};
-        MeanSlopePair[] expected = {new MeanSlopePair(2.0, 1.0), new MeanSlopePair(2.0, -1.0)};
-
-        MeanSlopePair[] result = plaa.transform(v);
-
-        Assert.assertArrayEquals(expected, result);
-    }
-
-    @Test
-    public void testTransformIgnoreRemaining() throws Exception {
-        PiecewiseLinearAggregateApproximation plaa = new PiecewiseLinearAggregateApproximation(2, SegmentationStrategy.IGNORE_REMAINING);
-        double[] v = {1, 2, 3, 3, 2, 1, 0};
         MeanSlopePair[] expected = {new MeanSlopePair(2.0, 1.0), new MeanSlopePair(2.0, -1.0)};
 
         MeanSlopePair[] result = plaa.transform(v);

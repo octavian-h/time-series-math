@@ -72,6 +72,16 @@ public class DynamicTimeWarpingDistanceTest {
     }
 
     @Test
+    public void testResultSmall() throws Exception {
+        double a[] = {3,2,1};
+        double b[] = {2,1,0};
+
+        double result = distance.compute(a, b);
+
+        Assert.assertEquals(0, result, TimeSeriesPrecision.EPSILON);
+    }
+
+    @Test
     public void testResult2() throws Exception {
         DynamicTimeWarpingDistance dtw = new DynamicTimeWarpingDistance(0.05, null);
         int m = 128;

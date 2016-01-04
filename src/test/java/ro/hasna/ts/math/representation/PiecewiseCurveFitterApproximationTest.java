@@ -20,9 +20,7 @@ import org.apache.commons.math3.fitting.AbstractCurveFitter;
 import org.apache.commons.math3.fitting.PolynomialCurveFitter;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
-import ro.hasna.ts.math.exception.ArrayLengthIsNotDivisibleException;
 import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
-import ro.hasna.ts.math.representation.util.SegmentationStrategy;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
 /**
@@ -65,19 +63,8 @@ public class PiecewiseCurveFitterApproximationTest {
         thrown.expect(ArrayLengthIsTooSmallException.class);
         thrown.expectMessage("3 is smaller than the minimum (4)");
 
-        PiecewiseCurveFitterApproximation pcfa = new PiecewiseCurveFitterApproximation(4, SegmentationStrategy.FRACTIONAL_PARTITION, curveFitter);
-        double[] v = {1, 2, 3};
-
-        pcfa.transform(v);
-    }
-
-    @Test
-    public void testTransformSegmentsNotDivisible() throws Exception {
-        thrown.expect(ArrayLengthIsNotDivisibleException.class);
-        thrown.expectMessage("5 is not divisible with 4");
-
         PiecewiseCurveFitterApproximation pcfa = new PiecewiseCurveFitterApproximation(4, curveFitter);
-        double[] v = {1, 2, 3, 4, 5};
+        double[] v = {1, 2, 3};
 
         pcfa.transform(v);
     }
@@ -94,19 +81,8 @@ public class PiecewiseCurveFitterApproximationTest {
     }
 
     @Test
-    public void testTransformIgnoreRemaining() throws Exception {
-        PiecewiseCurveFitterApproximation pcfa = new PiecewiseCurveFitterApproximation(2, SegmentationStrategy.IGNORE_REMAINING, curveFitter);
-        double[] v = {1, 2, 3, 4, 5, 6, 7};
-        double[][] expected = {{2.0}, {5.0}};
-
-        double[][] result = pcfa.transform(v);
-
-        assertMatrixEquals(expected, result, TimeSeriesPrecision.EPSILON);
-    }
-
-    @Test
     public void testTransformFractionalPartition1() throws Exception {
-        PiecewiseCurveFitterApproximation pcfa = new PiecewiseCurveFitterApproximation(2, SegmentationStrategy.FRACTIONAL_PARTITION, curveFitter);
+        PiecewiseCurveFitterApproximation pcfa = new PiecewiseCurveFitterApproximation(2, curveFitter);
         double[] v = {1, 2, 3, 4, 5, 6, 7};
         double[][] expected = {{8 / 3.5}, {20 / 3.5}};
 
@@ -117,7 +93,7 @@ public class PiecewiseCurveFitterApproximationTest {
 
     @Test
     public void testTransformFractionalPartition2() throws Exception {
-        PiecewiseCurveFitterApproximation pcfa = new PiecewiseCurveFitterApproximation(5, SegmentationStrategy.FRACTIONAL_PARTITION, curveFitter);
+        PiecewiseCurveFitterApproximation pcfa = new PiecewiseCurveFitterApproximation(5, curveFitter);
         double[] v = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
         double[][] expected = {{24.0 / 13}, {57.0 / 13}, {91.0 / 13}, {125.0 / 13}, {158.0 / 13}};
 
@@ -128,7 +104,7 @@ public class PiecewiseCurveFitterApproximationTest {
 
     @Test
     public void testTransformFractionalPartition3() throws Exception {
-        PiecewiseCurveFitterApproximation pcfa = new PiecewiseCurveFitterApproximation(13, SegmentationStrategy.FRACTIONAL_PARTITION, curveFitter);
+        PiecewiseCurveFitterApproximation pcfa = new PiecewiseCurveFitterApproximation(13, curveFitter);
         double[] v = new double[523];
         for (int i = 0; i < 523; i++) {
             v[i] = 1.0;

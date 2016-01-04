@@ -16,11 +16,7 @@
 package ro.hasna.ts.math.representation;
 
 import org.apache.commons.math3.exception.NumberIsTooSmallException;
-import org.apache.commons.math3.util.Precision;
-import ro.hasna.ts.math.exception.ArrayLengthIsNotDivisibleException;
 import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
-import ro.hasna.ts.math.representation.util.SegmentationStrategy;
-import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
 /**
  * Implements the Piecewise Aggregate Approximation (PAA) algorithm.
@@ -35,30 +31,18 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
 public class PiecewiseAggregateApproximation implements GenericTransformer<double[], double[]> {
     private static final long serialVersionUID = -8199587096227874425L;
     private final int segments;
-    private final SegmentationStrategy strategy;
 
     /**
-     * Creates a new instance of this class with default strategy.
+     * Creates a new instance of this class.
      *
-     * @param segments the number of segments
-     */
-    public PiecewiseAggregateApproximation(int segments) {
-        this(segments, SegmentationStrategy.STRICT);
-    }
-
-    /**
-     * Creates a new instance of this class with a given strategy.
-     *
-     * @param segments the number of segments
-     * @param strategy the type of strategy to be applied to the sequence
+     * @param segments     the number of segments
      * @throws NumberIsTooSmallException if segments lower than 1
      */
-    public PiecewiseAggregateApproximation(int segments, SegmentationStrategy strategy) {
+    public PiecewiseAggregateApproximation(int segments) {
         if (segments < 1) {
             throw new NumberIsTooSmallException(segments, 1, true);
         }
 
-        this.strategy = strategy;
         this.segments = segments;
     }
 
@@ -70,55 +54,42 @@ public class PiecewiseAggregateApproximation implements GenericTransformer<doubl
         }
 
         int modulo = len % segments;
-        if (modulo != 0 && strategy == SegmentationStrategy.STRICT) {
-            throw new ArrayLengthIsNotDivisibleException(len, segments);
-        }
-
         double[] reducedValues = new double[segments];
-        if (modulo == 0 || strategy == SegmentationStrategy.IGNORE_REMAINING) {
-            int intervalSize = len / segments;
+        if (modulo == 0) {
+            int segmentSize = len / segments;
             double sum = 0;
             int n = 0;
             for (int i = 0; i < len; i++) {
                 sum += values[i];
-                if ((i + 1) % intervalSize == 0) {
-                    reducedValues[n++] = sum / intervalSize;
+                if ((i + 1) % segmentSize == 0) {
+                    reducedValues[n++] = sum / segmentSize;
                     if (n == segments) break;
                     sum = 0;
                 }
             }
-
-        } else if (strategy == SegmentationStrategy.FRACTIONAL_PARTITION) {
-            double intervalSize = len * 1.0 / segments;
+        } else {
+            double segmentSize = len * 1.0 / segments;
+            int k = 0;
             double sum = 0;
-            int i = 0;
-            double x = 1.0;
-            int y = (int) (intervalSize - 1);
-            double z = intervalSize - 1 - y;
-            int n = 0;
-            while (i < len) {
-                if (!Precision.equals(x, 0, TimeSeriesPrecision.EPSILON)) {
-                    sum += values[i] * x;
-                }
-                int k = i + 1 + y;
-                for (int j = i + 1; j < k; j++) {
-                    sum += values[j];
-                }
-                if (!Precision.equals(z, 0, TimeSeriesPrecision.EPSILON)) {
-                    sum += values[k] * z;
+            for (int i = 0; i < segments - 1; i++) {
+                double x = (i + 1) * segmentSize - 1;
+
+                for (; k < x; k++) {
+                    sum += values[k];
                 }
 
-                reducedValues[n++] = sum / intervalSize;
-                if (n == segments) break;
+                double delta = x - (int) x;
+                sum += delta * values[k];
+                reducedValues[i] = sum / segmentSize;
 
-                sum = 0;
-
-                x = 1 - z;
-                y = (int) (intervalSize - x);
-                z = intervalSize - x - y;
-
-                i = k;
+                sum = (1 - delta) * values[k];
+                k++;
             }
+
+            for (; k < len; k++) {
+                sum += values[k];
+            }
+            reducedValues[segments - 1] = sum / segmentSize;
         }
 
         return reducedValues;

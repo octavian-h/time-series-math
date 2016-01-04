@@ -22,7 +22,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import ro.hasna.ts.math.distribution.NormalDistributionDivider;
 import ro.hasna.ts.math.normalization.ZNormalizer;
-import ro.hasna.ts.math.representation.util.SegmentationStrategy;
 import ro.hasna.ts.math.type.SaxPair;
 
 import java.util.Random;
@@ -68,7 +67,7 @@ public class IndexableSymbolicAggregateApproximationTest {
         expected[8] = new SaxPair(0, 3);
 
         IndexableSymbolicAggregateApproximation isax = new IndexableSymbolicAggregateApproximation(
-                new PiecewiseAggregateApproximation(9, SegmentationStrategy.FRACTIONAL_PARTITION),
+                new PiecewiseAggregateApproximation(9),
                 new ZNormalizer(),
                 alphabetSizes,
                 new NormalDistributionDivider());

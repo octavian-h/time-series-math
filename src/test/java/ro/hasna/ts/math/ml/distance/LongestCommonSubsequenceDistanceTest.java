@@ -74,6 +74,16 @@ public class LongestCommonSubsequenceDistanceTest {
     }
 
     @Test
+    public void testResultSmall() throws Exception {
+        double a[] = {3};
+        double b[] = {2};
+
+        double result = distance.compute(a, b);
+
+        Assert.assertEquals(1, result, TimeSeriesPrecision.EPSILON);
+    }
+
+    @Test
     public void testResult2() throws Exception {
         LongestCommonSubsequenceDistance lcss = new LongestCommonSubsequenceDistance(0.1, 0.05);
         int m = 128;

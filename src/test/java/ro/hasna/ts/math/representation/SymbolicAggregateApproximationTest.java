@@ -18,7 +18,6 @@ package ro.hasna.ts.math.representation;
 import org.junit.Assert;
 import org.junit.Test;
 import ro.hasna.ts.math.normalization.ZNormalizer;
-import ro.hasna.ts.math.representation.util.SegmentationStrategy;
 
 /**
  * @since 1.0
@@ -37,7 +36,7 @@ public class SymbolicAggregateApproximationTest {
         double[] breakpoints = {-0.4307272992954576, 0.4307272992954576};
         int[] expected = {0, 0, 1, 2, 2, 2, 1, 0, 0};
 
-        SymbolicAggregateApproximation sax = new SymbolicAggregateApproximation(new PiecewiseAggregateApproximation(9, SegmentationStrategy.FRACTIONAL_PARTITION), new ZNormalizer(), breakpoints);
+        SymbolicAggregateApproximation sax = new SymbolicAggregateApproximation(new PiecewiseAggregateApproximation(9), new ZNormalizer(), breakpoints);
         int[] result = sax.transform(list);
 
         Assert.assertArrayEquals(expected, result);
@@ -71,7 +70,7 @@ public class SymbolicAggregateApproximationTest {
             list[i] = i;
         }
         ZNormalizer normalizer = new ZNormalizer();
-        PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(segments, SegmentationStrategy.STRICT);
+        PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(segments);
 
         double[] first = normalizer.normalize(paa.transform(list));
         double[] second = paa.transform(normalizer.normalize(list));

@@ -21,8 +21,6 @@ import org.apache.commons.math3.stat.descriptive.moment.Mean;
 import org.apache.commons.math3.stat.descriptive.moment.Variance;
 import ro.hasna.ts.math.exception.ArrayLengthIsNotDivisibleException;
 import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
-import ro.hasna.ts.math.exception.UnsupportedStrategyException;
-import ro.hasna.ts.math.representation.util.SegmentationStrategy;
 import ro.hasna.ts.math.type.MeanSlopePair;
 
 /**
@@ -38,35 +36,19 @@ import ro.hasna.ts.math.type.MeanSlopePair;
 public class PiecewiseLinearAggregateApproximation implements GenericTransformer<double[], MeanSlopePair[]> {
     private static final long serialVersionUID = -4073250977010141095L;
     private final int segments;
-    private final SegmentationStrategy strategy;
 
     /**
-     * Creates a new instance of this class with default strategy.
+     * Creates a new instance of this class.
      *
      * @param segments the number of segments
-     */
-    public PiecewiseLinearAggregateApproximation(int segments) {
-        this(segments, SegmentationStrategy.STRICT);
-    }
-
-    /**
-     * Creates a new instance of this class with a given strategy.
-     *
-     * @param segments the number of segments
-     * @param strategy the type of strategy to be applied to the sequence
-     * @throws UnsupportedStrategyException if strategy is different than STRICT and IGNORE_REMAINING
      * @throws NumberIsTooSmallException if segments lower than 1
      */
-    public PiecewiseLinearAggregateApproximation(int segments, SegmentationStrategy strategy) {
+    public PiecewiseLinearAggregateApproximation(int segments) {
         if (segments < 1) {
             throw new NumberIsTooSmallException(segments, 1, true);
         }
-        if (strategy != SegmentationStrategy.STRICT && strategy != SegmentationStrategy.IGNORE_REMAINING) {
-            throw new UnsupportedStrategyException(strategy.name(), "PLAA");
-        }
 
         this.segments = segments;
-        this.strategy = strategy;
     }
 
     /**
@@ -82,22 +64,22 @@ public class PiecewiseLinearAggregateApproximation implements GenericTransformer
         }
 
         int modulo = len % segments;
-        if (modulo != 0 && strategy == SegmentationStrategy.STRICT) {
+        if (modulo != 0) {
             throw new ArrayLengthIsNotDivisibleException(len, segments);
         }
 
         MeanSlopePair[] reducedValues = new MeanSlopePair[segments];
-        int intervalSize = len / segments;
+        int segmentSize = len / segments;
 
-        double[] x = new double[intervalSize];
-        for (int i = 0; i < intervalSize; i++) {
+        double[] x = new double[segmentSize];
+        for (int i = 0; i < segmentSize; i++) {
             x[i] = i + 1;
         }
 
         double variance = new Variance(true).evaluate(x);
         for (int i = 0; i < segments; i++) {
-            double[] y = new double[intervalSize];
-            System.arraycopy(values, i * intervalSize, y, 0, intervalSize);
+            double[] y = new double[segmentSize];
+            System.arraycopy(values, i * segmentSize, y, 0, segmentSize);
 
             double covariance = new Covariance().covariance(x, y, true);
             double mean = new Mean().evaluate(y);
