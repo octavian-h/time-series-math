@@ -37,7 +37,7 @@ Add the following dependency to your maven project.
 <dependency>
     <groupId>ro.hasna.ts</groupId>
     <artifactId>time-series-math</artifactId>
-    <version>0.12</version>
+    <version>0.13</version>
 </dependency>
 ```
 
