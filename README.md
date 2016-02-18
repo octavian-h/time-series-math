@@ -29,6 +29,7 @@ The goal of this library is to provide optimised algorithms for time-series anal
 * Edit distance with Real Penalty (ERP)
 * Uniform Scaling
 * Scaled and Warped Matching (use DTW in Uniform Scaling)
+* Min-Max Normalization
 
 ## Usage ##
 Add the following dependency to your maven project.
@@ -36,7 +37,7 @@ Add the following dependency to your maven project.
 <dependency>
     <groupId>ro.hasna.ts</groupId>
     <artifactId>time-series-math</artifactId>
-    <version>0.11</version>
+    <version>0.12</version>
 </dependency>
 ```
 
