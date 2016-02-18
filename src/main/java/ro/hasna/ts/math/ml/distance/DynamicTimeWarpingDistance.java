@@ -1,5 +1,5 @@
-/**
- * Copyright (C) 2016-2015 Octavian Hasna
+/*
+ * Copyright 2015 Octavian Hasna
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,10 @@ import java.util.LinkedList;
  */
 public class DynamicTimeWarpingDistance implements GenericDistanceMeasure<double[]> {
     private static final long serialVersionUID = 1154818905340336905L;
+    public static int KIM_PRUNING = 0;
+    public static int KEOGH_PRUNING = 0;
+    public static int LEMIRE_PRUNING = 0;
+    public static int DTW_COMPUTATIONS = 0;
     private final double radiusPercentage;
     private final Normalizer normalizer;
 
@@ -72,16 +76,19 @@ public class DynamicTimeWarpingDistance implements GenericDistanceMeasure<double
         double transformedCutOff = distance(cutOffValue, 0);
 
         if (computeModifiedKimLowerBound(a, b, n, transformedCutOff) == Double.POSITIVE_INFINITY) {
+            KIM_PRUNING++;
             return Double.POSITIVE_INFINITY;
         }
 
         LowerBound keoghLowerBound = computeKeoghLowerBound(a, b, n, radius, transformedCutOff);
         if (keoghLowerBound.value == Double.POSITIVE_INFINITY) {
+            KEOGH_PRUNING++;
             return Double.POSITIVE_INFINITY;
         }
 
         LowerBound lemireLowerBound = computeLemireLowerBound(b, keoghLowerBound, n, radius, transformedCutOff);
         if (lemireLowerBound.value == Double.POSITIVE_INFINITY) {
+            LEMIRE_PRUNING++;
             return Double.POSITIVE_INFINITY;
         }
 
@@ -90,6 +97,7 @@ public class DynamicTimeWarpingDistance implements GenericDistanceMeasure<double
             cumulativeErrorMargins[i] += cumulativeErrorMargins[i + 1];
         }
 
+        DTW_COMPUTATIONS++;
         return computeDtw(a, b, n, radius, cumulativeErrorMargins, transformedCutOff);
     }
 
