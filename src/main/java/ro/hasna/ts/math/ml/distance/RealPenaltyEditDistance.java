@@ -96,11 +96,6 @@ public class RealPenaltyEditDistance implements GenericDistanceMeasure<double[]>
         return current[n - 1];
     }
 
-    @Override
-    public double compute(double[] a, double[] b, int n, double cutOffValue) {
-        return compute(a, b, cutOffValue);
-    }
-
     protected double distance(double a, double b) {
         return FastMath.abs(a - b);
     }

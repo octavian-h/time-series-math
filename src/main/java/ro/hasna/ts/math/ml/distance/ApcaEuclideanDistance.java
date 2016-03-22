@@ -15,9 +15,7 @@
  */
 package ro.hasna.ts.math.ml.distance;
 
-import org.apache.commons.math3.ml.distance.DistanceMeasure;
 import org.apache.commons.math3.util.FastMath;
-import ro.hasna.ts.math.representation.AdaptivePiecewiseConstantApproximation;
 import ro.hasna.ts.math.type.MeanLastPair;
 
 /**
@@ -26,38 +24,19 @@ import ro.hasna.ts.math.type.MeanLastPair;
  *
  * @since 1.0
  */
-public class ApcaEuclideanDistance implements DistanceMeasure, GenericDistanceMeasure<MeanLastPair[]> {
+public class ApcaEuclideanDistance implements GenericDistanceMeasure<MeanLastPair[]> {
     private static final long serialVersionUID = -5281044546933045617L;
-    private final AdaptivePiecewiseConstantApproximation apca;
-
-    public ApcaEuclideanDistance(AdaptivePiecewiseConstantApproximation apca) {
-        this.apca = apca;
-    }
-
-    @Override
-    public double compute(double[] a, double[] b) {
-        MeanLastPair[] mlpA = apca.transform(a);
-        MeanLastPair[] mlpB = apca.transform(b);
-        int n = a.length;
-
-        return compute(mlpA, mlpB, n, Double.POSITIVE_INFINITY);
-    }
 
     @Override
     public double compute(MeanLastPair[] a, MeanLastPair[] b) {
-        return compute(a, b, a.length, Double.POSITIVE_INFINITY);
+        return compute(a, b, Double.POSITIVE_INFINITY);
     }
 
     @Override
     public double compute(MeanLastPair[] a, MeanLastPair[] b, double cutOffValue) {
-        return compute(a, b, a.length, cutOffValue);
-    }
-
-    @Override
-    public double compute(MeanLastPair[] a, MeanLastPair[] b, int n, double cutoff) {
         double sum = 0.0;
         int w = a.length;
-        double transformedCutoff = cutoff * cutoff;
+        double transformedCutoff = cutOffValue * cutOffValue;
         int i = 0;
         int j = 0;
         int pos = 0;

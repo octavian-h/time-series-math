@@ -37,9 +37,4 @@ public class ChebyshevDistanceAdapter extends ChebyshevDistance implements Gener
         }
         return max;
     }
-
-    @Override
-    public double compute(double[] a, double[] b, int n, double cutOffValue) {
-        return compute(a, b, cutOffValue);
-    }
 }

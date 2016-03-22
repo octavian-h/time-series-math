@@ -32,20 +32,24 @@ import java.util.Random;
  */
 public class PlaaEuclideanDistanceTest {
     private PlaaEuclideanDistance distance;
+    private PiecewiseLinearAggregateApproximation plaa;
 
     @Before
     public void setUp() throws Exception {
-        distance = new PlaaEuclideanDistance(new PiecewiseLinearAggregateApproximation(8));
+        plaa = new PiecewiseLinearAggregateApproximation(8);
+        distance = new PlaaEuclideanDistance();
     }
 
     @After
     public void tearDown() throws Exception {
         distance = null;
+        plaa = null;
     }
 
     @Test
     public void testTriangleInequality() throws Exception {
-        new DistanceTester().withDistanceMeasure(distance).testTriangleInequality();
+        new DistanceTester().withGenericDistanceMeasure(distance, plaa)
+                .testTriangleInequality();
     }
 
     @Test
@@ -60,7 +64,7 @@ public class PlaaEuclideanDistanceTest {
         }
 
         ZNormalizer normalizer = new ZNormalizer();
-        double result = distance.compute(normalizer.normalize(a), normalizer.normalize(b));
+        double result = distance.compute(plaa.transform(normalizer.normalize(a)), plaa.transform(normalizer.normalize(b)));
 
         Assert.assertEquals(0, result, 0.1);
     }
@@ -79,7 +83,7 @@ public class PlaaEuclideanDistanceTest {
         b[2] = new MeanSlopePair(5, 8);
         b[3] = new MeanSlopePair(1, 2);
 
-        double result = distance.compute(a, b, 128, 3);
+        double result = distance.compute(a, b, 3);
 
         Assert.assertEquals(Double.POSITIVE_INFINITY, result, TimeSeriesPrecision.EPSILON);
     }

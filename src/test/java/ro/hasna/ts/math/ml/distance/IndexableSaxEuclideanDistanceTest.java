@@ -31,20 +31,23 @@ import java.util.Random;
  */
 public class IndexableSaxEuclideanDistanceTest {
     private IndexableSaxEuclideanDistance distance;
+    private IndexableSymbolicAggregateApproximation isax;
 
     @Before
     public void setUp() throws Exception {
-        distance = new IndexableSaxEuclideanDistance(new IndexableSymbolicAggregateApproximation(8, new int[]{2, 2, 2, 4, 2, 2, 2, 2}));
+        isax = new IndexableSymbolicAggregateApproximation(8, new int[]{2, 2, 2, 4, 2, 2, 2, 2});
+        distance = new IndexableSaxEuclideanDistance(isax);
     }
 
     @After
     public void tearDown() throws Exception {
         distance = null;
+        isax = null;
     }
 
     @Test
     public void testTriangleInequality() throws Exception {
-        new DistanceTester().withDistanceMeasure(distance)
+        new DistanceTester().withGenericDistanceMeasure(distance, isax)
                 .testTriangleInequality();
     }
 
@@ -64,7 +67,7 @@ public class IndexableSaxEuclideanDistanceTest {
             }
         }
 
-        double result = distance.compute(a, b);
+        double result = distance.compute(isax.transform(a), isax.transform(b));
 
         Assert.assertEquals(0, result, TimeSeriesPrecision.EPSILON);
     }
@@ -83,7 +86,7 @@ public class IndexableSaxEuclideanDistanceTest {
         b[2] = new SaxPair(5, 8);
         b[3] = new SaxPair(1, 2);
 
-        double result = distance.compute(a, b, 128, Double.POSITIVE_INFINITY);
+        double result = distance.compute(a, b, Double.POSITIVE_INFINITY);
 
         Assert.assertEquals(0, result, TimeSeriesPrecision.EPSILON);
     }
@@ -102,7 +105,7 @@ public class IndexableSaxEuclideanDistanceTest {
         b[2] = new SaxPair(5, 8);
         b[3] = new SaxPair(1, 2);
 
-        double result = distance.compute(a, b, 128, 3);
+        double result = distance.compute(a, b, 1);
 
         Assert.assertEquals(Double.POSITIVE_INFINITY, result, TimeSeriesPrecision.EPSILON);
     }

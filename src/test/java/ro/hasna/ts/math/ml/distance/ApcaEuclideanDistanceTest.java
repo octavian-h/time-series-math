@@ -29,25 +29,30 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
  */
 public class ApcaEuclideanDistanceTest {
     private ApcaEuclideanDistance distance;
+    private AdaptivePiecewiseConstantApproximation apca;
 
     @Before
     public void setUp() throws Exception {
-        distance = new ApcaEuclideanDistance(new AdaptivePiecewiseConstantApproximation(8));
+        apca = new AdaptivePiecewiseConstantApproximation(8);
+        distance = new ApcaEuclideanDistance();
     }
 
     @After
     public void tearDown() throws Exception {
         distance = null;
+        apca = null;
     }
 
     @Test
     public void testTriangleInequality() throws Exception {
-        new DistanceTester().withDistanceMeasure(distance).testTriangleInequality();
+        new DistanceTester().withGenericDistanceMeasure(distance, apca)
+                .testTriangleInequality();
     }
 
     @Test
     public void testEquality() throws Exception {
-        new DistanceTester().withDistanceMeasure(distance).testEquality();
+        new DistanceTester().withGenericDistanceMeasure(distance, apca)
+                .testEquality();
     }
 
     @Test
@@ -64,7 +69,7 @@ public class ApcaEuclideanDistanceTest {
         b[2] = new MeanLastPair(5, 60);
         b[3] = new MeanLastPair(1, 128);
 
-        double result = distance.compute(a, b, 128, 10);
+        double result = distance.compute(a, b, 10);
 
         Assert.assertEquals(Double.POSITIVE_INFINITY, result, TimeSeriesPrecision.EPSILON);
     }

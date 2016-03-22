@@ -54,11 +54,6 @@ public class LongestCommonSubsequenceDistance implements GenericDistanceMeasure<
         return d;
     }
 
-    @Override
-    public double compute(double[] a, double[] b, int n, double cutOffValue) {
-        return compute(a, b, cutOffValue);
-    }
-
     private int computeLcs(double[] a, double b[], int n, int radius) {
         boolean equals = true;
         for (int i = 0; i < n && equals; i++) {

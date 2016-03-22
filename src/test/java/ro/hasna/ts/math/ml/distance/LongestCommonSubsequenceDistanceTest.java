@@ -84,7 +84,7 @@ public class LongestCommonSubsequenceDistanceTest {
     }
 
     @Test
-    public void testResult2() throws Exception {
+    public void testResultLarge() throws Exception {
         LongestCommonSubsequenceDistance lcss = new LongestCommonSubsequenceDistance(0.1, 0.05);
         int m = 128;
         ZNormalizer normalizer = new ZNormalizer();

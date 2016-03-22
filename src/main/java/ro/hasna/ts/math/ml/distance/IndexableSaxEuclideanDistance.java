@@ -15,7 +15,6 @@
  */
 package ro.hasna.ts.math.ml.distance;
 
-import org.apache.commons.math3.ml.distance.DistanceMeasure;
 import org.apache.commons.math3.util.FastMath;
 import ro.hasna.ts.math.representation.IndexableSymbolicAggregateApproximation;
 import ro.hasna.ts.math.type.SaxPair;
@@ -25,7 +24,7 @@ import ro.hasna.ts.math.type.SaxPair;
  *
  * @since 1.0
  */
-public class IndexableSaxEuclideanDistance implements DistanceMeasure, GenericDistanceMeasure<SaxPair[]> {
+public class IndexableSaxEuclideanDistance implements GenericDistanceMeasure<SaxPair[]> {
     private static final long serialVersionUID = -4740907293933039859L;
     private final IndexableSymbolicAggregateApproximation isax;
 
@@ -34,29 +33,15 @@ public class IndexableSaxEuclideanDistance implements DistanceMeasure, GenericDi
     }
 
     @Override
-    public double compute(double[] a, double[] b) {
-        SaxPair[] symbolsA = isax.transform(a);
-        SaxPair[] symbolsB = isax.transform(b);
-        int n = a.length;
-
-        return compute(symbolsA, symbolsB, n, Double.POSITIVE_INFINITY);
-    }
-
-    @Override
     public double compute(SaxPair[] a, SaxPair[] b) {
-        return compute(a, b, a.length, Double.POSITIVE_INFINITY);
+        return compute(a, b, Double.POSITIVE_INFINITY);
     }
 
     @Override
-    public double compute(SaxPair[] a, SaxPair[] b, double cutOffValue) {
-        return compute(a, b, a.length, cutOffValue);
-    }
-
-    @Override
-    public double compute(SaxPair[] symbolsA, SaxPair[] symbolsB, int n, double cutoff) {
+    public double compute(SaxPair[] symbolsA, SaxPair[] symbolsB, double cutoff) {
         double sum = 0.0;
         int w = symbolsA.length;
-        double transformedCutoff = cutoff * cutoff * w / n;
+        double transformedCutoff = cutoff * cutoff;
 
         for (int i = 0; i < w; i++) {
             double[] boundsA = getBounds(symbolsA[i]);
@@ -75,7 +60,7 @@ public class IndexableSaxEuclideanDistance implements DistanceMeasure, GenericDi
             }
         }
 
-        return FastMath.sqrt(n * sum / w);
+        return FastMath.sqrt(sum);
     }
 
     private double[] getBounds(SaxPair saxPair) {

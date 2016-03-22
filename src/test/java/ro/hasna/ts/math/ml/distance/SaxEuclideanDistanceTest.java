@@ -15,6 +15,8 @@
  */
 package ro.hasna.ts.math.ml.distance;
 
+import org.apache.commons.math3.exception.DimensionMismatchException;
+import org.apache.commons.math3.ml.distance.DistanceMeasure;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -30,20 +32,30 @@ import java.util.Random;
  */
 public class SaxEuclideanDistanceTest {
     private SaxEuclideanDistance distance;
+    private SymbolicAggregateApproximation sax;
 
     @Before
     public void setUp() throws Exception {
-        distance = new SaxEuclideanDistance(new SymbolicAggregateApproximation(8, 16));
+        sax = new SymbolicAggregateApproximation(8, 16);
+        distance = new SaxEuclideanDistance(sax);
     }
 
     @After
     public void tearDown() throws Exception {
         distance = null;
+        sax = null;
     }
 
     @Test
     public void testTriangleInequality() throws Exception {
-        new DistanceTester().withDistanceMeasure(distance).testTriangleInequality();
+        new DistanceTester().withDistanceMeasure(new DistanceMeasure() {
+            private static final long serialVersionUID = -8270417993000076772L;
+
+            @Override
+            public double compute(double[] a, double[] b) throws DimensionMismatchException {
+                return distance.compute(sax.transform(a), sax.transform(b));
+            }
+        }).testTriangleInequality();
     }
 
     @Test
@@ -57,7 +69,7 @@ public class SaxEuclideanDistanceTest {
             b[i] = 100 + i + random.nextDouble();
         }
 
-        double result = distance.compute(a, b);
+        double result = distance.compute(sax.transform(a), sax.transform(b));
 
         Assert.assertEquals(0, result, TimeSeriesPrecision.EPSILON);
     }
@@ -67,7 +79,7 @@ public class SaxEuclideanDistanceTest {
         int a[] = {0, 4, 5, 6};
         int b[] = {7, 2, 5, 1};
 
-        double result = distance.compute(a, b, 128, 3);
+        double result = distance.compute(a, b, 1);
 
         Assert.assertEquals(Double.POSITIVE_INFINITY, result, TimeSeriesPrecision.EPSILON);
     }

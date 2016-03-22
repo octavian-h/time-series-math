@@ -109,9 +109,4 @@ public class RealSequenceEditDistance implements GenericDistanceMeasure<double[]
 
         return current[n - 1];
     }
-
-    @Override
-    public double compute(double[] a, double[] b, int n, double cutOffValue) {
-        return compute(a, b, cutOffValue);
-    }
 }

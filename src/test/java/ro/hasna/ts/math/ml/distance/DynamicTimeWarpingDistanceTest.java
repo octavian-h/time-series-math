@@ -73,8 +73,8 @@ public class DynamicTimeWarpingDistanceTest {
 
     @Test
     public void testResultSmall() throws Exception {
-        double a[] = {3,2,1};
-        double b[] = {2,1,0};
+        double a[] = {3, 2, 1};
+        double b[] = {2, 1, 0};
 
         double result = distance.compute(a, b);
 
@@ -82,7 +82,7 @@ public class DynamicTimeWarpingDistanceTest {
     }
 
     @Test
-    public void testResult2() throws Exception {
+    public void testResultLarge() throws Exception {
         DynamicTimeWarpingDistance dtw = new DynamicTimeWarpingDistance(0.05, null);
         int m = 128;
         ZNormalizer normalizer = new ZNormalizer();

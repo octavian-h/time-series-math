@@ -15,9 +15,7 @@
  */
 package ro.hasna.ts.math.ml.distance;
 
-import org.apache.commons.math3.ml.distance.DistanceMeasure;
 import org.apache.commons.math3.util.FastMath;
-import ro.hasna.ts.math.representation.PiecewiseLinearAggregateApproximation;
 import ro.hasna.ts.math.type.MeanSlopePair;
 
 /**
@@ -25,39 +23,20 @@ import ro.hasna.ts.math.type.MeanSlopePair;
  *
  * @since 1.0
  */
-public class PlaaEuclideanDistance implements DistanceMeasure, GenericDistanceMeasure<MeanSlopePair[]> {
+public class PlaaEuclideanDistance implements GenericDistanceMeasure<MeanSlopePair[]> {
     private static final long serialVersionUID = -2987558975696360228L;
-    private final PiecewiseLinearAggregateApproximation plaa;
-
-    public PlaaEuclideanDistance(PiecewiseLinearAggregateApproximation plaa) {
-        this.plaa = plaa;
-    }
-
-    @Override
-    public double compute(double[] a, double[] b) {
-        MeanSlopePair[] mspA = plaa.transform(a);
-        MeanSlopePair[] mspB = plaa.transform(b);
-        int n = a.length;
-
-        return compute(mspA, mspB, n, Double.POSITIVE_INFINITY);
-    }
 
     @Override
     public double compute(MeanSlopePair[] a, MeanSlopePair[] b) {
-        return compute(a, b, a.length, Double.POSITIVE_INFINITY);
+        return compute(a, b, Double.POSITIVE_INFINITY);
     }
 
     @Override
-    public double compute(MeanSlopePair[] a, MeanSlopePair[] b, double cutOffValue) {
-        return compute(a, b, a.length, cutOffValue);
-    }
-
-    @Override
-    public double compute(MeanSlopePair[] a, MeanSlopePair[] b, int n, double cutoff) {
+    public double compute(MeanSlopePair[] a, MeanSlopePair[] b, double cutoff) {
         double sum1 = 0.0;
         double sum2 = 0.0;
         int w = a.length;
-        double k = n * 1.0 / w;
+        double k = 1.0 / w;
         double transformedCutoff = cutoff * cutoff;
 
         for (int i = 0; i < w; i++) {

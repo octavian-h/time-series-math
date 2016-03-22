@@ -18,6 +18,7 @@ package ro.hasna.ts.math.ml.distance.util;
 import org.apache.commons.math3.ml.distance.DistanceMeasure;
 import org.junit.Assert;
 import ro.hasna.ts.math.ml.distance.GenericDistanceMeasure;
+import ro.hasna.ts.math.representation.GenericTransformer;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
 /**
@@ -36,6 +37,29 @@ public class DistanceTester {
     public DistanceTester() {
     }
 
+    public <T> DistanceTester withGenericDistanceMeasure(final GenericDistanceMeasure<T[]> distance, final GenericTransformer<double[], T[]> transformer) {
+        this.distance = new GenericDistanceMeasure<double[]>() {
+            private static final long serialVersionUID = -7602963003446517879L;
+
+            @Override
+            public double compute(double[] a, double[] b) {
+                T[] ta = transformer.transform(a);
+                T[] tb = transformer.transform(b);
+
+                return distance.compute(ta, tb);
+            }
+
+            @Override
+            public double compute(double[] a, double[] b, double cutOffValue) {
+                T[] ta = transformer.transform(a);
+                T[] tb = transformer.transform(b);
+
+                return distance.compute(ta, tb, cutOffValue);
+            }
+        };
+        return this;
+    }
+
     public DistanceTester withGenericDistanceMeasure(GenericDistanceMeasure<double[]> distance) {
         this.distance = distance;
         return this;
@@ -52,11 +76,6 @@ public class DistanceTester {
 
             @Override
             public double compute(double[] a, double[] b, double cutOffValue) {
-                return distance.compute(a, b);
-            }
-
-            @Override
-            public double compute(double[] a, double[] b, int n, double cutOffValue) {
                 return distance.compute(a, b);
             }
         };

@@ -47,17 +47,19 @@ public interface GenericDistanceMeasure<T> extends Serializable {
      */
     double compute(T a, T b, double cutOffValue);
 
-    /**
-     * Compute the distance between two n-dimensional vectors.
-     * <p>
-     * The two vectors are required to have the same dimension.
-     *
-     * @param a           the first vector
-     * @param b           the second vector
-     * @param cutOffValue if the distance being calculated is above this value
-     *                    stop computing the remaining distance
-     * @param n           the vector length before transformation
-     * @return the distance between the two vectors
-     */
-    double compute(T a, T b, int n, double cutOffValue);
+//    /**
+//     * Compute the distance between two n-dimensional vectors.
+//     * <p>
+//     * The two vectors are required to have the same dimension.
+//     *
+//     * @param a           the first vector
+//     * @param b           the second vector
+//     * @param cutOffValue if the distance being calculated is above this value
+//     *                    stop computing the remaining distance
+//     * @param n           the vector length before transformation
+//     * @return the distance between the two vectors
+//     */
+//    default double compute(T a, T b, int n, double cutOffValue) {
+//        return 0;
+//    }
 }

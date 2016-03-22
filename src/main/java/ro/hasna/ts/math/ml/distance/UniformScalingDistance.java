@@ -116,9 +116,4 @@ public class UniformScalingDistance implements GenericDistanceMeasure<double[]> 
 
         return distance.compute(a, aux, cutOffValue);
     }
-
-    @Override
-    public double compute(double[] a, double[] b, int n, double cutOffValue) {
-        return compute(a, b, cutOffValue);
-    }
 }

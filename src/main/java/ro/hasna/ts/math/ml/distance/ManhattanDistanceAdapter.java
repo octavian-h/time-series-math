@@ -37,9 +37,4 @@ public class ManhattanDistanceAdapter extends ManhattanDistance implements Gener
         }
         return sum;
     }
-
-    @Override
-    public double compute(double[] a, double[] b, int n, double cutOffValue) {
-        return compute(a, b, cutOffValue);
-    }
 }
