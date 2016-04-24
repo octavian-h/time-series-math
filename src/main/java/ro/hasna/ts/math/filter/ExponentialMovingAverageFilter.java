@@ -42,7 +42,7 @@ public class ExponentialMovingAverageFilter implements Filter {
     public double[] filter(double[] values) {
         int length = values.length;
         double[] result = new double[length];
-        result[0] = values[0] * smoothingFactor;
+        result[0] = values[0];
         double k = 1 - smoothingFactor;
         for (int i = 1; i < length; i++) {
             result[i] = values[i] * smoothingFactor + result[i - 1] * k;

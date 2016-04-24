@@ -56,7 +56,7 @@ public class ExponentialMovingAverageFilterTest {
     @Test
     public void testFilter() throws Exception {
         double[] v = {1, 1, 2, 2, 3, 3, 4, 4, 5};
-        double[] expected = {0.8, 0.96, 1.79, 1.95, 2.79, 2.95, 3.79, 3.95, 4.79};
+        double[] expected = {1, 1, 1.8, 1.96, 2.792, 2.9584, 3.79168, 3.958336, 4.7916672};
 
         Filter filter = new ExponentialMovingAverageFilter(0.8);
         double[] result = filter.filter(v);
