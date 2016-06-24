@@ -29,7 +29,7 @@ public class ExponentialMovingAverageFilter implements Filter {
 
     public ExponentialMovingAverageFilter(double smoothingFactor) {
         if (smoothingFactor <= 0 || smoothingFactor >= 1) {
-            throw new OutOfRangeException(LocalizableMessages.OUT_OF_RANGE_BOTH, smoothingFactor, 0, 1);
+            throw new OutOfRangeException(LocalizableMessages.OUT_OF_RANGE_BOTH_EXCLUSIVE, smoothingFactor, 0, 1);
         }
 
         this.smoothingFactor = smoothingFactor;

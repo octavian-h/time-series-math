@@ -15,10 +15,9 @@
  */
 package ro.hasna.ts.math.ml.distance;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.apache.commons.math3.exception.OutOfRangeException;
+import org.junit.*;
+import org.junit.rules.ExpectedException;
 import ro.hasna.ts.math.ml.distance.util.DistanceTester;
 import ro.hasna.ts.math.normalization.ZNormalizer;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
@@ -30,6 +29,8 @@ import java.util.Scanner;
  * @since 1.0
  */
 public class DynamicTimeWarpingDistanceTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
     private DynamicTimeWarpingDistance distance;
 
     @Before
@@ -40,6 +41,22 @@ public class DynamicTimeWarpingDistanceTest {
     @After
     public void tearDown() throws Exception {
         distance = null;
+    }
+
+    @Test
+    public void testConstructor1() throws Exception {
+        thrown.expect(OutOfRangeException.class);
+        thrown.expectMessage("2 out of [0, 1] range");
+
+        new DynamicTimeWarpingDistance(2, null);
+    }
+
+    @Test
+    public void testConstructor2() throws Exception {
+        thrown.expect(OutOfRangeException.class);
+        thrown.expectMessage("-0.5 out of [0, 1] range");
+
+        new DynamicTimeWarpingDistance(-0.5, null);
     }
 
     @Test

@@ -26,8 +26,8 @@ import org.apache.commons.math3.exception.util.Localizable;
  */
 public class LocalizableMessages {
     public static final Localizable NUMBER_NOT_DIVISIBLE_WITH = new DummyLocalizable("{0} is not divisible with {1}");
-    public static final Localizable OUT_OF_RANGE_BOTH = new DummyLocalizable("{0} out of ({1}, {2}) range");
-    public static final Localizable UNSUPPORTED_STRATEGY = new DummyLocalizable("the strategy {0} is not supported in {1}");
+    public static final Localizable OUT_OF_RANGE_BOTH_EXCLUSIVE = new DummyLocalizable("{0} out of ({1}, {2}) range");
+    public static final Localizable OUT_OF_RANGE_BOTH_INCLUSIVE = new DummyLocalizable("{0} out of [{1}, {2}] range");
 
     private LocalizableMessages() {
     }

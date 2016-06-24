@@ -15,10 +15,9 @@
  */
 package ro.hasna.ts.math.ml.distance;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.apache.commons.math3.exception.OutOfRangeException;
+import org.junit.*;
+import org.junit.rules.ExpectedException;
 import ro.hasna.ts.math.ml.distance.util.DistanceTester;
 import ro.hasna.ts.math.normalization.ZNormalizer;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
@@ -30,16 +29,34 @@ import java.util.Scanner;
  * @since 1.0
  */
 public class LongestCommonSubsequenceDistanceTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
     private LongestCommonSubsequenceDistance distance;
 
     @Before
     public void setUp() throws Exception {
-        distance = new LongestCommonSubsequenceDistance(0.25, 0.25);
+        distance = new LongestCommonSubsequenceDistance(0.25, 0.05);
     }
 
     @After
     public void tearDown() throws Exception {
         distance = null;
+    }
+
+    @Test
+    public void testConstructor1() throws Exception {
+        thrown.expect(OutOfRangeException.class);
+        thrown.expectMessage("2 out of [0, 1] range");
+
+        new LongestCommonSubsequenceDistance(0.1, 2);
+    }
+
+    @Test
+    public void testConstructor2() throws Exception {
+        thrown.expect(OutOfRangeException.class);
+        thrown.expectMessage("-0.5 out of [0, 1] range");
+
+        new LongestCommonSubsequenceDistance(0.1, -0.5);
     }
 
     @Test
@@ -58,19 +75,31 @@ public class LongestCommonSubsequenceDistanceTest {
     public void testOverflow() throws Exception {
         new DistanceTester().withGenericDistanceMeasure(distance)
                 .withVectorLength(128)
-                .withCutOffValue(0.3)
+                .withCutOffValue(0.96875)
                 .testOverflowSquare();
     }
 
     @Test
     public void testResult() throws Exception {
-        double a[] = {3, 2, 5, 7, 4, 8, 10, 7};
-        double b[] = {2, 5, 4, 7, 3, 10, 8, 6};
+        double a[] = {2, 2, 3, 3, 4, 2, 3, 1, 3, 4, 3, 2, 3, 2, 3, 3, 1, 1, 3, 2};
+        double b[] = {3, 4, 2, 3, 4, 4, 2, 3, 3, 1, 1, 4, 3, 2, 2, 3, 4, 4, 3, 1};
 
         double result = distance.compute(a, b);
 
-        // 1 - |{2,5,7,10}| / 8
+        // 1 - |{2,3,4,2,3, 3,3,2,3,3}| / 20
         Assert.assertEquals(0.5, result, TimeSeriesPrecision.EPSILON);
+    }
+
+    @Test
+    public void testResult2() throws Exception {
+        double a[] = {2, 2, 3, 3, 4, 2, 3, 1, 3, 4, 3, 2, 3, 2, 3, 3, 1, 1, 3, 2};
+        double b[] = {3, 4, 2, 3, 4, 4, 2, 3, 3, 1, 1, 4, 3, 2, 2, 3, 4, 4, 3, 1};
+
+        LongestCommonSubsequenceDistance tmp = new LongestCommonSubsequenceDistance(0.25, 1);
+        double result = tmp.compute(a, b);
+
+        // 1 - |{2,3,4,2,3,1, 4,3,2,2,3,3,1}| / 20
+        Assert.assertEquals(0.35, result, TimeSeriesPrecision.EPSILON);
     }
 
     @Test
@@ -127,7 +156,7 @@ public class LongestCommonSubsequenceDistanceTest {
 
 //        System.out.println("duration=" + duration);
 
-        Assert.assertEquals(41365, posMin);
-        Assert.assertEquals(0.5703125, min, TimeSeriesPrecision.EPSILON);
+        Assert.assertEquals(93728, posMin);
+        Assert.assertEquals(0.5625, min, TimeSeriesPrecision.EPSILON);
     }
 }

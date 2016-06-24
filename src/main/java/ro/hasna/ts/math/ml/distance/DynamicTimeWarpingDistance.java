@@ -15,7 +15,9 @@
  */
 package ro.hasna.ts.math.ml.distance;
 
+import org.apache.commons.math3.exception.OutOfRangeException;
 import org.apache.commons.math3.util.FastMath;
+import ro.hasna.ts.math.exception.util.LocalizableMessages;
 import ro.hasna.ts.math.normalization.Normalizer;
 import ro.hasna.ts.math.normalization.ZNormalizer;
 
@@ -45,8 +47,13 @@ public class DynamicTimeWarpingDistance implements GenericDistanceMeasure<double
      *
      * @param radiusPercentage Sakoe-Chiba Band width used to constraint the warping window
      * @param normalizer       the normalizer (it can be null if the values were normalized)
+     * @throws OutOfRangeException if radiusPercentage is outside the interval [0, 1]
      */
     public DynamicTimeWarpingDistance(double radiusPercentage, Normalizer normalizer) {
+        if (radiusPercentage < 0 || radiusPercentage > 1) {
+            throw new OutOfRangeException(LocalizableMessages.OUT_OF_RANGE_BOTH_INCLUSIVE, radiusPercentage, 0, 1);
+        }
+
         this.radiusPercentage = radiusPercentage;
         this.normalizer = normalizer;
     }
