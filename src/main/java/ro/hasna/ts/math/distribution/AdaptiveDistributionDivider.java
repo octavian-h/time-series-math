@@ -44,9 +44,9 @@ public class AdaptiveDistributionDivider implements DistributionDivider {
     /**
      * Creates a new instance of this class.
      *
-     * @param trainingSet    the set of normalized PAA segments for improving the breakpoints
-     * @param threshold      the threshold used for terminating the algorithm
-     * @param baseDivider    the base distribution divider used for initial breakpoints
+     * @param trainingSet the set of normalized PAA segments for improving the breakpoints
+     * @param threshold   the threshold used for terminating the algorithm
+     * @param baseDivider the base distribution divider used for initial breakpoints
      */
     public AdaptiveDistributionDivider(double[][] trainingSet, double threshold, DistributionDivider baseDivider) {
         this.trainingSet = trainingSet;

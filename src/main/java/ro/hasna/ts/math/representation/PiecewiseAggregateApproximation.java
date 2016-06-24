@@ -35,7 +35,7 @@ public class PiecewiseAggregateApproximation implements GenericTransformer<doubl
     /**
      * Creates a new instance of this class.
      *
-     * @param segments     the number of segments
+     * @param segments the number of segments
      * @throws NumberIsTooSmallException if segments lower than 1
      */
     public PiecewiseAggregateApproximation(int segments) {
