@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Copyright 2015 Octavian Hasna
+# Copyright 2016 Octavian Hasna
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,6 +35,17 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
 
         mvn --batch-mode release:prepare --settings ci/maven-settings.xml
         mvn --batch-mode release:perform --settings ci/maven-settings.xml
+
+        TAG="$(git describe --tags --abbrev=0)"
+        PACKAGE="${TAG%-*}" # delete the shortest substring from the end that starts with "-" (inclusive)
+        VERSION="${TAG##*-}" # delete the longest substring from the begging that ends with "-" (inclusive)
+
+        echo "Sync artifact $PACKAGE:$VERSION to Maven Central"
+        curl --request POST \
+             --url "https://api.bintray.com/maven_central_sync/octavian-h/maven/$PACKAGE/versions/$VERSION" \
+             --user octavian-h:$BINTRAY_API_KEY \
+             --header "content-type: application/json" \
+             --data "{\"username\": \"$SONATYPE_USER\",\"password\": \"$SONATYPE_TOKEN\",\"close\": \"1\"}"
 
     else
         echo "Skip deploy/release"
