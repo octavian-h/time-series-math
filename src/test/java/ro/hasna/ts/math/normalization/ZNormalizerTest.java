@@ -21,11 +21,11 @@ import org.apache.commons.math3.util.FastMath;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
 /**
@@ -44,7 +44,7 @@ public class ZNormalizerTest {
 
     @Test
     public void testCalls() throws Exception {
-        Mockito.when(mean.evaluate(Matchers.any(double[].class))).thenReturn(3.0);
+        Mockito.when(mean.evaluate(ArgumentMatchers.any(double[].class))).thenReturn(3.0);
         double[] v = {1.0, 2.0, 3.0, 4.0, 5.0};
 
         normalizer.normalize(v);
