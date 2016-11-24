@@ -8,28 +8,39 @@ The goal of this library is to provide optimised algorithms for time-series anal
 
 ## Features ##
 
-* Piecewise Aggregate Approximation (PAA)
-* Z-Normalization
-* Symbolic Aggregate Approximation (SAX)
-* Discrete Fourier Transform (DFT)
-* Discrete Cosine Transform (DCT)
-* Moving Average Filter
-* Exponential Moving Average Filter
-* Piecewise Linear Aggregate Approximation (PLAA)
-* Indexable Symbolic Aggregate Approximation (iSAX)
-* Adaptive Distribution Divider used for (adaptive SAX/iSAX)
-* TESPAR DZ
-* Discrete Chebyshev Transform (DChT)
-* Discrete Haar Wavelet Transform (DWT)
-* Adaptive Piecewise Constant Approximation (APCA)
-* Piecewise Curve Fitting Approximation with linear (PLA), quadratic (PQA) or other types of curve fitting function
-* Dynamic Time Warping (DTW)
-* Longest Common Subsequence (LCSS)
-* Edit Distance on Real sequence (EDR)
-* Edit distance with Real Penalty (ERP)
-* Uniform Scaling
-* Scaled and Warped Matching (use DTW in Uniform Scaling)
-* Min-Max Normalization
+* Filters:
+    * Moving Average Filter
+    * Exponential Moving Average Filter
+* Normalizers:
+    * Z-Normalization
+    * Min-Max Normalization
+* Representations:
+    * non-invertible
+        * TESPAR DZ
+    * piecewise
+        * Piecewise Aggregate Approximation (PAA)
+        * Piecewise Linear Aggregate Approximation (PLAA)
+        * Adaptive Piecewise Constant Approximation (APCA)
+        * Piecewise Curve Fitting Approximation with linear (PLA), quadratic (PQA) or other types of curve fitting function
+    * symbolic
+        * Symbolic Aggregate Approximation (SAX)
+        * Indexable Symbolic Aggregate Approximation (iSAX)
+    * spectral
+        * Discrete Fourier Transform (DFT)
+        * Discrete Cosine Transform (DCT)
+        * Discrete Chebyshev Transform (DChT)
+    * wavelet
+        * Discrete Haar Wavelet Transform (DWT)
+* Measurements:
+    * Dynamic Time Warping (DTW)
+    * Longest Common Subsequence (LCSS)
+    * Edit Distance on Real sequence (EDR)
+    * Edit distance with Real Penalty (ERP)
+    * Uniform Scaling
+    * Scaled and Warped Matching (use DTW in Uniform Scaling)
+* Others
+    * Adaptive Distribution Divider used for (adaptive SAX/iSAX)
+    * Complexity Invariant Distance
 
 ## Usage ##
 Add the following dependency to your maven project.
@@ -37,20 +48,8 @@ Add the following dependency to your maven project.
 <dependency>
     <groupId>ro.hasna.ts</groupId>
     <artifactId>time-series-math</artifactId>
-    <version>0.15</version>
+    <version>0.16</version>
 </dependency>
-```
-
-And also add the following custom repository.
-```xml
-<repository>
-    <snapshots>
-        <enabled>false</enabled>
-    </snapshots>
-    <id>central</id>
-    <name>bintray</name>
-    <url>http://jcenter.bintray.com</url>
-</repository>
 ```
 
 ### Code examples ###
