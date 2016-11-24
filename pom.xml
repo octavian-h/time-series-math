@@ -21,7 +21,7 @@
 
     <groupId>ro.hasna.ts</groupId>
     <artifactId>time-series-math</artifactId>
-    <version>0.16-SNAPSHOT</version>
+    <version>0.16</version>
     <packaging>jar</packaging>
 
     <name>Time Series Math Library</name>
@@ -58,7 +58,7 @@
         <connection>scm:git:https://github.com/octavian-h/time-series-math.git</connection>
         <developerConnection>scm:git:https://github.com/octavian-h/time-series-math.git</developerConnection>
         <url>https://github.com/octavian-h/time-series-math</url>
-        <tag>HEAD</tag>
+        <tag>time-series-math-0.16</tag>
     </scm>
 
     <distributionManagement>
