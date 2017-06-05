@@ -65,7 +65,18 @@ public class RealSequenceEditDistanceTest {
 
         double result = distance.compute(a, b);
 
-        // 3-d, 4-i, 4-3-s, 8-d, 8-i, 7-6-s
+        // 3-d, 4-i, 4-3-r, 8-d, 8-i, 7-6-r
         Assert.assertEquals(6, result, TimeSeriesPrecision.EPSILON);
+    }
+
+    @Test
+    public void testDifferentLengths() throws Exception {
+        double a[] = {1, 2, 3, 4};
+        double b[] = {1, 100, 101, 2, 4};
+
+        double result = distance.compute(a, b);
+
+        // 100-i, 101-i, 3-d
+        Assert.assertEquals(3, result, TimeSeriesPrecision.EPSILON);
     }
 }

@@ -48,52 +48,53 @@ public class RealPenaltyEditDistance implements GenericDistanceMeasure<double[]>
 
     @Override
     public double compute(double[] a, double[] b, double cutOffValue) {
-        int n = a.length;
+        int n = b.length;
         int radius = (int) (n * radiusPercentage);
-        double d = computeEd(a, b, n, radius);
-        if (d >= cutOffValue) {
-            return Double.POSITIVE_INFINITY;
-        }
-        return d;
-    }
-
-    private double computeEd(double[] a, double[] b, int n, int radius) {
-        double[] prev = new double[n];
-        double[] current = new double[n];
-        double[] aux = new double[n];
+        int n1 = n + 1;
+        double[] prev = new double[n1];
+        double[] current = new double[n1];
+        double[] db = new double[n];
         int start, end;
-        double x, y, z;
+        double min, da, x, y, z;
 
-        prev[0] = distance(b[0], gap);
-        aux[0] = distance(a[0], gap);
-        for (int i = 1; i < n; i++) {
-            prev[i] = prev[i - 1] + distance(b[i], gap);
-            aux[i] = aux[i - 1] + distance(a[i], gap);
+        current[0] = 0;
+        prev[0] = 0;
+        for (int i = 1; i < n1; i++) {
+            db[i - 1] = distance(b[i - 1], gap);
+            prev[i] = prev[i - 1] + db[i - 1];
         }
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < a.length; i++) {
             start = FastMath.max(0, i - radius);
             end = FastMath.min(n - 1, i + radius);
+
+            da = distance(a[i], gap);
+            current[0] = current[0] + da;
+            min = Double.POSITIVE_INFINITY;
+
             for (int j = start; j <= end; j++) {
-                x = prev[j] + distance(a[i], gap);
-                y = distance(b[j], gap);
-                z = distance(a[i], b[j]);
-                if (j != 0) {
-                    y += current[j - 1];
-                    z += prev[j - 1];
-                } else {
-                    y += aux[i];
-                    if (i != 0) {
-                        z += aux[i - 1];
-                    }
+                x = prev[j + 1] + da;
+                y = current[j] + db[j];
+                z = prev[j] + distance(a[i], b[j]);
+
+                current[j + 1] = FastMath.min(x, FastMath.min(y, z));
+                if (current[j + 1] < min) {
+                    min = current[j + 1];
                 }
-                current[j] = FastMath.min(x, FastMath.min(y, z));
             }
 
-            System.arraycopy(current, 0, prev, 0, n);
+            if (min > cutOffValue) {
+                return Double.POSITIVE_INFINITY;
+            }
+
+            System.arraycopy(current, 0, prev, 0, n1);
         }
 
-        return current[n - 1];
+        if (current[n] > cutOffValue) {
+            return Double.POSITIVE_INFINITY;
+        }
+
+        return current[n];
     }
 
     protected double distance(double a, double b) {

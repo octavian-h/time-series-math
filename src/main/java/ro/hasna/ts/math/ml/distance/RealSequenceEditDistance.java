@@ -27,6 +27,8 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
  * <i>The string-to-string correction problem</i>
  * Chen Lei and Raymond Ng (2004)
  * <i>On the marriage of lp-norms and edit distance</i>
+ * Chen Lei (2005)
+ * <i>Similarity search over time series and trajectory data</i>
  * </p>
  *
  * @since 1.0
@@ -52,61 +54,63 @@ public class RealSequenceEditDistance implements GenericDistanceMeasure<double[]
 
     @Override
     public double compute(double[] a, double[] b, double cutOffValue) {
-        int n = a.length;
+        if (equals(a, b)) return 0;
+
+        int n = b.length;
         int radius = (int) (n * radiusPercentage);
-        double d = computeEd(a, b, n, radius);
-        if (d >= cutOffValue) {
+        int n1 = n + 1;
+        double[] prev = new double[n1];
+        double[] current = new double[n1];
+        int start, end;
+        double min, x, y, z;
+
+        for (int i = 0; i < n1; i++) {
+            prev[i] = i;
+        }
+
+        for (int i = 0; i < a.length; i++) {
+            start = FastMath.max(0, i - radius);
+            end = FastMath.min(n - 1, i + radius);
+
+            current[0] = i + 1;
+            min = Double.POSITIVE_INFINITY;
+
+            for (int j = start; j <= end; j++) {
+                x = prev[j + 1] + 1;
+                y = current[j] + 1;
+                z = prev[j];
+
+                if (!Precision.equals(a[i], b[j], epsilon)) {
+                    z++;
+                }
+
+                current[j + 1] = FastMath.min(x, FastMath.min(y, z));
+                if (current[j + 1] < min) {
+                    min = current[j + 1];
+                }
+            }
+
+            if (min > cutOffValue) {
+                return Double.POSITIVE_INFINITY;
+            }
+
+            System.arraycopy(current, 0, prev, 0, n1);
+        }
+
+        if (current[n] > cutOffValue) {
             return Double.POSITIVE_INFINITY;
         }
-        return d;
+
+        return current[n];
     }
 
-    private double computeEd(double[] a, double[] b, int n, int radius) {
-        boolean equals = true;
-        for (int i = 0; i < n && equals; i++) {
+    private boolean equals(double[] a, double[] b) {
+        boolean equals = a.length == b.length;
+        for (int i = 0; i < a.length && equals; i++) {
             if (!Precision.equals(a[i], b[i], epsilon)) {
                 equals = false;
             }
         }
-        if (equals) {
-            return 0;
-        }
-
-        double[] prev = new double[n];
-        double[] current = new double[n];
-        int start, end;
-        double x, y, z;
-
-        for (int i = 0; i < n; i++) {
-            prev[i] = i + 1;
-        }
-
-        for (int i = 0; i < n; i++) {
-            start = FastMath.max(0, i - radius);
-            end = FastMath.min(n - 1, i + radius);
-            for (int j = start; j <= end; j++) {
-                if (Precision.equals(a[i], b[j], epsilon)) {
-                    if (j == 0) {
-                        current[j] = i;
-                    } else {
-                        current[j] = prev[j - 1];
-                    }
-                } else {
-                    x = prev[j] + 1;
-                    if (j == 0) {
-                        y = i + 1;
-                        z = i + 1;
-                    } else {
-                        y = current[j - 1] + 1;
-                        z = prev[j - 1] + 1;
-                    }
-                    current[j] = FastMath.min(x, FastMath.min(y, z));
-                }
-            }
-
-            System.arraycopy(current, 0, prev, 0, n);
-        }
-
-        return current[n - 1];
+        return equals;
     }
 }

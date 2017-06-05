@@ -68,4 +68,13 @@ public class RealPenaltyEditDistanceTest {
         Assert.assertEquals(11, result, TimeSeriesPrecision.EPSILON);
     }
 
+    @Test
+    public void testDifferentLengths() throws Exception {
+        double a[] = {1, 2, 3, 4};
+        double b[] = {1, 100, 101, 2, 4};
+
+        double result = distance.compute(a, b);
+
+        Assert.assertEquals(198, result, TimeSeriesPrecision.EPSILON);
+    }
 }
