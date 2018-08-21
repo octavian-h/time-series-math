@@ -83,7 +83,7 @@ public class AdaptivePiecewiseConstantApproximation implements GenericTransforme
             TreeSet<Segment> set = createSegmentsSet(values, first);
 
 
-            // unify concurrent segments with minimum error
+            // unify consecutive segments with minimum error
             while (numberOfSegments > segments) {
                 Segment minSegment = set.pollFirst();
                 minSegment.mean = getUnifiedMean(minSegment, minSegment.next);
@@ -159,13 +159,11 @@ public class AdaptivePiecewiseConstantApproximation implements GenericTransforme
         set.remove(toBeDeleted);
     }
 
-    private MeanLastPair[] getMeanLastPairs(Segment segments, int numberOfSegments) {
+    private MeanLastPair[] getMeanLastPairs(Segment segment, int numberOfSegments) {
         MeanLastPair[] result = new MeanLastPair[numberOfSegments];
-        int i = 0;
-        while (segments != null) {
-            result[i] = new MeanLastPair(segments.mean, segments.end);
-            segments = segments.next;
-            i++;
+        for (int i = 0; i < numberOfSegments && segment != null; i++) {
+            result[i] = new MeanLastPair(segment.mean, segment.end);
+            segment = segment.next;
         }
         return result;
     }

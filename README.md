@@ -7,7 +7,6 @@
 The goal of this library is to provide optimised algorithms for time-series analysis and signal processing.
 
 ## Features ##
-
 * Filters:
     * Moving Average Filter
     * Exponential Moving Average Filter
@@ -53,7 +52,6 @@ Add the following dependency to your maven project.
 ```
 
 ### Code examples ###
-
 ```java
 class Test {
     public static void main(String[] args) {
@@ -80,12 +78,11 @@ class Test {
 ```
 
 ## Planned features ##
-
 * FastDTW
 * SparseDTW
+* Matrix Profile
 
 ## Contributing ##
-
 * Create your own fork of [octavian-h/times-series-math](https://github.com/octavian-h/time-series-math)
 * Make the changes
 * Submit a pull request
