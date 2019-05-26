@@ -16,8 +16,6 @@
 package ro.hasna.ts.math.type;
 
 import org.apache.commons.math3.util.Pair;
-import org.apache.commons.math3.util.Precision;
-import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
 /**
  * @since 1.0
@@ -40,22 +38,5 @@ public class MeanLastPair extends Pair<Double, Integer> {
 
     public int getLast() {
         return getSecond();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof MeanLastPair)) {
-            return false;
-        } else {
-            MeanLastPair mlp = (MeanLastPair) o;
-            return Precision.equals(getFirst(), mlp.getMean(), TimeSeriesPrecision.EPSILON) &&
-                    getSecond() == mlp.getLast();
-        }
     }
 }

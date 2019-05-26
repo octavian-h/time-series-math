@@ -39,20 +39,4 @@ public class SaxPair extends Pair<Integer, Integer> {
     public int getAlphabetSize() {
         return getSecond();
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof SaxPair)) {
-            return false;
-        } else {
-            SaxPair saxPair = (SaxPair) o;
-            return getFirst() == saxPair.getSymbol() && getSecond() == saxPair.getAlphabetSize();
-        }
-    }
 }

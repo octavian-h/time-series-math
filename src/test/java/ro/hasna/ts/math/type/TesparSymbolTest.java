@@ -45,7 +45,6 @@ public class TesparSymbolTest {
         Assert.assertEquals(10, symbol.getDuration());
         Assert.assertEquals(3, symbol.getShape());
         Assert.assertEquals(5.5, symbol.getAmplitude(), TimeSeriesPrecision.EPSILON);
-        Assert.assertEquals("[10, 3, 5.5]", symbol.toString());
     }
 
     @Test
