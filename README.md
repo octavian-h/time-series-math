@@ -16,6 +16,7 @@ The goal of this library is to provide optimised algorithms for time-series anal
 * Representations:
     * non-invertible
         * TESPAR DZ
+        * Matrix Profile (self join & left join)
     * piecewise
         * Piecewise Aggregate Approximation (PAA)
         * Piecewise Linear Aggregate Approximation (PLAA)
@@ -78,9 +79,7 @@ class Test {
 ```
 
 ## Planned features ##
-* FastDTW
-* SparseDTW
-* Matrix Profile
+* Matrix Profile (full join)
 
 ## Contributing ##
 * Create your own fork of [octavian-h/times-series-math](https://github.com/octavian-h/time-series-math)

@@ -1,20 +1,30 @@
 package ro.hasna.ts.math.ml.distance;
 
-import ro.hasna.ts.math.representation.mp.MatrixProfileTransformer;
+import org.apache.commons.math3.util.Pair;
+import ro.hasna.ts.math.representation.mp.LeftJoinMatrixProfileTransformer;
 import ro.hasna.ts.math.type.MatrixProfile;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 /**
- * Calculates the k<sup>th</sup> smallest value in the matrix profile of AB and BA.
+ * Calculates the k<sup>th</sup> smallest value in the full join matrix profile (Mab and Mba).
+ * <p>
+ * Reference:
+ * Gharghabi S., Imani S., Bagnall A., Darvishzadeh A., Keogh E. (2018)
+ * <i>An Ultra-Fast Time Series Distance Measure to allow Data Mining in more Complex Real-World Deployments</i>
+ * </p>
  */
 public class MatrixProfileDistance implements GenericDistanceMeasure<double[]> {
-    private final MatrixProfileTransformer matrixProfileTransformer;
+    private static final long serialVersionUID = -2290780320746907899L;
+    private final LeftJoinMatrixProfileTransformer matrixProfileTransformer;
     private final double k;
 
-    public MatrixProfileDistance(MatrixProfileTransformer matrixProfileTransformer) {
+    public MatrixProfileDistance(LeftJoinMatrixProfileTransformer matrixProfileTransformer) {
         this(matrixProfileTransformer, 5.0);
     }
 
-    public MatrixProfileDistance(MatrixProfileTransformer matrixProfileTransformer, double k) {
+    public MatrixProfileDistance(LeftJoinMatrixProfileTransformer matrixProfileTransformer, double k) {
         this.matrixProfileTransformer = matrixProfileTransformer;
         this.k = k;
     }
@@ -26,20 +36,23 @@ public class MatrixProfileDistance implements GenericDistanceMeasure<double[]> {
 
     @Override
     public double compute(double[] a, double[] b, double cutOffValue) {
-        MatrixProfile mpAB = matrixProfileTransformer.transform(a, b);
-        double[] mpABProfile = mpAB.getProfile();
-        MatrixProfile mpBA = matrixProfileTransformer.transform(b, a);
-        double[] mpBAProfile = mpBA.getProfile();
-        int n = mpABProfile.length + mpBAProfile.length;
-        int position = (int) (k * n);
-        double[] v = new double[n];
-        System.arraycopy(mpABProfile, 0, v, 0, mpABProfile.length);
-        System.arraycopy(mpBAProfile, 0, v, mpABProfile.length, mpBAProfile.length);
-        return quickSelect(v, 0, n, position);
+        //TODO use a full join instead of two left-joins
+        PriorityQueue<Double> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
+        updateMaxHeap(a, b, maxHeap);
+        updateMaxHeap(b, a, maxHeap);
+        return maxHeap.peek();
     }
 
-    private double quickSelect(double[] v, int left, int right, int k) {
-        //TODO
-        return 0;
+    private void updateMaxHeap(double[] a, double[] b, PriorityQueue<Double> maxHeap) {
+        MatrixProfile mp = matrixProfileTransformer.transform(new Pair<>(a, b));
+        double[] profile = mp.getProfile();
+        for (double v : profile) {
+            if (maxHeap.size() < k) {
+                maxHeap.add(v);
+            } else if (v < maxHeap.peek()) {
+                maxHeap.poll();
+                maxHeap.add(v);
+            }
+        }
     }
 }
