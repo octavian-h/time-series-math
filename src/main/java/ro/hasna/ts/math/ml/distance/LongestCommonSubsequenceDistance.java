@@ -73,7 +73,7 @@ public class LongestCommonSubsequenceDistance implements GenericDistanceMeasure<
         return 1 - lcs * 1.0 / n;
     }
 
-    private int computeLcs(double[] a, double b[], int n, int radius, double min) {
+    private int computeLcs(double[] a, double[] b, int n, int radius, double min) {
         min = min - n + 1;
 
         int w = 2 * radius + 1;

@@ -346,7 +346,7 @@ public class DynamicTimeWarpingDistance implements GenericDistanceMeasure<double
         double[] projection;
         double[] errorMargins;
 
-        public LowerBound(double value, double[] projection, double[] errorMargins) {
+        LowerBound(double value, double[] projection, double[] errorMargins) {
             this.value = value;
             this.projection = projection;
             this.errorMargins = errorMargins;
@@ -357,7 +357,7 @@ public class DynamicTimeWarpingDistance implements GenericDistanceMeasure<double
         double[] lower;
         double[] upper;
 
-        public Envelope(double[] lower, double[] upper) {
+        Envelope(double[] lower, double[] upper) {
             this.lower = lower;
             this.upper = upper;
         }

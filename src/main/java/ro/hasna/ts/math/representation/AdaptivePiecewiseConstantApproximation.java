@@ -22,7 +22,6 @@ import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
 import ro.hasna.ts.math.type.MeanLastPair;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
-import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -133,12 +132,8 @@ public class AdaptivePiecewiseConstantApproximation implements GenericTransforme
     }
 
     private TreeSet<Segment> createSegmentsSet(double[] values, Segment first) {
-        TreeSet<Segment> map = new TreeSet<>(new Comparator<Segment>() {
-            @Override
-            public int compare(Segment s1, Segment s2) {
-                return Precision.compareTo(s1.errorWithNext, s2.errorWithNext, TimeSeriesPrecision.EPSILON);
-            }
-        });
+        TreeSet<Segment> map = new TreeSet<>((s1, s2) ->
+                Precision.compareTo(s1.errorWithNext, s2.errorWithNext, TimeSeriesPrecision.EPSILON));
 
         Segment current = first;
         while (current.next != null) {

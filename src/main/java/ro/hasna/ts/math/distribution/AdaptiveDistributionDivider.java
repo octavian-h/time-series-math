@@ -70,19 +70,19 @@ public class AdaptiveDistributionDivider implements DistributionDivider {
                 count[i] = 0;
             }
 
-            for (int i = 0; i < trainingSet.length; i++) {
-                for (int j = 0; j < trainingSet[i].length; j++) {
+            for (double[] row : trainingSet) {
+                for (double v : row) {
                     boolean found = false;
                     for (int k = 0; k < breakpoints.length && !found; k++) {
                         double breakpoint = breakpoints[k];
-                        if (breakpoint > trainingSet[i][j]) {
-                            sum[k] += trainingSet[i][j];
+                        if (breakpoint > v) {
+                            sum[k] += v;
                             count[k]++;
                             found = true;
                         }
                     }
                     if (!found) {
-                        sum[breakpoints.length] += trainingSet[i][j];
+                        sum[breakpoints.length] += v;
                         count[breakpoints.length]++;
                     }
                 }
@@ -95,19 +95,19 @@ public class AdaptiveDistributionDivider implements DistributionDivider {
             }
 
             double delta = 0.0;
-            for (int i = 0; i < trainingSet.length; i++) {
-                for (int j = 0; j < trainingSet[i].length; j++) {
+            for (double[] row : trainingSet) {
+                for (double v : row) {
                     boolean found = false;
                     for (int k = 0; k < breakpoints.length && !found; k++) {
                         double breakpoint = breakpoints[k];
-                        if (breakpoint > trainingSet[i][j]) {
-                            double aux = trainingSet[i][j] - r[k];
+                        if (breakpoint > v) {
+                            double aux = v - r[k];
                             delta += aux * aux;
                             found = true;
                         }
                     }
                     if (!found) {
-                        double aux = trainingSet[i][j] - r[breakpoints.length];
+                        double aux = v - r[breakpoints.length];
                         delta += aux * aux;
                     }
                 }

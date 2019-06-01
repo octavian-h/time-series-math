@@ -106,9 +106,7 @@ public class TesparDzCoding implements GenericTransformer<double[], int[]> {
         local maximum for negative values otherwise false */
         if (a > 0 && b > 0 && c > 0 && a > b && b < c) {
             return true;
-        } else if (a < 0 && b < 0 && c < 0 && a < b && b > c) {
-            return true;
         }
-        return false;
+        return a < 0 && b < 0 && c < 0 && a < b && b > c;
     }
 }
