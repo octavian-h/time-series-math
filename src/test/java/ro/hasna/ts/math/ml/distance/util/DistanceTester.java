@@ -104,9 +104,9 @@ public class DistanceTester {
 
     public void testTriangleInequality() throws Exception {
         int n = 128;
-        double a[] = new double[n];
-        double b[] = new double[n];
-        double c[] = new double[n];
+        double[] a = new double[n];
+        double[] b = new double[n];
+        double[] c = new double[n];
 
         for (int i = 0; i < n; i++) {
             a[i] = i;
@@ -127,8 +127,8 @@ public class DistanceTester {
 
     public void testEquality() throws Exception {
         int n = 128;
-        double a[] = new double[n];
-        double b[] = new double[n];
+        double[] a = new double[n];
+        double[] b = new double[n];
         for (int i = 0; i < n; i++) {
             a[i] = i;
             b[i] = i;
@@ -140,8 +140,8 @@ public class DistanceTester {
     }
 
     public void testOverflowAdditive() throws Exception {
-        double a[] = new double[vectorLength];
-        double b[] = new double[vectorLength];
+        double[] a = new double[vectorLength];
+        double[] b = new double[vectorLength];
         for (int i = 0; i < vectorLength; i++) {
             a[i] = i;
             b[i] = i + offset;
@@ -153,8 +153,8 @@ public class DistanceTester {
     }
 
     public void testOverflowSquare() throws Exception {
-        double a[] = new double[vectorLength];
-        double b[] = new double[vectorLength];
+        double[] a = new double[vectorLength];
+        double[] b = new double[vectorLength];
         for (int i = 0; i < vectorLength; i++) {
             a[i] = i;
             b[i] = i * i;
@@ -166,8 +166,8 @@ public class DistanceTester {
     }
 
     public void testResultAdditive() throws Exception {
-        double a[] = new double[vectorLength];
-        double b[] = new double[vectorLength];
+        double[] a = new double[vectorLength];
+        double[] b = new double[vectorLength];
         for (int i = 0; i < vectorLength; i++) {
             a[i] = i;
             b[i] = i + offset;
@@ -179,8 +179,8 @@ public class DistanceTester {
     }
 
     public void testResultSquare() throws Exception {
-        double a[] = new double[vectorLength];
-        double b[] = new double[vectorLength];
+        double[] a = new double[vectorLength];
+        double[] b = new double[vectorLength];
         for (int i = 0; i < vectorLength; i++) {
             a[i] = i;
             b[i] = i * i;

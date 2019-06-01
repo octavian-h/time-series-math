@@ -46,15 +46,4 @@ public class TesparSymbolTest {
         Assert.assertEquals(3, symbol.getShape());
         Assert.assertEquals(5.5, symbol.getAmplitude(), TimeSeriesPrecision.EPSILON);
     }
-
-    @Test
-    public void testEquals() throws Exception {
-        TesparSymbol symbol = new TesparSymbol(10, 3, 5.5);
-
-        Assert.assertEquals(false, symbol.equals(null));
-        Assert.assertEquals(true, symbol.equals(symbol));
-        Assert.assertEquals(true, symbol.equals(new TesparSymbol(10, 3, 5.5)));
-        Assert.assertEquals(false, symbol.equals(new TesparSymbol(10, 4, 5.5)));
-    }
-
 }

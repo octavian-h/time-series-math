@@ -74,9 +74,9 @@ public class ComplexityInvariantDistanceTest {
 
     @Test
     public void testResultSmall() throws Exception {
-        double a[] = {2, 3, 4, 3, 2}; // CF = sqrt(1+1+1+1)=2
-        double b[] = {0, 1, 2, 1, 0}; // CF = sqrt(1+1+1+1)=2
-        double c[] = {2, 4, 2, 4, 2}; // CF = sqrt(4+4+4+4)=4
+        double[] a = {2, 3, 4, 3, 2}; // CF = sqrt(1+1+1+1)=2
+        double[] b = {0, 1, 2, 1, 0}; // CF = sqrt(1+1+1+1)=2
+        double[] c = {2, 4, 2, 4, 2}; // CF = sqrt(4+4+4+4)=4
 
         double r1 = distance.compute(a, b); // ED = sqrt(20)
         double r2 = distance.compute(a, c); // ED = sqrt(6)

@@ -43,7 +43,7 @@ public class DiscreteChebyshevTransformTest {
 
     @Before
     public void setUp() throws Exception {
-        Mockito.when(fastFourierTransformer.transform(Mockito.<double[]>any(), Mockito.<TransformType>any())).thenReturn(new Complex[]{new Complex(0)});
+        Mockito.when(fastFourierTransformer.transform(Mockito.<double[]>any(), Mockito.any())).thenReturn(new Complex[]{new Complex(0)});
     }
 
     @After
@@ -73,7 +73,7 @@ public class DiscreteChebyshevTransformTest {
         double[] v = {1, 2};
         discreteChebyshevTransform.transform(v);
 
-        Mockito.verify(fastFourierTransformer, Mockito.never()).transform(Mockito.<double[]>any(), Mockito.<TransformType>any());
+        Mockito.verify(fastFourierTransformer, Mockito.never()).transform(Mockito.<double[]>any(), Mockito.any());
     }
 
     @Test

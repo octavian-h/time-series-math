@@ -40,7 +40,7 @@ public class DiscreteCosineTransformTest {
 
     @Before
     public void setUp() throws Exception {
-        Mockito.when(fastCosineTransformer.transform(Mockito.<double[]>any(), Mockito.<TransformType>any())).thenReturn(new double[]{0});
+        Mockito.when(fastCosineTransformer.transform(Mockito.any(), Mockito.any())).thenReturn(new double[]{0});
     }
 
     @After

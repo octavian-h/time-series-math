@@ -43,7 +43,7 @@ public class DiscreteFourierTransformTest {
 
     @Before
     public void setUp() throws Exception {
-        Mockito.when(fastFourierTransformer.transform(Mockito.<double[]>any(), Mockito.<TransformType>any())).thenReturn(new Complex[]{new Complex(0)});
+        Mockito.when(fastFourierTransformer.transform(Mockito.<double[]>any(), Mockito.any())).thenReturn(new Complex[]{new Complex(0)});
     }
 
     @After

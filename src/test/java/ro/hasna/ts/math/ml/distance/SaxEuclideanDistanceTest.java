@@ -61,8 +61,8 @@ public class SaxEuclideanDistanceTest {
     @Test
     public void testEquality() throws Exception {
         int n = 128;
-        double a[] = new double[n];
-        double b[] = new double[n];
+        double[] a = new double[n];
+        double[] b = new double[n];
         Random random = new Random();
         for (int i = 0; i < n; i++) {
             a[i] = i;
@@ -76,8 +76,8 @@ public class SaxEuclideanDistanceTest {
 
     @Test
     public void testOverflow() throws Exception {
-        int a[] = {0, 4, 5, 6};
-        int b[] = {7, 2, 5, 1};
+        int[] a = {0, 4, 5, 6};
+        int[] b = {7, 2, 5, 1};
 
         double result = distance.compute(a, b, 1);
 

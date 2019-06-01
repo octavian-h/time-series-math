@@ -60,8 +60,8 @@ public class RealSequenceEditDistanceTest {
 
     @Test
     public void testResult() throws Exception {
-        double a[] = {3, 2, 5, 7, 4, 8, 10, 7};
-        double b[] = {2, 5, 4, 7, 3, 10, 8, 6};
+        double[] a = {3, 2, 5, 7, 4, 8, 10, 7};
+        double[] b = {2, 5, 4, 7, 3, 10, 8, 6};
 
         double result = distance.compute(a, b);
 
@@ -71,8 +71,8 @@ public class RealSequenceEditDistanceTest {
 
     @Test
     public void testDifferentLengths() throws Exception {
-        double a[] = {1, 2, 3, 4};
-        double b[] = {1, 100, 101, 2, 4};
+        double[] a = {1, 2, 3, 4};
+        double[] b = {1, 100, 101, 2, 4};
 
         double result = distance.compute(a, b);
 

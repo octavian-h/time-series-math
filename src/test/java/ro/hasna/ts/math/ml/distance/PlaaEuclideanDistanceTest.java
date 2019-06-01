@@ -55,8 +55,8 @@ public class PlaaEuclideanDistanceTest {
     @Test
     public void testEquality() throws Exception {
         int n = 128;
-        double a[] = new double[n];
-        double b[] = new double[n];
+        double[] a = new double[n];
+        double[] b = new double[n];
         Random random = new Random();
         for (int i = 0; i < n; i++) {
             a[i] = i;

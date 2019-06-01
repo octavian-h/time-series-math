@@ -81,8 +81,8 @@ public class LongestCommonSubsequenceDistanceTest {
 
     @Test
     public void testResult() throws Exception {
-        double a[] = {2, 2, 3, 3, 4, 2, 3, 1, 3, 4, 3, 2, 3, 2, 3, 3, 1, 1, 3, 2};
-        double b[] = {3, 4, 2, 3, 4, 4, 2, 3, 3, 1, 1, 4, 3, 2, 2, 3, 4, 4, 3, 1};
+        double[] a = {2, 2, 3, 3, 4, 2, 3, 1, 3, 4, 3, 2, 3, 2, 3, 3, 1, 1, 3, 2};
+        double[] b = {3, 4, 2, 3, 4, 4, 2, 3, 3, 1, 1, 4, 3, 2, 2, 3, 4, 4, 3, 1};
 
         double result = distance.compute(a, b);
 
@@ -92,8 +92,8 @@ public class LongestCommonSubsequenceDistanceTest {
 
     @Test
     public void testResult2() throws Exception {
-        double a[] = {2, 2, 3, 3, 4, 2, 3, 1, 3, 4, 3, 2, 3, 2, 3, 3, 1, 1, 3, 2};
-        double b[] = {3, 4, 2, 3, 4, 4, 2, 3, 3, 1, 1, 4, 3, 2, 2, 3, 4, 4, 3, 1};
+        double[] a = {2, 2, 3, 3, 4, 2, 3, 1, 3, 4, 3, 2, 3, 2, 3, 3, 1, 1, 3, 2};
+        double[] b = {3, 4, 2, 3, 4, 4, 2, 3, 3, 1, 1, 4, 3, 2, 2, 3, 4, 4, 3, 1};
 
         LongestCommonSubsequenceDistance tmp = new LongestCommonSubsequenceDistance(0.25, 1);
         double result = tmp.compute(a, b);
@@ -104,8 +104,8 @@ public class LongestCommonSubsequenceDistanceTest {
 
     @Test
     public void testResultSmall() throws Exception {
-        double a[] = {3};
-        double b[] = {2};
+        double[] a = {3};
+        double[] b = {2};
 
         double result = distance.compute(a, b);
 
