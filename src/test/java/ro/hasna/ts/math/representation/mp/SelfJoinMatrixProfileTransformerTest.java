@@ -1,15 +1,41 @@
 package ro.hasna.ts.math.representation.mp;
 
+import org.apache.commons.math3.exception.NumberIsTooSmallException;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import ro.hasna.ts.math.type.MatrixProfile;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
-/**
- * @author ohasna
- * @since 22.05.2019
- */
 public class SelfJoinMatrixProfileTransformerTest {
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void constructor_withSmallWindow() throws Exception {
+        thrown.expect(NumberIsTooSmallException.class);
+        thrown.expectMessage("3 is smaller than the minimum (4)");
+
+        new SelfJoinMatrixProfileTransformer(3);
+    }
+
+    @Test
+    public void constructor_withSmallExclusionZonePercentage() throws Exception {
+        thrown.expect(NumberIsTooSmallException.class);
+        thrown.expectMessage("4 is smaller than the minimum (10)");
+
+        new SelfJoinMatrixProfileTransformer(4, 0.1, false);
+    }
+
+    @Test
+    public void transform_withSmallInput() throws Exception {
+        thrown.expect(NumberIsTooSmallException.class);
+        thrown.expectMessage("4 is smaller than the minimum (5)");
+
+        new SelfJoinMatrixProfileTransformer(4).transform(new double[4]);
+    }
 
     @Test
     public void transform_withoutNormalization() throws Exception {
@@ -17,7 +43,7 @@ public class SelfJoinMatrixProfileTransformerTest {
         double[] v = {1, 2, 3, 4, 120, 71, 2, 2, 3, 5, 19};
 
         MatrixProfile transform = transformer.transform(v);
-        double[] expectedMp = new double[]{2.0, 10202.0, 15859.0, 18338.0, 7163.0, 4766.0, 2.0, 201.0};
+        double[] expectedMp = new double[]{1.4142135623730951, 101.00495037373169, 125.93252161375949, 135.41787178950938, 84.63450832845902, 69.03622237637282, 1.4142135623730951, 14.177446878757825};
         int[] expectedIp = new int[]{6, 7, 1, 7, 5, 6, 0, 6};
 
         Assert.assertArrayEquals(expectedMp, transform.getProfile(), TimeSeriesPrecision.EPSILON);

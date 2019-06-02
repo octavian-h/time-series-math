@@ -1,8 +1,7 @@
 package ro.hasna.ts.math.ml.distance;
 
-import org.apache.commons.math3.util.Pair;
-import ro.hasna.ts.math.representation.mp.LeftJoinMatrixProfileTransformer;
-import ro.hasna.ts.math.type.MatrixProfile;
+import ro.hasna.ts.math.representation.mp.MatrixProfileTransformer;
+import ro.hasna.ts.math.type.FullMatrixProfile;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -17,16 +16,16 @@ import java.util.PriorityQueue;
  */
 public class MatrixProfileDistance implements GenericDistanceMeasure<double[]> {
     private static final long serialVersionUID = -2290780320746907899L;
-    private final LeftJoinMatrixProfileTransformer matrixProfileTransformer;
-    private final double k;
+    private final MatrixProfileTransformer matrixProfileTransformer;
+    private final double kPercentage;
 
-    public MatrixProfileDistance(LeftJoinMatrixProfileTransformer matrixProfileTransformer) {
-        this(matrixProfileTransformer, 5.0);
+    public MatrixProfileDistance(int window) {
+        this(new MatrixProfileTransformer(window), 0.05);
     }
 
-    public MatrixProfileDistance(LeftJoinMatrixProfileTransformer matrixProfileTransformer, double k) {
+    public MatrixProfileDistance(MatrixProfileTransformer matrixProfileTransformer, double kPercentage) {
         this.matrixProfileTransformer = matrixProfileTransformer;
-        this.k = k;
+        this.kPercentage = kPercentage;
     }
 
     @Override
@@ -36,16 +35,18 @@ public class MatrixProfileDistance implements GenericDistanceMeasure<double[]> {
 
     @Override
     public double compute(double[] a, double[] b, double cutOffValue) {
-        //TODO use a full join instead of two left-joins
+        FullMatrixProfile fmp = matrixProfileTransformer.fullJoinTransform(a, b);
+        double[] leftProfile = fmp.getLeftMatrixProfile().getProfile();
+        double[] rightProfile = fmp.getRightMatrixProfile().getProfile();
+        int k = Math.max(1, (int) (kPercentage * (leftProfile.length + rightProfile.length)));
+
         PriorityQueue<Double> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
-        updateMaxHeap(a, b, maxHeap);
-        updateMaxHeap(b, a, maxHeap);
+        updateMaxHeap(leftProfile, k, maxHeap);
+        updateMaxHeap(rightProfile, k, maxHeap);
         return maxHeap.peek();
     }
 
-    private void updateMaxHeap(double[] a, double[] b, PriorityQueue<Double> maxHeap) {
-        MatrixProfile mp = matrixProfileTransformer.transform(new Pair<>(a, b));
-        double[] profile = mp.getProfile();
+    private void updateMaxHeap(double[] profile, int k, PriorityQueue<Double> maxHeap) {
         for (double v : profile) {
             if (maxHeap.size() < k) {
                 maxHeap.add(v);
