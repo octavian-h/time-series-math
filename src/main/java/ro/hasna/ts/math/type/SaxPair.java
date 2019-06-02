@@ -15,28 +15,16 @@
  */
 package ro.hasna.ts.math.type;
 
-import org.apache.commons.math3.util.Pair;
+import lombok.Data;
 
-/**
- * @since 1.0
- */
-public class SaxPair extends Pair<Integer, Integer> {
-
+@Data
+public class SaxPair {
     /**
-     * Create an entry of type (symbol, alphabetSize).
-     *
-     * @param symbol       the symbol value for the segment
-     * @param alphabetSize the size of the alphabet used by the symbol
+     * The symbol value for the segment.
      */
-    public SaxPair(int symbol, int alphabetSize) {
-        super(symbol, alphabetSize);
-    }
-
-    public int getSymbol() {
-        return getFirst();
-    }
-
-    public int getAlphabetSize() {
-        return getSecond();
-    }
+    private final int symbol;
+    /**
+     * The size of the alphabet used by the symbol.
+     */
+    private final int alphabetSize;
 }

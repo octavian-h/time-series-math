@@ -26,7 +26,7 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
  */
 public class DistanceTester {
     private GenericDistanceMeasure<double[]> distance;
-    private int vectorLength;
+    private int vectorLength = 128;
     private double offset;
     private double cutOffValue;
     private double expectedResult;
@@ -103,14 +103,13 @@ public class DistanceTester {
     }
 
     public void testTriangleInequality() throws Exception {
-        int n = 128;
-        double[] a = new double[n];
-        double[] b = new double[n];
-        double[] c = new double[n];
+        double[] a = new double[vectorLength];
+        double[] b = new double[vectorLength];
+        double[] c = new double[vectorLength];
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < vectorLength; i++) {
             a[i] = i;
-            b[i] = n - i;
+            b[i] = vectorLength - i;
             c[i] = i * i;
         }
 
@@ -126,10 +125,9 @@ public class DistanceTester {
     }
 
     public void testEquality() throws Exception {
-        int n = 128;
-        double[] a = new double[n];
-        double[] b = new double[n];
-        for (int i = 0; i < n; i++) {
+        double[] a = new double[vectorLength];
+        double[] b = new double[vectorLength];
+        for (int i = 0; i < vectorLength; i++) {
             a[i] = i;
             b[i] = i;
         }

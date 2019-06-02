@@ -15,14 +15,10 @@
  */
 package ro.hasna.ts.math.type;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Data;
 import org.apache.commons.math3.exception.NotPositiveException;
 
-@Getter
-@EqualsAndHashCode
-@ToString
+@Data
 public class TesparSymbol {
     private final int duration;
     private final int shape;

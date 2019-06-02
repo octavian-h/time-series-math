@@ -106,7 +106,6 @@ public class AdaptivePiecewiseConstantApproximation implements GenericTransforme
                     set.add(minSegment.prev);
                 }
 
-
                 numberOfSegments--;
             }
         }

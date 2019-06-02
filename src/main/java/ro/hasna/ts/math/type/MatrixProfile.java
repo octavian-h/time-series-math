@@ -1,16 +1,12 @@
 package ro.hasna.ts.math.type;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Data;
 import org.apache.commons.math3.exception.DimensionMismatchException;
 
-@Getter
-@EqualsAndHashCode
-@ToString
+@Data
 public class MatrixProfile {
-    private double[] profile;
-    private int[] indexProfile;
+    private final double[] profile;
+    private final int[] indexProfile;
 
     public MatrixProfile(double[] profile, int[] indexProfile) {
         if (profile.length != indexProfile.length) {
@@ -21,10 +17,10 @@ public class MatrixProfile {
         this.indexProfile = indexProfile;
     }
 
-    public MatrixProfile(int n) {
-        profile = new double[n];
-        indexProfile = new int[n];
-        for (int j = 0; j < n; j++) {
+    public MatrixProfile(int size) {
+        profile = new double[size];
+        indexProfile = new int[size];
+        for (int j = 0; j < size; j++) {
             profile[j] = Double.POSITIVE_INFINITY;
             indexProfile[j] = -1;
         }

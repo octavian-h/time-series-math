@@ -15,28 +15,16 @@
  */
 package ro.hasna.ts.math.type;
 
-import org.apache.commons.math3.util.Pair;
+import lombok.Data;
 
-/**
- * @since 1.0
- */
-public class MeanLastPair extends Pair<Double, Integer> {
-
+@Data
+public class MeanLastPair {
     /**
-     * Create an entry of type (mean, last).
-     *
-     * @param mean the mean value for the segment
-     * @param last the position from the last element of the segment
+     * The mean value for the segment.
      */
-    public MeanLastPair(double mean, int last) {
-        super(mean, last);
-    }
-
-    public double getMean() {
-        return getFirst();
-    }
-
-    public int getLast() {
-        return getSecond();
-    }
+    private final double mean;
+    /**
+     * The position from the last element of the segment.
+     */
+    private final int last;
 }

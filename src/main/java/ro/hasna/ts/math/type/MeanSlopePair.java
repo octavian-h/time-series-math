@@ -15,28 +15,16 @@
  */
 package ro.hasna.ts.math.type;
 
-import org.apache.commons.math3.util.Pair;
+import lombok.Data;
 
-/**
- * @since 1.0
- */
-public class MeanSlopePair extends Pair<Double, Double> {
-
+@Data
+public class MeanSlopePair {
     /**
-     * Create an entry of type (mean, slope).
-     *
-     * @param mean  the mean value for the segment
-     * @param slope the slope of the segment
+     * The mean value for the segment.
      */
-    public MeanSlopePair(double mean, double slope) {
-        super(mean, slope);
-    }
-
-    public double getMean() {
-        return getFirst();
-    }
-
-    public double getSlope() {
-        return getSecond();
-    }
+    private final double mean;
+    /**
+     * The slope of the segment.
+     */
+    private final double slope;
 }
