@@ -48,11 +48,12 @@ public class DiscreteFourierTransform implements GenericTransformer<double[], do
         // pad the input array with zeros so as to have a length == 2^k
         int initialLength = values.length;
         int powerOfTwo = Integer.highestOneBit(initialLength);
+        double[] copy = values;
         if (initialLength != powerOfTwo) {
             powerOfTwo = powerOfTwo << 1;
+            copy = new double[powerOfTwo];
+            System.arraycopy(values, 0, copy, 0, initialLength);
         }
-        double[] copy = new double[powerOfTwo];
-        System.arraycopy(values, 0, copy, 0, initialLength);
 
         // run FFT
         Complex[] complexes = fourierTransformer.transform(copy, TransformType.FORWARD);
