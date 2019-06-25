@@ -14,7 +14,34 @@ class MatrixProfileUtil {
     private MatrixProfileUtil() {
     }
 
-    static Complex[] computeConvolutionUsingFft(double[] a, double[] b, int window) {
+    /**
+     * When this is finished second will contain statistics for last sliding window
+     */
+    static void computeFirstNormalizedDistanceProfile(double[] a, double[] b, int skip, int nb, int window, double[] distanceProfile, double[] productSums, BothWaySummaryStatistics first, BothWaySummaryStatistics second) {
+        if (window > Math.log(b.length)) {
+            // O(b.length * log(b.length))
+            computeFirstNormalizedDistanceProfileWithFft(a, b, skip, nb, window, distanceProfile, productSums, first, second);
+        } else {
+            // O(b.length * window)
+            computeFirstNormalizedDistanceProfileWithProductSums(a, b, skip, nb, window, distanceProfile, productSums, first, second);
+        }
+    }
+
+    static double computeNormalizedDistance(int window, double productSum, BothWaySummaryStatistics first, BothWaySummaryStatistics second) {
+        return 2.0 * window * (1 - (productSum - window * first.getMean() * second.getMean()) / (window * first.getStandardDeviation() * second.getStandardDeviation()));
+    }
+
+    static void computeFirstDistanceProfile(double[] a, double[] b, int skip, int nb, int window, double[] distanceProfile) {
+        for (int j = skip; j < nb; j++) {
+            double distance = 0;
+            for (int k = 0; k < window; k++) {
+                distance += (a[k] - b[k + j]) * (a[k] - b[k + j]);
+            }
+            distanceProfile[j] = distance;
+        }
+    }
+
+    private static Complex[] computeConvolutionUsingFft(double[] a, double[] b, int window) {
         FastFourierTransformer fft = new FastFourierTransformer(DftNormalization.STANDARD);
         int powerOfTwo = Integer.highestOneBit(b.length);
         double[] paddedB = b;
@@ -35,7 +62,7 @@ class MatrixProfileUtil {
         return fft.transform(transformA, TransformType.INVERSE);
     }
 
-    static void computeFirstNormalizedDistanceProfileWithProductSums(double[] a, double[] b, int skip, int nb, int window, double[] distanceProfile, double[] productSums, BothWaySummaryStatistics first, BothWaySummaryStatistics second) {
+    private static void computeFirstNormalizedDistanceProfileWithProductSums(double[] a, double[] b, int skip, int nb, int window, double[] distanceProfile, double[] productSums, BothWaySummaryStatistics first, BothWaySummaryStatistics second) {
         for (int j = skip; j < nb; j++) {
             if (j > skip) {
                 second.addValue(b[j + window - 1]);
@@ -50,11 +77,7 @@ class MatrixProfileUtil {
         }
     }
 
-    static double computeNormalizedDistance(int window, double productSum, BothWaySummaryStatistics first, BothWaySummaryStatistics second) {
-        return 2.0 * window * (1 - (productSum - window * first.getMean() * second.getMean()) / (window * first.getStandardDeviation() * second.getStandardDeviation()));
-    }
-
-    static void computeFirstNormalizedDistanceProfileWithFft(double[] a, double[] b, int skip, int nb, int window, double[] distanceProfile, double[] productSums, BothWaySummaryStatistics first, BothWaySummaryStatistics second) {
+    private static void computeFirstNormalizedDistanceProfileWithFft(double[] a, double[] b, int skip, int nb, int window, double[] distanceProfile, double[] productSums, BothWaySummaryStatistics first, BothWaySummaryStatistics second) {
         Complex[] transform = computeConvolutionUsingFft(a, b, window);
         for (int j = skip; j < nb; j++) {
             if (j > skip) {
@@ -64,29 +87,6 @@ class MatrixProfileUtil {
 
             productSums[j] = transform[j + window - 1].abs();
             distanceProfile[j] = computeNormalizedDistance(window, productSums[j], first, second);
-        }
-    }
-
-    /**
-     * When this is finished second will contain statistics for last sliding window
-     */
-    static void computeFirstNormalizedDistanceProfile(double[] a, double[] b, int skip, int nb, int window, double[] distanceProfile, double[] productSums, BothWaySummaryStatistics first, BothWaySummaryStatistics second) {
-        if (window > Math.log(b.length)) {
-            // O(b.length * log(b.length))
-            computeFirstNormalizedDistanceProfileWithFft(a, b, skip, nb, window, distanceProfile, productSums, first, second);
-        } else {
-            // O(b.length * window)
-            computeFirstNormalizedDistanceProfileWithProductSums(a, b, skip, nb, window, distanceProfile, productSums, first, second);
-        }
-    }
-
-    static void computeFirstDistanceProfile(double[] a, double[] b, int skip, int nb, int window, double[] distanceProfile) {
-        for (int j = skip; j < nb; j++) {
-            double distance = 0;
-            for (int k = 0; k < window; k++) {
-                distance += (a[k] - b[k + j]) * (a[k] - b[k + j]);
-            }
-            distanceProfile[j] = distance;
         }
     }
 }
