@@ -82,7 +82,7 @@ public class MatrixProfileTransformer implements Serializable {
             second.addValue(b[i]);
         }
 
-        computeFirstNormalizedDistanceProfile(a, b, nb, distanceProfile, productSums, first, second);
+        MatrixProfileUtil.computeFirstNormalizedDistanceProfile(a, b, 0, nb, window, distanceProfile, productSums, first, second);
         updateMatrixProfileFromDistanceProfile(distanceProfile, nb, 0, fmp);
         for (int i = 1; i < na; i++) {
             computeNextNormalizedDistanceProfile(a, b, nb, distanceProfile, productSums, first, second, i);
@@ -90,24 +90,6 @@ public class MatrixProfileTransformer implements Serializable {
         }
         sqrtMatrixProfile(fmp);
         return fmp;
-    }
-
-    /**
-     * When this is finished second will contain statistics for last sliding window
-     */
-    private void computeFirstNormalizedDistanceProfile(double[] a, double[] b, int nb, double[] distanceProfile, double[] productSums, BothWaySummaryStatistics first, BothWaySummaryStatistics second) {
-        for (int j = 0; j < nb; j++) {
-            if (j > 0) {
-                second.addValue(b[j + window - 1]);
-                second.removeValue(b[j - 1]);
-            }
-            double productSum = 0;
-            for (int k = 0; k < window; k++) {
-                productSum += a[k] * b[k + j];
-            }
-            productSums[j] = productSum;
-            distanceProfile[j] = computeNormalizedDistance(productSums[j], first, second);
-        }
     }
 
     /**
@@ -126,7 +108,7 @@ public class MatrixProfileTransformer implements Serializable {
             double prev = a[i - 1] * b[j - 1];
             double next = a[i + window - 1] * b[j + window - 1];
             productSums[j] = productSums[j - 1] - prev + next;
-            distanceProfile[j] = computeNormalizedDistance(productSums[j], first, secondClone);
+            distanceProfile[j] = MatrixProfileUtil.computeNormalizedDistance(window, productSums[j], first, secondClone);
         }
 
         secondClone.removeValue(b[window]);
@@ -136,11 +118,7 @@ public class MatrixProfileTransformer implements Serializable {
             productSum += a[k + i] * b[k];
         }
         productSums[0] = productSum;
-        distanceProfile[0] = computeNormalizedDistance(productSums[0], first, secondClone);
-    }
-
-    private double computeNormalizedDistance(double productSum, BothWaySummaryStatistics first, BothWaySummaryStatistics second) {
-        return 2.0 * window * (1 - (productSum - window * first.getMean() * second.getMean()) / (window * first.getStandardDeviation() * second.getStandardDeviation()));
+        distanceProfile[0] = MatrixProfileUtil.computeNormalizedDistance(window, productSums[0], first, secondClone);
     }
 
     private FullMatrixProfile computeFullMatrixProfile(double[] a, double[] b) {
@@ -149,7 +127,7 @@ public class MatrixProfileTransformer implements Serializable {
         FullMatrixProfile fmp = new FullMatrixProfile(nb, na);
         double[] distanceProfile = new double[nb];
 
-        computeFirstDistanceProfile(a, b, nb, distanceProfile);
+        MatrixProfileUtil.computeFirstDistanceProfile(a, b, 0, nb, window, distanceProfile);
         updateMatrixProfileFromDistanceProfile(distanceProfile, nb, 0, fmp);
         for (int i = 1; i < na; i++) {
             computeNextDistanceProfile(a, b, nb, distanceProfile, i);
@@ -157,16 +135,6 @@ public class MatrixProfileTransformer implements Serializable {
         }
         sqrtMatrixProfile(fmp);
         return fmp;
-    }
-
-    private void computeFirstDistanceProfile(double[] a, double[] b, int nb, double[] distanceProfile) {
-        for (int j = 0; j < nb; j++) {
-            double distance = 0;
-            for (int k = 0; k < window; k++) {
-                distance += (a[k] - b[k + j]) * (a[k] - b[k + j]);
-            }
-            distanceProfile[j] = distance;
-        }
     }
 
     private void computeNextDistanceProfile(double[] a, double[] b, int nb, double[] prevDistanceProfile, int i) {

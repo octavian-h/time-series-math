@@ -3,9 +3,12 @@ package ro.hasna.ts.math.representation.mp;
 import org.apache.commons.math3.exception.NumberIsTooSmallException;
 import org.apache.commons.math3.util.FastMath;
 import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
+import ro.hasna.ts.math.exception.CancellationException;
 import ro.hasna.ts.math.representation.GenericTransformer;
 import ro.hasna.ts.math.stat.BothWaySummaryStatistics;
 import ro.hasna.ts.math.type.MatrixProfile;
+
+import java.util.function.Predicate;
 
 /**
  * Implements the STOMP algorithm to compute the self join matrix profile.
@@ -61,13 +64,26 @@ public class SelfJoinMatrixProfileTransformer implements GenericTransformer<doub
         }
 
         if (useNormalization) {
-            return computeNormalizedMatrixProfile(input, skip);
+            return computeNormalizedMatrixProfile(input, skip, null);
         }
-        return computeMatrixProfile(input, skip);
+        return computeMatrixProfile(input, skip, null);
     }
 
-    private MatrixProfile computeNormalizedMatrixProfile(double[] input, int skip) {
-        // O(N + w + w*N + N + N*N + N)
+    public void transform(double[] input, Predicate<MatrixProfile> callback) {
+        int len = input.length;
+        int skip = (int) (window * exclusionZonePercentage);
+        if (len < window + skip) {
+            throw new ArrayLengthIsTooSmallException(len, window + skip, true);
+        }
+
+        if (useNormalization) {
+            computeNormalizedMatrixProfile(input, skip, callback);
+        } else {
+            computeMatrixProfile(input, skip, callback);
+        }
+    }
+
+    private MatrixProfile computeNormalizedMatrixProfile(double[] input, int skip, Predicate<MatrixProfile> callback) {
         int n = input.length - window + 1;
         MatrixProfile mp = new MatrixProfile(n);
         double[] distanceProfile = new double[n];
@@ -80,32 +96,14 @@ public class SelfJoinMatrixProfileTransformer implements GenericTransformer<doub
             second.addValue(input[i + skip]);
         }
 
-        computeFirstNormalizedDistanceProfile(input, skip, n, distanceProfile, productSums, first, second);
-        updateMatrixProfileFromDistanceProfile(distanceProfile, n, skip, 0, mp);
+        MatrixProfileUtil.computeFirstNormalizedDistanceProfile(input, input, skip, n, window, distanceProfile, productSums, first, second);
+        updateMatrixProfileFromDistanceProfile(distanceProfile, n, skip, 0, mp, callback);
         for (int i = 1; i < n - skip; i++) {
             computeNextNormalizedDistanceProfile(input, skip, n, distanceProfile, productSums, first, second, i);
-            updateMatrixProfileFromDistanceProfile(distanceProfile, n, skip, i, mp);
+            updateMatrixProfileFromDistanceProfile(distanceProfile, n, skip, i, mp, callback);
         }
         updateMatrixProfileWithSqrt(mp);
         return mp;
-    }
-
-    /**
-     * When this is finished second will contain statistics for last sliding window
-     */
-    private void computeFirstNormalizedDistanceProfile(double[] input, int skip, int n, double[] distanceProfile, double[] productSums, BothWaySummaryStatistics first, BothWaySummaryStatistics second) {
-        for (int j = skip; j < n; j++) {
-            if (j > skip) {
-                second.addValue(input[j + window - 1]);
-                second.removeValue(input[j - 1]);
-            }
-            double productSum = 0;
-            for (int k = 0; k < window; k++) {
-                productSum += input[k] * input[k + j];
-            }
-            productSums[j] = productSum;
-            distanceProfile[j] = computeNormalizedDistance(productSums[j], first, second);
-        }
     }
 
     /**
@@ -124,25 +122,21 @@ public class SelfJoinMatrixProfileTransformer implements GenericTransformer<doub
             double prev = input[i - 1] * input[j - 1];
             double next = input[i + window - 1] * input[j + window - 1];
             productSums[j] = productSums[j - 1] - prev + next;
-            distanceProfile[j] = computeNormalizedDistance(productSums[j], first, secondClone);
+            distanceProfile[j] = MatrixProfileUtil.computeNormalizedDistance(window, productSums[j], first, secondClone);
         }
     }
 
-    private double computeNormalizedDistance(double productSum, BothWaySummaryStatistics first, BothWaySummaryStatistics second) {
-        return 2.0 * window * (1 - (productSum - window * first.getMean() * second.getMean()) / (window * first.getStandardDeviation() * second.getStandardDeviation()));
-    }
-
-    private MatrixProfile computeMatrixProfile(double[] input, int skip) {
+    private MatrixProfile computeMatrixProfile(double[] input, int skip, Predicate<MatrixProfile> callback) {
         // O(N + w*N + N + N*N)
         int n = input.length - window + 1;
         MatrixProfile mp = new MatrixProfile(n);
         double[] distanceProfile = new double[n];
 
-        computeFirstDistanceProfile(input, n, skip, distanceProfile);
-        updateMatrixProfileFromDistanceProfile(distanceProfile, n, skip, 0, mp);
+        MatrixProfileUtil.computeFirstDistanceProfile(input, input, skip, n, window, distanceProfile);
+        updateMatrixProfileFromDistanceProfile(distanceProfile, n, skip, 0, mp, callback);
         for (int i = 1; i < n - skip; i++) {
             computeNextDistanceProfile(input, n, skip, distanceProfile, i);
-            updateMatrixProfileFromDistanceProfile(distanceProfile, n, skip, i, mp);
+            updateMatrixProfileFromDistanceProfile(distanceProfile, n, skip, i, mp, callback);
         }
         updateMatrixProfileWithSqrt(mp);
         return mp;
@@ -156,17 +150,7 @@ public class SelfJoinMatrixProfileTransformer implements GenericTransformer<doub
         }
     }
 
-    private void computeFirstDistanceProfile(double[] input, int n, int skip, double[] distanceProfile) {
-        for (int j = skip; j < n; j++) {
-            double distance = 0;
-            for (int k = 0; k < window; k++) {
-                distance += (input[k] - input[k + j]) * (input[k] - input[k + j]);
-            }
-            distanceProfile[j] = distance;
-        }
-    }
-
-    private void updateMatrixProfileFromDistanceProfile(double[] distanceProfile, int n, int skip, int i, MatrixProfile mp) {
+    private void updateMatrixProfileFromDistanceProfile(double[] distanceProfile, int n, int skip, int i, MatrixProfile mp, Predicate<MatrixProfile> callback) {
         for (int j = i + skip; j < n; j++) {
             // update horizontal line from upper triangle
             if (mp.getProfile()[j] > distanceProfile[j]) {
@@ -177,6 +161,14 @@ public class SelfJoinMatrixProfileTransformer implements GenericTransformer<doub
             if (mp.getProfile()[i] > distanceProfile[j]) {
                 mp.getProfile()[i] = distanceProfile[j];
                 mp.getIndexProfile()[i] = j;
+            }
+        }
+
+        if (callback != null) {
+            MatrixProfile clone = mp.clone();
+            updateMatrixProfileWithSqrt(clone);
+            if (!callback.test(clone)) {
+                throw new CancellationException();
             }
         }
     }
