@@ -1,13 +1,10 @@
 package ro.hasna.ts.math.representation.mp;
 
-import org.apache.commons.math3.exception.NumberIsTooSmallException;
 import org.apache.commons.math3.util.FastMath;
 import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
 import ro.hasna.ts.math.stat.BothWaySummaryStatistics;
 import ro.hasna.ts.math.type.FullMatrixProfile;
 import ro.hasna.ts.math.type.MatrixProfile;
-
-import java.io.Serializable;
 
 /**
  * Implements the STOMP algorithm to compute the matrix profile.
@@ -17,58 +14,43 @@ import java.io.Serializable;
  * <i>Exploiting a Novel Algorithm and GPUs to Break the One Hundred Million Barrier for Time Series Motifs and Joins</i>
  * </p>
  */
-public class MatrixProfileTransformer implements Serializable {
+public class MatrixProfileTransformer extends AbstractMatrixProfileTransformer {
     private static final long serialVersionUID = 1675705026272406220L;
-    private final int window;
-    private final boolean useNormalization;
 
-    /**
-     * Creates a new instance of this class with normalization enabled.
-     *
-     * @param window the length of the window
-     * @throws NumberIsTooSmallException if window is lower than 1
-     */
     public MatrixProfileTransformer(int window) {
-        this(window, true);
+        super(window, 0, true);
     }
 
-    /**
-     * @param window           the length of the window
-     * @param useNormalization flag to use Z-Normalization
-     * @throws NumberIsTooSmallException if window is lower than 1
-     */
-    public MatrixProfileTransformer(int window, boolean useNormalization) {
-        this.useNormalization = useNormalization;
-        if (window < 1) {
-            throw new NumberIsTooSmallException(window, 1, true);
-        }
-
-        this.window = window;
+    public MatrixProfileTransformer(int window, double exclusionZonePercentage, boolean useNormalization) {
+        super(window, exclusionZonePercentage, useNormalization);
     }
+
 
     public MatrixProfile transform(double[] a, double[] b) {
-        if (Math.min(a.length, b.length) < window) {
-            throw new ArrayLengthIsTooSmallException(Math.min(a.length, b.length), window, true);
+        int skip = (int) (window * exclusionZonePercentage);
+        if (Math.min(a.length, b.length) < window + skip) {
+            throw new ArrayLengthIsTooSmallException(Math.min(a.length, b.length), window + skip, true);
         }
 
         if (useNormalization) {
-            return computeNormalizedFullMatrixProfile(a, b).getLeftMatrixProfile();
+            return computeNormalizedFullMatrixProfile(a, b, skip).getLeftMatrixProfile();
         }
-        return computeFullMatrixProfile(a, b).getLeftMatrixProfile();
+        return computeFullMatrixProfile(a, b, skip).getLeftMatrixProfile();
     }
 
     public FullMatrixProfile fullJoinTransform(double[] a, double[] b) {
-        if (Math.min(a.length, b.length) < window) {
-            throw new ArrayLengthIsTooSmallException(Math.min(a.length, b.length), window, true);
+        int skip = (int) (window * exclusionZonePercentage);
+        if (Math.min(a.length, b.length) < window + skip) {
+            throw new ArrayLengthIsTooSmallException(Math.min(a.length, b.length), window + skip, true);
         }
 
         if (useNormalization) {
-            return computeNormalizedFullMatrixProfile(a, b);
+            return computeNormalizedFullMatrixProfile(a, b, skip);
         }
-        return computeFullMatrixProfile(a, b);
+        return computeFullMatrixProfile(a, b, skip);
     }
 
-    private FullMatrixProfile computeNormalizedFullMatrixProfile(double[] a, double[] b) {
+    private FullMatrixProfile computeNormalizedFullMatrixProfile(double[] a, double[] b, int skip) {
         int na = a.length - window + 1;
         int nb = b.length - window + 1;
         FullMatrixProfile fmp = new FullMatrixProfile(nb, na);
@@ -79,14 +61,14 @@ public class MatrixProfileTransformer implements Serializable {
         BothWaySummaryStatistics second = new BothWaySummaryStatistics();
         for (int i = 0; i < window; i++) {
             first.addValue(a[i]);
-            second.addValue(b[i]);
+            second.addValue(b[i + skip]);
         }
 
-        MatrixProfileUtil.computeFirstNormalizedDistanceProfile(a, b, 0, nb, window, distanceProfile, productSums, first, second);
-        updateMatrixProfileFromDistanceProfile(distanceProfile, nb, 0, fmp);
+        computeFirstNormalizedDistanceProfile(a, first, b, second, skip, nb, productSums, distanceProfile);
+        updateMatrixProfileFromDistanceProfile(distanceProfile, 0, skip, nb, fmp);
         for (int i = 1; i < na; i++) {
-            computeNextNormalizedDistanceProfile(a, b, nb, distanceProfile, productSums, first, second, i);
-            updateMatrixProfileFromDistanceProfile(distanceProfile, nb, i, fmp);
+            computeNextNormalizedDistanceProfile(a, first, i, b, second, skip, nb, distanceProfile, productSums);
+            updateMatrixProfileFromDistanceProfile(distanceProfile, i, skip, nb, fmp);
         }
         sqrtMatrixProfile(fmp);
         return fmp;
@@ -95,9 +77,9 @@ public class MatrixProfileTransformer implements Serializable {
     /**
      * First is updated, second is not updated.
      */
-    private void computeNextNormalizedDistanceProfile(double[] a, double[] b, int nb, double[] distanceProfile, double[] productSums, BothWaySummaryStatistics first, BothWaySummaryStatistics second, int i) {
-        first.addValue(a[i + window - 1]);
+    private void computeNextNormalizedDistanceProfile(double[] a, BothWaySummaryStatistics first, int i, double[] b, BothWaySummaryStatistics second, int skip, int nb, double[] distanceProfile, double[] productSums) {
         first.removeValue(a[i - 1]);
+        first.addValue(a[i + window - 1]);
         BothWaySummaryStatistics secondClone = second.clone();
 
         for (int j = nb - 1; j >= 1; j--) {
@@ -108,7 +90,7 @@ public class MatrixProfileTransformer implements Serializable {
             double prev = a[i - 1] * b[j - 1];
             double next = a[i + window - 1] * b[j + window - 1];
             productSums[j] = productSums[j - 1] - prev + next;
-            distanceProfile[j] = MatrixProfileUtil.computeNormalizedDistance(window, productSums[j], first, secondClone);
+            distanceProfile[j] = computeNormalizedDistance(productSums[j], first, secondClone);
         }
 
         secondClone.removeValue(b[window]);
@@ -118,20 +100,20 @@ public class MatrixProfileTransformer implements Serializable {
             productSum += a[k + i] * b[k];
         }
         productSums[0] = productSum;
-        distanceProfile[0] = MatrixProfileUtil.computeNormalizedDistance(window, productSums[0], first, secondClone);
+        distanceProfile[0] = computeNormalizedDistance(productSums[0], first, secondClone);
     }
 
-    private FullMatrixProfile computeFullMatrixProfile(double[] a, double[] b) {
+    private FullMatrixProfile computeFullMatrixProfile(double[] a, double[] b, int skip) {
         int na = a.length - window + 1;
         int nb = b.length - window + 1;
         FullMatrixProfile fmp = new FullMatrixProfile(nb, na);
         double[] distanceProfile = new double[nb];
 
-        MatrixProfileUtil.computeFirstDistanceProfile(a, b, 0, nb, window, distanceProfile);
-        updateMatrixProfileFromDistanceProfile(distanceProfile, nb, 0, fmp);
+        computeFirstDistanceProfileWithProductSums(a, b, skip, nb, distanceProfile);
+        updateMatrixProfileFromDistanceProfile(distanceProfile, 0, skip, nb, fmp);
         for (int i = 1; i < na; i++) {
             computeNextDistanceProfile(a, b, nb, distanceProfile, i);
-            updateMatrixProfileFromDistanceProfile(distanceProfile, nb, i, fmp);
+            updateMatrixProfileFromDistanceProfile(distanceProfile, i, skip, nb, fmp);
         }
         sqrtMatrixProfile(fmp);
         return fmp;
@@ -151,12 +133,15 @@ public class MatrixProfileTransformer implements Serializable {
         prevDistanceProfile[0] = distance;
     }
 
-    private void updateMatrixProfileFromDistanceProfile(double[] distanceProfile, int nb, int i, FullMatrixProfile mp) {
+    private void updateMatrixProfileFromDistanceProfile(double[] distanceProfile, int i, int skip, int nb, FullMatrixProfile mp) {
         double[] leftProfile = mp.getLeftMatrixProfile().getProfile();
         int[] leftIndexProfile = mp.getLeftMatrixProfile().getIndexProfile();
         double[] rightProfile = mp.getRightMatrixProfile().getProfile();
         int[] rightIndexProfile = mp.getRightMatrixProfile().getIndexProfile();
         for (int j = 0; j < nb; j++) {
+            if (inExclusionZone(i, j, skip)) {
+                continue;
+            }
             // update horizontal line
             if (leftProfile[j] > distanceProfile[j]) {
                 leftProfile[j] = distanceProfile[j];

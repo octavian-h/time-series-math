@@ -48,7 +48,7 @@ public class MatrixProfileDistanceTest {
         double[] a = {1, 2, 3, 82, 69, 54};
         double[] b = {45, 78, 12, 98, 65, 32, 2, 2, 4};
 
-        MatrixProfileDistance tmp = new MatrixProfileDistance(new MatrixProfileTransformer(3, false), 0.05);
+        MatrixProfileDistance tmp = new MatrixProfileDistance(new MatrixProfileTransformer(3, 0, false), 0.05);
         double result = tmp.compute(a, b);
 
         Assert.assertEquals(FastMath.sqrt(2), result, TimeSeriesPrecision.EPSILON);
@@ -113,7 +113,7 @@ public class MatrixProfileDistanceTest {
 
 //        System.out.println("duration=" + duration);
 
-        Assert.assertEquals(47998, posMin);
-        Assert.assertEquals(3.481167532713249, min, TimeSeriesPrecision.EPSILON);
+        Assert.assertEquals(7369, posMin);
+        Assert.assertEquals(1.0095869451091144, min, TimeSeriesPrecision.EPSILON);
     }
 }

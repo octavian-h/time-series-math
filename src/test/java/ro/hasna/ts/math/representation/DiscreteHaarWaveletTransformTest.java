@@ -39,9 +39,9 @@ public class DiscreteHaarWaveletTransformTest {
 
     @Test
     public void testTransform() throws Exception {
-        double[] v = new double[]{1, 2, 1, 0, -1, -2, -1, 0};
+        double[] v = {1, 2, 1, 0, -1, -2, -1, 0};
         double[] result = waveletTransform.transform(v);
-        double[] expected = new double[]{0, 8, 2, -2, -1, 1, 1, -1};
+        double[] expected = {0, 8, 2, -2, -1, 1, 1, -1};
 
         Assert.assertArrayEquals(expected, result, TimeSeriesPrecision.EPSILON);
     }

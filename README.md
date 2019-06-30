@@ -16,7 +16,9 @@ The goal of this library is to provide optimised algorithms for time-series anal
 * Representations:
     * non-invertible
         * TESPAR DZ
-        * Matrix Profile (self join & left join)
+        * Matrix Profile
+            * full join
+            * self join: STOMP, STAMP, SCRIMP
     * piecewise
         * Piecewise Aggregate Approximation (PAA)
         * Piecewise Linear Aggregate Approximation (PLAA)

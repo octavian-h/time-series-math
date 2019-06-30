@@ -16,6 +16,7 @@
 package ro.hasna.ts.math.representation;
 
 import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.transform.DftNormalization;
 import org.apache.commons.math3.transform.FastFourierTransformer;
 import org.apache.commons.math3.transform.TransformType;
 import org.junit.After;
@@ -28,6 +29,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * @since 1.0
@@ -66,6 +70,21 @@ public class DiscreteFourierTransformTest {
         discreteFourierTransform.transform(v);
 
         Mockito.verify(fastFourierTransformer).transform(v, TransformType.FORWARD);
+    }
+
+    @Test
+    public void reverseTransform() {
+        double[] v = {1, 2, 2, 5, 50, 25, 18, 0};
+        double[] v2 = {4, 3, 2, 1, 0, 0, 0, 0};
+        FastFourierTransformer fft = new FastFourierTransformer(DftNormalization.STANDARD);
+        Complex[] transformB = fft.transform(v, TransformType.FORWARD);
+        Complex[] transformA = fft.transform(v2, TransformType.FORWARD);
+        for (int i = 0; i < 8; i++) {
+            transformA[i] =transformA[i].multiply(transformB[i]);
+        }
+        Complex[] reverse = fft.transform(transformA, TransformType.INVERSE);
+        System.out.println(Arrays.toString(reverse));
+        System.out.println(Arrays.stream(reverse).map(Complex::abs).collect(Collectors.toList()));
     }
 
     @Test
