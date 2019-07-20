@@ -48,7 +48,7 @@ public class ScrimpTransformer extends SelfJoinAbstractMatrixProfileTransformer 
         return mp;
     }
 
-    private void computeNextNormalizedDistanceProfile(double[] a, double[] b, int indexB, int n, double prevProductSum, double[] distanceProfile) {
+    protected void computeNextNormalizedDistanceProfile(double[] a, double[] b, int indexB, int n, double prevProductSum, double[] distanceProfile) {
         BothWaySummaryStatistics first = new BothWaySummaryStatistics();
         int indexA = 0;
         BothWaySummaryStatistics second = new BothWaySummaryStatistics();
@@ -71,7 +71,7 @@ public class ScrimpTransformer extends SelfJoinAbstractMatrixProfileTransformer 
         }
     }
 
-    private void updateMatrixProfileFromDiagonalDistanceProfile(double[] distanceProfile, int indexB, int n, MatrixProfile mp, Predicate<MatrixProfile> callback) {
+    protected void updateMatrixProfileFromDiagonalDistanceProfile(double[] distanceProfile, int indexB, int n, MatrixProfile mp, Predicate<MatrixProfile> callback) {
         int indexA = 0;
         while (indexB < n - 1) {
             indexA++;
@@ -115,7 +115,7 @@ public class ScrimpTransformer extends SelfJoinAbstractMatrixProfileTransformer 
         return mp;
     }
 
-    private void computeNextDistanceProfile(double[] a, double[] b, int indexB, int n, double prevDistance, double[] distanceProfile) {
+    protected void computeNextDistanceProfile(double[] a, double[] b, int indexB, int n, double prevDistance, double[] distanceProfile) {
         int indexA = 0;
         while (indexB < n - 1) {
             double prev = a[indexA] - b[indexB];

@@ -68,7 +68,7 @@ public abstract class AbstractMatrixProfileTransformer implements Serializable {
                 second.removeValue(b[j - 1]);
             }
 
-            productSums[j] = transform[j + window - 1].abs();
+            productSums[j] = transform[j + window - 1].getReal();
             distanceProfile[j] = computeNormalizedDistance(productSums[j], first, second);
         }
     }
@@ -110,7 +110,7 @@ public abstract class AbstractMatrixProfileTransformer implements Serializable {
     }
 
     protected double computeNormalizedDistance(double productSum, BothWaySummaryStatistics first, BothWaySummaryStatistics second) {
-        return Math.abs(2.0 * window * (1 - (productSum - window * first.getMean() * second.getMean()) / (window * first.getStandardDeviation() * second.getStandardDeviation())));
+        return 2.0 * window * (1 - (productSum - window * first.getMean() * second.getMean()) / (window * first.getStandardDeviation() * second.getStandardDeviation()));
     }
 
     protected void computeFirstDistanceProfileWithProductSums(double[] a, double[] b, int skip, int nb, double[] distanceProfile) {

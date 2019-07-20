@@ -113,7 +113,7 @@ public class MatrixProfileDistanceTest {
 
 //        System.out.println("duration=" + duration);
 
-        Assert.assertEquals(1913, posMin);
-        Assert.assertEquals(0.15550732325865685, min, TimeSeriesPrecision.EPSILON);
+        Assert.assertEquals(48002, posMin);
+        Assert.assertEquals(3.4811675327308373, min, TimeSeriesPrecision.EPSILON);
     }
 }

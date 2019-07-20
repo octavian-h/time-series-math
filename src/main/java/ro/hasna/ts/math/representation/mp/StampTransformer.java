@@ -102,7 +102,7 @@ public class StampTransformer extends SelfJoinAbstractMatrixProfileTransformer {
             if (inExclusionZone(i, j, skip)) {
                 distanceProfile[j] = Double.POSITIVE_INFINITY;
             } else {
-                double productSum = transform[j + window - 1].abs();
+                double productSum = transform[j + window - 1].getReal();
                 distanceProfile[j] = computeNormalizedDistance(productSum, first, second);
             }
         }
