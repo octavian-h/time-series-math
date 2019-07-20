@@ -66,7 +66,7 @@ public abstract class SelfJoinAbstractMatrixProfileTransformer extends AbstractM
         }
     }
 
-    void updateMatrixProfileWithSqrt(MatrixProfile mp) {
+    protected void updateMatrixProfileWithSqrt(MatrixProfile mp) {
         double[] profile = mp.getProfile();
         for (int i = 0; i < profile.length; i++) {
             profile[i] = FastMath.sqrt(profile[i]);

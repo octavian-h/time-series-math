@@ -37,7 +37,7 @@ public class StampTransformer extends SelfJoinAbstractMatrixProfileTransformer {
         return mp;
     }
 
-    private void updateMatrixProfileFromDistanceProfile(double[] distanceProfile, int n, int i, MatrixProfile mp, Predicate<MatrixProfile> callback) {
+    protected void updateMatrixProfileFromDistanceProfile(double[] distanceProfile, int n, int i, MatrixProfile mp, Predicate<MatrixProfile> callback) {
         for (int j = 0; j < n; j++) {
             // update horizontal line from upper triangle
             if (mp.getProfile()[j] > distanceProfile[j]) {
@@ -60,7 +60,6 @@ public class StampTransformer extends SelfJoinAbstractMatrixProfileTransformer {
         MatrixProfile mp = new MatrixProfile(n);
         double[] distanceProfile = new double[n];
 
-
         int[] indices = generateRandomIndices(n);
         for (int i = 0; i < n; i++) {
             int index = indices[i];
@@ -72,7 +71,7 @@ public class StampTransformer extends SelfJoinAbstractMatrixProfileTransformer {
         return mp;
     }
 
-    private void computeDistanceProfileWithProductSums(double[] a, int i, double[] b, int skip, int nb, double[] distanceProfile) {
+    protected void computeDistanceProfileWithProductSums(double[] a, int i, double[] b, int skip, int nb, double[] distanceProfile) {
         for (int j = 0; j < nb; j++) {
             if (inExclusionZone(i, j, skip)) {
                 distanceProfile[j] = Double.POSITIVE_INFINITY;
@@ -86,7 +85,7 @@ public class StampTransformer extends SelfJoinAbstractMatrixProfileTransformer {
         }
     }
 
-    private void computeNormalizedDistanceProfileWithFft(double[] a, int i, double[] b, int skip, int nb, double[] distanceProfile) {
+    protected void computeNormalizedDistanceProfileWithFft(double[] a, int i, double[] b, int skip, int nb, double[] distanceProfile) {
         BothWaySummaryStatistics first = new BothWaySummaryStatistics();
         BothWaySummaryStatistics second = new BothWaySummaryStatistics();
         for (int k = 0; k < window; k++) {

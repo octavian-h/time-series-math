@@ -110,7 +110,7 @@ public abstract class AbstractMatrixProfileTransformer implements Serializable {
     }
 
     protected double computeNormalizedDistance(double productSum, BothWaySummaryStatistics first, BothWaySummaryStatistics second) {
-        return 2.0 * window * (1 - (productSum - window * first.getMean() * second.getMean()) / (window * first.getStandardDeviation() * second.getStandardDeviation()));
+        return Math.abs(2.0 * window * (1 - (productSum - window * first.getMean() * second.getMean()) / (window * first.getStandardDeviation() * second.getStandardDeviation())));
     }
 
     protected void computeFirstDistanceProfileWithProductSums(double[] a, double[] b, int skip, int nb, double[] distanceProfile) {

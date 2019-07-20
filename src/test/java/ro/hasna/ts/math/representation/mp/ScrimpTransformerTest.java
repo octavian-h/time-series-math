@@ -1,7 +1,6 @@
 package ro.hasna.ts.math.representation.mp;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import ro.hasna.ts.math.type.MatrixProfile;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
@@ -11,7 +10,6 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
  */
 public class ScrimpTransformerTest {
 
-    @Ignore("not implemented")
     @Test
     public void transform_withoutNormalization() {
         ScrimpTransformer transformer = new ScrimpTransformer(4, 0.25, false);
