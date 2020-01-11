@@ -1,4 +1,4 @@
-# Time Series Math Library (BETA) #
+# Time Series Math Library #
 
 [![Build Status](https://img.shields.io/travis/octavian-h/time-series-math/master.svg)](https://travis-ci.org/octavian-h/time-series-math)
 [![Coverage Status](https://img.shields.io/coveralls/octavian-h/time-series-math/master.svg)](https://coveralls.io/github/octavian-h/time-series-math?branch=master)
@@ -50,7 +50,7 @@ Add the following dependency to your maven project.
 <dependency>
     <groupId>ro.hasna.ts</groupId>
     <artifactId>time-series-math</artifactId>
-    <version>0.17</version>
+    <version>0.18</version>
 </dependency>
 ```
 
