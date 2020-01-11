@@ -22,7 +22,7 @@ import ro.hasna.ts.math.exception.util.LocalizableMessages;
 /**
  * Exception to be thrown when a number is not divisible with a given factor.
  *
- * @since 1.0
+ * @since 0.3
  */
 public class NumberIsNotDivisibleException extends MathIllegalNumberException {
     private static final long serialVersionUID = -3573144648031073903L;

@@ -19,9 +19,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import ro.hasna.ts.math.normalization.ZNormalizer;
 
-/**
- * @since 1.0
- */
+
 public class SymbolicAggregateApproximationTest {
 
     @Test

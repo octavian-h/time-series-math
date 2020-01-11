@@ -25,7 +25,7 @@ import org.apache.commons.math3.util.FastMath;
  * <i>Robust and fast similarity search for moving object trajectories</i>
  * </p>
  *
- * @since 1.0
+ * @since 0.10
  */
 public class RealPenaltyEditDistance implements GenericDistanceMeasure<double[]> {
     private static final long serialVersionUID = 7419503714378886631L;

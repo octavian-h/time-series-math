@@ -20,7 +20,7 @@ import java.io.Serializable;
 /**
  * Interface for generic vector transformation.
  *
- * @since 1.0
+ * @since 0.7
  */
 public interface GenericTransformer<I, O> extends Serializable {
     /**

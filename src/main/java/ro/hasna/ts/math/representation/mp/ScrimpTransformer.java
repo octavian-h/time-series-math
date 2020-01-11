@@ -1,3 +1,18 @@
+/*
+ * Copyright 2015 Octavian Hasna
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package ro.hasna.ts.math.representation.mp;
 
 import ro.hasna.ts.math.stat.BothWaySummaryStatistics;
@@ -7,6 +22,13 @@ import java.util.function.Predicate;
 
 /**
  * Implements the SCRIMP algorithm to compute the self join matrix profile.
+ * <p>
+ * Reference:
+ * Zhu Y., Yeh C. C. M., Zimmerman Z., Kamgar K., Keogh E. (2018, November)
+ * <i>Matrix profile XI: SCRIMP++: time series motif discovery at interactive speeds</i>
+ * </p>
+ *
+ * @since 0.17
  */
 public class ScrimpTransformer extends SelfJoinAbstractMatrixProfileTransformer {
     private static final long serialVersionUID = -7360923839319598742L;

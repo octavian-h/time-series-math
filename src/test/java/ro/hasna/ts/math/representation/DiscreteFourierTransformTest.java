@@ -33,9 +33,7 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-/**
- * @since 1.0
- */
+
 @RunWith(MockitoJUnitRunner.class)
 public class DiscreteFourierTransformTest {
 

@@ -22,7 +22,7 @@ import ro.hasna.ts.math.type.MeanLastPair;
  * Calculates the L<sub>2</sub> (Euclidean) distance between two vectors using the APCA representation.
  * NOTE: there is no guarantee that the distance satisfy the triangle inequality
  *
- * @since 1.0
+ * @since 0.8
  */
 public class ApcaEuclideanDistance implements GenericDistanceMeasure<MeanLastPair[]> {
     private static final long serialVersionUID = -5281044546933045617L;

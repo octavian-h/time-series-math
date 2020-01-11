@@ -23,7 +23,7 @@ import org.apache.commons.math3.transform.TransformType;
 /**
  * Implements the Discrete Fourier Transformation using {@link FastFourierTransformer}.
  *
- * @since 1.0
+ * @since 0.5
  */
 public class DiscreteFourierTransform implements GenericTransformer<double[], double[]> {
     private static final long serialVersionUID = -9081297024486191358L;

@@ -21,7 +21,7 @@ import ro.hasna.ts.math.exception.util.LocalizableMessages;
 /**
  * Implements the exponential moving average filter (exponential smoothing).
  *
- * @since 1.0
+ * @since 0.3
  */
 public class ExponentialMovingAverageFilter implements Filter {
     private static final long serialVersionUID = -5033372522209156302L;

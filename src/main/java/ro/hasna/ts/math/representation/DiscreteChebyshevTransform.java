@@ -24,7 +24,7 @@ import org.apache.commons.math3.util.FastMath;
 /**
  * Implements the Discrete Chebyshev Transformation using {@link FastFourierTransformer}.
  *
- * @since 1.0
+ * @since 0.7
  */
 public class DiscreteChebyshevTransform implements GenericTransformer<double[], double[]> {
     private static final long serialVersionUID = 574122627898745036L;

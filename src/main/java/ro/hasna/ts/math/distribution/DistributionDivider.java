@@ -22,7 +22,7 @@ import java.io.Serializable;
 /**
  * Interface for distributions with breakpoints.
  *
- * @since 1.0
+ * @since 0.6
  */
 public interface DistributionDivider extends Serializable {
     /**

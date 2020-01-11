@@ -20,7 +20,7 @@ import java.io.Serializable;
 /**
  * Interface for all time series filter algorithms.
  *
- * @since 1.0
+ * @since 0.3
  */
 public interface Filter extends Serializable {
     /**

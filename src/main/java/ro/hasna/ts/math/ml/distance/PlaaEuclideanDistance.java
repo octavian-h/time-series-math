@@ -21,7 +21,7 @@ import ro.hasna.ts.math.type.MeanSlopePair;
 /**
  * Calculates the L<sub>2</sub> (Euclidean) distance between two vectors using the PLAA representation.
  *
- * @since 1.0
+ * @since 0.7
  */
 public class PlaaEuclideanDistance implements GenericDistanceMeasure<MeanSlopePair[]> {
     private static final long serialVersionUID = -2987558975696360228L;

@@ -26,7 +26,7 @@ import ro.hasna.ts.math.type.TesparSymbol;
  * <i>Shannon, TESPAR And Approximation Strategies</i>
  * </p>
  *
- * @since 1.0
+ * @since 0.7
  */
 public class TesparDzCoding implements GenericTransformer<double[], int[]> {
     private static final long serialVersionUID = 7734158131264856074L;

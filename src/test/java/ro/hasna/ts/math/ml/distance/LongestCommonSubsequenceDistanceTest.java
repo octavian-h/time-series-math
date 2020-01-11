@@ -25,9 +25,7 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
 import java.util.Locale;
 import java.util.Scanner;
 
-/**
- * @since 1.0
- */
+
 public class LongestCommonSubsequenceDistanceTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();

@@ -21,9 +21,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
-/**
- * @since 1.0
- */
+
 public class DiscreteHaarWaveletTransformTest {
     private DiscreteHaarWaveletTransform waveletTransform;
 

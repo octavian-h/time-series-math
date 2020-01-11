@@ -21,7 +21,7 @@ import ro.hasna.ts.math.representation.SymbolicAggregateApproximation;
 /**
  * Calculates the L<sub>2</sub> (Euclidean) distance between two vectors using the SAX representation.
  *
- * @since 1.0
+ * @since 0.7
  */
 public class SaxEuclideanDistance implements GenericDistanceMeasure<int[]> {
     private static final long serialVersionUID = -2580188567848020545L;

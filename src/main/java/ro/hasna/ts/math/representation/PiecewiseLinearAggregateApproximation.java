@@ -31,7 +31,7 @@ import ro.hasna.ts.math.type.MeanSlopePair;
  * <i>An Improvement of PAA for Dimensionality Reduction in Large Time Series Databases</i>
  * </p>
  *
- * @since 1.0
+ * @since 0.6
  */
 public class PiecewiseLinearAggregateApproximation implements GenericTransformer<double[], MeanSlopePair[]> {
     private static final long serialVersionUID = -4073250977010141095L;

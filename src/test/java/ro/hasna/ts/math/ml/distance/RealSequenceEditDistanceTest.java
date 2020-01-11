@@ -22,9 +22,7 @@ import org.junit.Test;
 import ro.hasna.ts.math.ml.distance.util.DistanceTester;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
-/**
- * @since 1.0
- */
+
 public class RealSequenceEditDistanceTest {
     private RealSequenceEditDistance distance;
 

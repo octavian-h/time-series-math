@@ -21,7 +21,7 @@ import org.apache.commons.math3.exception.NumberIsTooSmallException;
 /**
  * Implements the equal areas of probability for Uniform Distribution.
  *
- * @since 1.0
+ * @since 0.6
  */
 public class UniformDistributionDivider implements DistributionDivider {
     private static final long serialVersionUID = 3307519249593191140L;

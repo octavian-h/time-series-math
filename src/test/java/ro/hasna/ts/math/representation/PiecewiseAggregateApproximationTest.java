@@ -23,9 +23,7 @@ import org.junit.rules.ExpectedException;
 import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
-/**
- * @since 1.0
- */
+
 public class PiecewiseAggregateApproximationTest {
 
     @Rule

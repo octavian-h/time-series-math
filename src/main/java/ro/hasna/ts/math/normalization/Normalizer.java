@@ -20,7 +20,7 @@ import java.io.Serializable;
 /**
  * Interface for all normalization algorithms.
  *
- * @since 1.0
+ * @since 0.5
  */
 public interface Normalizer extends Serializable {
     /**

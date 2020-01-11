@@ -1,3 +1,18 @@
+/*
+ * Copyright 2015 Octavian Hasna
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package ro.hasna.ts.math.ml.distance;
 
 import ro.hasna.ts.math.representation.mp.MatrixProfileTransformer;
@@ -13,6 +28,8 @@ import java.util.PriorityQueue;
  * Gharghabi S., Imani S., Bagnall A., Darvishzadeh A., Keogh E. (2018)
  * <i>An Ultra-Fast Time Series Distance Measure to allow Data Mining in more Complex Real-World Deployments</i>
  * </p>
+ *
+ * @since 0.17
  */
 public class MatrixProfileDistance implements GenericDistanceMeasure<double[]> {
     private static final long serialVersionUID = -2290780320746907899L;

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2015 Octavian Hasna
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package ro.hasna.ts.math.representation.mp;
 
 import org.apache.commons.math3.complex.Complex;
@@ -8,6 +23,13 @@ import java.util.function.Predicate;
 
 /**
  * Implements the STAMP algorithm to compute the self join matrix profile.
+ * <p>
+ * Reference:
+ * Yeh C. C. M., Zhu Y., Ulanova L., Begum N., Ding Y., Dau H. A., Keogh E. (2016, December)
+ * <i>Matrix profile I: all pairs similarity joins for time series: a unifying view that includes motifs, discords and shapelets</i>
+ * </p>
+ *
+ * @since 0.17
  */
 public class StampTransformer extends SelfJoinAbstractMatrixProfileTransformer {
     private static final long serialVersionUID = 5919724985496947961L;

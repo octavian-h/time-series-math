@@ -1,3 +1,18 @@
+/*
+ * Copyright 2015 Octavian Hasna
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package ro.hasna.ts.math.representation.mp;
 
 import org.apache.commons.math3.util.FastMath;
@@ -13,6 +28,8 @@ import ro.hasna.ts.math.type.MatrixProfile;
  * Zhu Y., Zimmerman Z., Senobari N. S., Yeh C. C. M., Funning G., Mueen A., Keogh E. (2016)
  * <i>Exploiting a Novel Algorithm and GPUs to Break the One Hundred Million Barrier for Time Series Motifs and Joins</i>
  * </p>
+ *
+ * @since 0.17
  */
 public class MatrixProfileTransformer extends AbstractMatrixProfileTransformer {
     private static final long serialVersionUID = 1675705026272406220L;

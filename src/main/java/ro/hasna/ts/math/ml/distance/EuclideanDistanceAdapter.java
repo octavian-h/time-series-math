@@ -21,7 +21,7 @@ import org.apache.commons.math3.util.FastMath;
 /**
  * Adapter class for {@link EuclideanDistance} that implements {@link GenericDistanceMeasure}.
  *
- * @since 1.0
+ * @since 0.9
  */
 public class EuclideanDistanceAdapter extends EuclideanDistance implements GenericDistanceMeasure<double[]> {
     private static final long serialVersionUID = 2803606298141242772L;

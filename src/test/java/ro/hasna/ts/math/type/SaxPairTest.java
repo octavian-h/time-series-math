@@ -18,9 +18,7 @@ package ro.hasna.ts.math.type;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * @since 1.0
- */
+
 public class SaxPairTest {
 
     @Test

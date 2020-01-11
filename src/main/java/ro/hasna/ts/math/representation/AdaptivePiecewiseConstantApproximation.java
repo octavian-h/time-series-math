@@ -33,7 +33,7 @@ import java.util.TreeSet;
  * <i>Locally Adaptive Dimensionality Reduction for Indexing Large Time Series Databases</i>
  * </p>
  *
- * @since 1.0
+ * @since 0.8
  */
 public class AdaptivePiecewiseConstantApproximation implements GenericTransformer<double[], MeanLastPair[]> {
     private static final long serialVersionUID = 5071554004881637993L;

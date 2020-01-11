@@ -21,9 +21,7 @@ import org.junit.rules.ExpectedException;
 import ro.hasna.ts.math.ml.distance.util.DistanceTester;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
-/**
- * @since 1.0
- */
+
 public class UniformScalingDistanceTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();

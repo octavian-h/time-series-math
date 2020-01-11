@@ -1,3 +1,18 @@
+/*
+ * Copyright 2015 Octavian Hasna
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package ro.hasna.ts.math.representation.mp;
 
 import org.apache.commons.math3.complex.Complex;
@@ -12,6 +27,8 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
+ * Useful methods used by full and self join matrix profile algorithms.
+ *
  * @since 0.17
  */
 public abstract class AbstractMatrixProfileTransformer implements Serializable {
@@ -48,28 +65,28 @@ public abstract class AbstractMatrixProfileTransformer implements Serializable {
     }
 
     /**
-     * When this is finished second will contain statistics for last sliding window
+     * This method will update bStatistics with last sliding window statistics
      */
-    protected void computeFirstNormalizedDistanceProfile(double[] a, BothWaySummaryStatistics first, double[] b, BothWaySummaryStatistics second, int skip, int nb, double[] productSums, double[] distanceProfile) {
+    protected void computeFirstNormalizedDistanceProfile(double[] a, BothWaySummaryStatistics aStatistics, double[] b, BothWaySummaryStatistics bStatistics, int skip, int nb, double[] productSums, double[] distanceProfile) {
         if (window > Math.log(b.length)) {
             // O(b.length * log(b.length))
-            computeFirstNormalizedDistanceProfileWithFft(a, first, b, second, skip, nb, productSums, distanceProfile);
+            computeFirstNormalizedDistanceProfileWithFft(a, aStatistics, b, bStatistics, skip, nb, productSums, distanceProfile);
         } else {
             // O(b.length * window)
-            computeFirstNormalizedDistanceProfileWithProductSums(a, first, b, second, skip, nb, productSums, distanceProfile);
+            computeFirstNormalizedDistanceProfileWithProductSums(a, aStatistics, b, bStatistics, skip, nb, productSums, distanceProfile);
         }
     }
 
-    private void computeFirstNormalizedDistanceProfileWithFft(double[] a, BothWaySummaryStatistics first, double[] b, BothWaySummaryStatistics second, int skip, int nb, double[] productSums, double[] distanceProfile) {
+    private void computeFirstNormalizedDistanceProfileWithFft(double[] a, BothWaySummaryStatistics aStatistics, double[] b, BothWaySummaryStatistics bStatistics, int skip, int nb, double[] productSums, double[] distanceProfile) {
         Complex[] transform = computeConvolutionUsingFft(a, 0, b);
         for (int j = skip; j < nb; j++) {
             if (j > skip) {
-                second.addValue(b[j + window - 1]);
-                second.removeValue(b[j - 1]);
+                bStatistics.addValue(b[j + window - 1]);
+                bStatistics.removeValue(b[j - 1]);
             }
 
             productSums[j] = transform[j + window - 1].getReal();
-            distanceProfile[j] = computeNormalizedDistance(productSums[j], first, second);
+            distanceProfile[j] = computeNormalizedDistance(productSums[j], aStatistics, bStatistics);
         }
     }
 

@@ -30,7 +30,7 @@ import java.util.List;
  * Implements Piecewise Approximation using a curve fitting function (ex: linear = PLA, quadratic = PQA etc.).
  * An optimised implementation for the mean function is the class {@code PiecewiseAggregateApproximation}.
  *
- * @since 1.0
+ * @since 0.10
  */
 public class PiecewiseCurveFitterApproximation implements GenericTransformer<double[], double[][]> {
     private static final long serialVersionUID = -410430777798956046L;

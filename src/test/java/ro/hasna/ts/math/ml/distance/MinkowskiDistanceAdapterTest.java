@@ -20,9 +20,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ro.hasna.ts.math.ml.distance.util.DistanceTester;
 
-/**
- * @since 1.0
- */
+
 public abstract class MinkowskiDistanceAdapterTest {
     protected GenericDistanceMeasure<double[]> distance;
     protected int vectorLength = 100;

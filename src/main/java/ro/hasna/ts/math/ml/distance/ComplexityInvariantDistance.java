@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Octavian Hasna
+ * Copyright 2015 Octavian Hasna
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import org.apache.commons.math3.util.FastMath;
  * <i>A Complexity-Invariant Distance Measure for Time Series</i>
  * </p>
  *
- * @since 1.0
+ * @since 0.14
  */
 public class ComplexityInvariantDistance implements GenericDistanceMeasure<double[]> {
     private static final long serialVersionUID = 8279756267007620217L;

@@ -18,7 +18,7 @@ package ro.hasna.ts.math.exception;
 import org.apache.commons.math3.exception.util.Localizable;
 
 /**
- * @since 1.0
+ * @since 0.3
  */
 public class ArrayLengthIsNotDivisibleException extends NumberIsNotDivisibleException {
     private static final long serialVersionUID = 1652407890465175618L;

@@ -24,9 +24,7 @@ import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
 import ro.hasna.ts.math.type.MeanLastPair;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
-/**
- * @since 1.0
- */
+
 public class AdaptivePiecewiseConstantApproximationTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();

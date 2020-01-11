@@ -15,9 +15,7 @@
  */
 package ro.hasna.ts.math.ml.distance;
 
-/**
- * @since 1.0
- */
+
 public class ManhattanDistanceAdapterTest extends MinkowskiDistanceAdapterTest {
     public ManhattanDistanceAdapterTest() {
         this.distance = new ManhattanDistanceAdapter();

@@ -27,7 +27,7 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
  * <i>Detecting time series motifs under uniform scaling</i>
  * </p>
  *
- * @since 1.0
+ * @since 0.10
  */
 public class UniformScalingDistance implements GenericDistanceMeasure<double[]> {
     private static final long serialVersionUID = -596315329786672046L;

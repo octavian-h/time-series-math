@@ -27,7 +27,7 @@ import ro.hasna.ts.math.normalization.ZNormalizer;
  * <i>A symbolic representation of time series, with implications for streaming algorithms</i>
  * </p>
  *
- * @since 1.0
+ * @since 0.5
  */
 public class SymbolicAggregateApproximation implements GenericTransformer<double[], int[]> {
     private static final long serialVersionUID = -2951279057715694424L;

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2015 Octavian Hasna
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package ro.hasna.ts.math.stat;
 
 import org.apache.commons.math3.exception.InsufficientDataException;
@@ -8,6 +23,11 @@ import org.apache.commons.math3.util.FastMath;
 
 import java.io.Serializable;
 
+/**
+ * Compute iterative statistics when adding or removing values.
+ *
+ * @since 0.17
+ */
 public class BothWaySummaryStatistics implements StatisticalSummary, Serializable, Cloneable {
     private static final long serialVersionUID = -8419769227216721345L;
     private long n;

@@ -26,7 +26,7 @@ import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
  * <i>Locally Adaptive Dimensionality Reduction for Indexing Large Time Series Databases </i>
  * </p>
  *
- * @since 1.0
+ * @since 0.5
  */
 public class PiecewiseAggregateApproximation implements GenericTransformer<double[], double[]> {
     private static final long serialVersionUID = -8199587096227874425L;

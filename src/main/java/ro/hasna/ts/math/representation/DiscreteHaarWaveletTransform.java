@@ -22,7 +22,7 @@ package ro.hasna.ts.math.representation;
  * Wikipedia https://en.wikipedia.org/wiki/Discrete_wavelet_transform
  * </p>
  *
- * @since 1.0
+ * @since 0.8
  */
 public class DiscreteHaarWaveletTransform implements GenericTransformer<double[], double[]> {
     private static final long serialVersionUID = -7596019215266231225L;

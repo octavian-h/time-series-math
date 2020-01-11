@@ -21,9 +21,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * @since 1.0
- */
+
 public class TesparDzCodingTest {
     private TesparDzCoding tesparDzCoding;
 

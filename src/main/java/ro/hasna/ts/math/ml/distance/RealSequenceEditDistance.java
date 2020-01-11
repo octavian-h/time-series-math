@@ -31,7 +31,7 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
  * <i>Similarity search over time series and trajectory data</i>
  * </p>
  *
- * @since 1.0
+ * @since 0.10
  */
 public class RealSequenceEditDistance implements GenericDistanceMeasure<double[]> {
     private static final long serialVersionUID = -373272813771443967L;

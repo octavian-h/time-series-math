@@ -22,7 +22,7 @@ import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
  * Implements the ZNormalizer algorithm that use mean and standard deviation for data normalization.
  * This algorithm is also called Standard Score, Z-Values, Z-Scores, Normal Scores and Standardized Variables.
  *
- * @since 1.0
+ * @since 0.5
  */
 public class ZNormalizer implements Normalizer {
     private static final long serialVersionUID = 6446811014325682141L;

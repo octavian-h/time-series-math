@@ -15,9 +15,6 @@
  */
 package ro.hasna.ts.math.ml.distance;
 
-/**
- * @since 1.0
- */
 public class ChebyshevDistanceAdapterTest extends MinkowskiDistanceAdapterTest {
     public ChebyshevDistanceAdapterTest() {
         this.distance = new ChebyshevDistanceAdapter();

@@ -27,9 +27,7 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
 import java.util.Random;
 
-/**
- * @since 1.0
- */
+
 public class SaxEuclideanDistanceTest {
     private SaxEuclideanDistance distance;
     private SymbolicAggregateApproximation sax;

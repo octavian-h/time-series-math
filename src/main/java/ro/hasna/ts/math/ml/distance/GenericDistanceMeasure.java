@@ -20,7 +20,7 @@ import java.io.Serializable;
 /**
  * Interface for generic distance measures of n-dimensional vectors.
  *
- * @since 1.0
+ * @since 0.7
  */
 public interface GenericDistanceMeasure<T> extends Serializable {
     /**

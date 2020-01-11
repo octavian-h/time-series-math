@@ -31,7 +31,7 @@ import java.util.LinkedList;
  * Wikipedia https://en.wikipedia.org/wiki/Dynamic_time_warping
  * </p>
  *
- * @since 1.0
+ * @since 0.10
  */
 public class DynamicTimeWarpingDistance implements GenericDistanceMeasure<double[]> {
     private static final long serialVersionUID = 1154818905340336905L;

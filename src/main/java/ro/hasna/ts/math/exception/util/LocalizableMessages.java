@@ -22,7 +22,6 @@ import org.apache.commons.math3.exception.util.Localizable;
  * Class for localized messages formats used in exceptions messages.
  *
  * @see org.apache.commons.math3.exception.util.LocalizedFormats
- * @since 1.0
  */
 public class LocalizableMessages {
     public static final Localizable NUMBER_NOT_DIVISIBLE_WITH = new DummyLocalizable("{0} is not divisible with {1}");

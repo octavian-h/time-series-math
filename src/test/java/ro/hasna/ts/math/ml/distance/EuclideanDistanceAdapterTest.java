@@ -15,9 +15,7 @@
  */
 package ro.hasna.ts.math.ml.distance;
 
-/**
- * @since 1.0
- */
+
 public class EuclideanDistanceAdapterTest extends MinkowskiDistanceAdapterTest {
     public EuclideanDistanceAdapterTest() {
         this.distance = new EuclideanDistanceAdapter();

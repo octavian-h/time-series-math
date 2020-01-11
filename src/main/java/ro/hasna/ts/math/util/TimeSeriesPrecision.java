@@ -21,7 +21,7 @@ import org.apache.commons.math3.util.FastMath;
  * Methods and constants used for comparisons.
  *
  * @see org.apache.commons.math3.util.Precision
- * @since 1.0
+ * @since 0.5
  */
 public class TimeSeriesPrecision {
     public static final double EPSILON = FastMath.pow(2, -30);

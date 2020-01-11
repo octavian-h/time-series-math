@@ -20,7 +20,7 @@ import org.apache.commons.math3.exception.DimensionMismatchException;
 /**
  * Implements the moving average/mean filter.
  *
- * @since 1.0
+ * @since 0.3
  */
 public class MovingAverageFilter implements Filter {
     private static final long serialVersionUID = -7876483245195295513L;

@@ -22,7 +22,7 @@ import org.apache.commons.math3.transform.TransformType;
 /**
  * Implements the Discrete Cosine Transformation using {@link FastCosineTransformer}.
  *
- * @since 1.0
+ * @since 0.6
  */
 public class DiscreteCosineTransform implements GenericTransformer<double[], double[]> {
     private static final long serialVersionUID = -100136722639862251L;

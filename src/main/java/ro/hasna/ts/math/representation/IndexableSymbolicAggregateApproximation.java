@@ -30,7 +30,7 @@ import ro.hasna.ts.math.type.SaxPair;
  * <i>iSAX 2.0: Indexing and mining one billion time series</i>
  * </p>
  *
- * @since 1.0
+ * @since 0.7
  */
 public class IndexableSymbolicAggregateApproximation implements GenericTransformer<double[], SaxPair[]> {
     private static final long serialVersionUID = -1652621695908903282L;

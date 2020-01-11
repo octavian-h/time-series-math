@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Octavian Hasna
+ * Copyright 2015 Octavian Hasna
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import org.apache.commons.math3.exception.NumberIsTooLargeException;
 /**
  * Implements the min-max normalization algorithm that maps the original data to a new interval.
  *
- * @since 1.0
+ * @since 0.12
  */
 public class MinMaxNormalizer implements Normalizer {
     private static final long serialVersionUID = 2822371561555309746L;

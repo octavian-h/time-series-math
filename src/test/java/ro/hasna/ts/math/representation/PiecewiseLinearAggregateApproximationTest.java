@@ -24,9 +24,7 @@ import ro.hasna.ts.math.exception.ArrayLengthIsNotDivisibleException;
 import ro.hasna.ts.math.exception.ArrayLengthIsTooSmallException;
 import ro.hasna.ts.math.type.MeanSlopePair;
 
-/**
- * @since 1.0
- */
+
 public class PiecewiseLinearAggregateApproximationTest {
 
     @Rule

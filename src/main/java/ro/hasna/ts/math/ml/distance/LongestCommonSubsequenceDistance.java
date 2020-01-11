@@ -28,7 +28,7 @@ import ro.hasna.ts.math.exception.util.LocalizableMessages;
  * <i>Discovering similar multidimensional trajectories</i>
  * </p>
  *
- * @since 1.0
+ * @since 0.7
  */
 public class LongestCommonSubsequenceDistance implements GenericDistanceMeasure<double[]> {
     private static final long serialVersionUID = 4542559569313251930L;

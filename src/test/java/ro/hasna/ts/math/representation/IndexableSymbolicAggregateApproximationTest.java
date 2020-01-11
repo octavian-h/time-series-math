@@ -26,9 +26,7 @@ import ro.hasna.ts.math.type.SaxPair;
 
 import java.util.Random;
 
-/**
- * @since 1.0
- */
+
 public class IndexableSymbolicAggregateApproximationTest {
 
     @Rule

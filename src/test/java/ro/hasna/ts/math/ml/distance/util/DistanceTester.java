@@ -21,9 +21,7 @@ import ro.hasna.ts.math.ml.distance.GenericDistanceMeasure;
 import ro.hasna.ts.math.representation.GenericTransformer;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
-/**
- * @since 1.0
- */
+
 public class DistanceTester {
     private GenericDistanceMeasure<double[]> distance;
     private int vectorLength = 128;

@@ -23,7 +23,7 @@ package ro.hasna.ts.math.distribution;
  * <i>Two Novel Adaptive Symbolic Representations for Similarity Search in Time Series Databases</i>
  * </p>
  *
- * @since 1.0
+ * @since 0.6
  */
 public class AdaptiveDistributionDivider implements DistributionDivider {
     private static final long serialVersionUID = -4952292138370739914L;

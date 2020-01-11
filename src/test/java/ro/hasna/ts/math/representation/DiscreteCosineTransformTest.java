@@ -26,9 +26,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-/**
- * @since 1.0
- */
+
 @RunWith(MockitoJUnitRunner.class)
 public class DiscreteCosineTransformTest {
 

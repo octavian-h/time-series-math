@@ -22,7 +22,7 @@ import ro.hasna.ts.math.type.SaxPair;
 /**
  * Calculates the L<sub>2</sub> (Euclidean) distance between two vectors using the iSAX representation.
  *
- * @since 1.0
+ * @since 0.7
  */
 public class IndexableSaxEuclideanDistance implements GenericDistanceMeasure<SaxPair[]> {
     private static final long serialVersionUID = -4740907293933039859L;

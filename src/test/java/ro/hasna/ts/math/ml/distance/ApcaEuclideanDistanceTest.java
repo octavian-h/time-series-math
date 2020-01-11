@@ -24,9 +24,6 @@ import ro.hasna.ts.math.representation.AdaptivePiecewiseConstantApproximation;
 import ro.hasna.ts.math.type.MeanLastPair;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
-/**
- * @since 1.0
- */
 public class ApcaEuclideanDistanceTest {
     private ApcaEuclideanDistance distance;
     private AdaptivePiecewiseConstantApproximation apca;

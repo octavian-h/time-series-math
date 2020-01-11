@@ -1,9 +1,28 @@
+/*
+ * Copyright 2015 Octavian Hasna
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package ro.hasna.ts.math.representation.mp;
 
 import org.junit.Assert;
 import org.junit.Test;
+import ro.hasna.ts.math.ml.distance.LongestCommonSubsequenceDistance;
 import ro.hasna.ts.math.type.MatrixProfile;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
+
+import java.util.Locale;
+import java.util.Scanner;
 
 /**
  * @since 0.17
@@ -34,5 +53,27 @@ public class StompTransformerTest {
 
         Assert.assertArrayEquals(expectedMp, transform.getProfile(), TimeSeriesPrecision.EPSILON);
         Assert.assertArrayEquals(expectedIp, transform.getIndexProfile());
+    }
+
+    @Test
+    public void transform_large() {
+        int m = 300;
+        int window = 8;
+
+        Scanner dataScanner = new Scanner(LongestCommonSubsequenceDistance.class.getResourceAsStream("data-100k.txt")).useLocale(Locale.ENGLISH);
+        double[] data = new double[m];
+        for (int i = 0; i < m && dataScanner.hasNextDouble(); i++) {
+            data[i] = dataScanner.nextDouble();
+        }
+
+        StompTransformer stompTransformer = new StompTransformer(window);
+        MatrixProfile mp1 = stompTransformer.transform(data);
+        StampTransformer stampTransformer = new StampTransformer(window);
+        MatrixProfile mp2 = stampTransformer.transform(data);
+        ScrimpTransformer scrimpTransformer = new ScrimpTransformer(window);
+        MatrixProfile mp3 = scrimpTransformer.transform(data);
+
+        Assert.assertArrayEquals(mp1.getProfile(), mp2.getProfile(), TimeSeriesPrecision.EPSILON);
+        Assert.assertArrayEquals(mp1.getProfile(), mp3.getProfile(), TimeSeriesPrecision.EPSILON);
     }
 }

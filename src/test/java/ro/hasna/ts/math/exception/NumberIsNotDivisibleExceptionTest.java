@@ -19,9 +19,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import ro.hasna.ts.math.representation.PiecewiseAggregateApproximation;
 
-/**
- * @since 1.0
- */
 public class NumberIsNotDivisibleExceptionTest {
 
     @Test
