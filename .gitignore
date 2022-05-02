@@ -8,5 +8,3 @@ target/
 ### JetBrains
 *.iml
 .idea/
-
-ci/private-key.gpg
