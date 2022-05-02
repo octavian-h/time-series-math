@@ -23,7 +23,7 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
 public class MeanLastPairTest {
 
     @Test
-    public void testGetters() throws Exception {
+    public void testGetters() {
         MeanLastPair pair = new MeanLastPair(10.0, 20);
 
         Assert.assertEquals(10.0, pair.getMean(), TimeSeriesPrecision.EPSILON);

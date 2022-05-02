@@ -28,7 +28,7 @@ import java.util.LinkedList;
  * Calculates the distance between two vectors using Dynamic Time Warping.
  * <p>
  * Reference:
- * Wikipedia https://en.wikipedia.org/wiki/Dynamic_time_warping
+ * Wikipedia <a href="https://en.wikipedia.org/wiki/Dynamic_time_warping">https://en.wikipedia.org/wiki/Dynamic_time_warping</a>
  * </p>
  *
  * @since 0.10

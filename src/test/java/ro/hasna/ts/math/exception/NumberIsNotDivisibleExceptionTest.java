@@ -22,7 +22,7 @@ import ro.hasna.ts.math.representation.PiecewiseAggregateApproximation;
 public class NumberIsNotDivisibleExceptionTest {
 
     @Test
-    public void testGetFactor() throws Exception {
+    public void testGetFactor() {
         try {
             PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(4);
             double[] v = {1, 2, 3, 4, 5};

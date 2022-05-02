@@ -26,7 +26,7 @@ public class AdaptiveDistributionDividerTest {
     private AdaptiveDistributionDivider divider;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         double[][] trainingSet = {
                 {60.7, 96.05, 130.45, 151.3, 160.45, 162.55, 160.3, 138.8, 111.85, 79.6},
                 {59.5, 93.85, 128.9, 150.9, 160.55, 162.6, 160.45, 140.1, 112.6, 81.25},
@@ -45,12 +45,12 @@ public class AdaptiveDistributionDividerTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         divider = null;
     }
 
     @Test
-    public void testGetBreakpoints1() throws Exception {
+    public void testGetBreakpoints1() {
         double[] expected = {-0.6468634085322369, 0.5037245662070147};
         double[] v = divider.getBreakpoints(3);
 
@@ -58,7 +58,7 @@ public class AdaptiveDistributionDividerTest {
     }
 
     @Test
-    public void testGetBreakpoints2() throws Exception {
+    public void testGetBreakpoints2() {
         double[] expected = {-1.097189452816095, -0.18696880941804792, 0.6120418964169175};
         double[] v = divider.getBreakpoints(4);
 

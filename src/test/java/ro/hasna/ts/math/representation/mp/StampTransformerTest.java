@@ -36,7 +36,7 @@ public class StampTransformerTest {
     }
 
     @Test
-    public void transform_withNormalization() throws Exception {
+    public void transform_withNormalization() {
         StampTransformer transformer = new StampTransformer(4);
         double[] v = {1, 2, 3, 4, 120, 71, 2, 2, 3, 5, 19};
 

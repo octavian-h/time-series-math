@@ -33,13 +33,13 @@ public class SaxEuclideanDistanceTest {
     private SymbolicAggregateApproximation sax;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         sax = new SymbolicAggregateApproximation(8, 16);
         distance = new SaxEuclideanDistance(sax);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         distance = null;
         sax = null;
     }
@@ -57,7 +57,7 @@ public class SaxEuclideanDistanceTest {
     }
 
     @Test
-    public void testEquality() throws Exception {
+    public void testEquality() {
         int n = 128;
         double[] a = new double[n];
         double[] b = new double[n];
@@ -73,7 +73,7 @@ public class SaxEuclideanDistanceTest {
     }
 
     @Test
-    public void testOverflow() throws Exception {
+    public void testOverflow() {
         int[] a = {0, 4, 5, 6};
         int[] b = {7, 2, 5, 1};
 

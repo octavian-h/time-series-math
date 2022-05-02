@@ -31,12 +31,12 @@ public abstract class MinkowskiDistanceAdapterTest {
     private DistanceTester distanceTester;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         distanceTester = new DistanceTester().withGenericDistanceMeasure(distance);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         distanceTester = null;
     }
 

@@ -105,12 +105,14 @@ public class RealSequenceEditDistance implements GenericDistanceMeasure<double[]
     }
 
     private boolean equals(double[] a, double[] b) {
-        boolean equals = a.length == b.length;
-        for (int i = 0; i < a.length && equals; i++) {
+        if (a.length != b.length) {
+            return false;
+        }
+        for (int i = 0; i < a.length; i++) {
             if (!Precision.equals(a[i], b[i], epsilon)) {
-                equals = false;
+                return false;
             }
         }
-        return equals;
+        return true;
     }
 }

@@ -32,17 +32,17 @@ public class LongestCommonSubsequenceDistanceTest {
     private LongestCommonSubsequenceDistance distance;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         distance = new LongestCommonSubsequenceDistance(0.25, 0.05);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         distance = null;
     }
 
     @Test
-    public void testConstructor1() throws Exception {
+    public void testConstructor1() {
         thrown.expect(OutOfRangeException.class);
         thrown.expectMessage("2 out of [0, 1] range");
 
@@ -50,7 +50,7 @@ public class LongestCommonSubsequenceDistanceTest {
     }
 
     @Test
-    public void testConstructor2() throws Exception {
+    public void testConstructor2() {
         thrown.expect(OutOfRangeException.class);
         thrown.expectMessage("-0.5 out of [0, 1] range");
 
@@ -78,7 +78,7 @@ public class LongestCommonSubsequenceDistanceTest {
     }
 
     @Test
-    public void testResult() throws Exception {
+    public void testResult() {
         double[] a = {2, 2, 3, 3, 4, 2, 3, 1, 3, 4, 3, 2, 3, 2, 3, 3, 1, 1, 3, 2};
         double[] b = {3, 4, 2, 3, 4, 4, 2, 3, 3, 1, 1, 4, 3, 2, 2, 3, 4, 4, 3, 1};
 
@@ -89,7 +89,7 @@ public class LongestCommonSubsequenceDistanceTest {
     }
 
     @Test
-    public void testResult2() throws Exception {
+    public void testResult2() {
         double[] a = {2, 2, 3, 3, 4, 2, 3, 1, 3, 4, 3, 2, 3, 2, 3, 3, 1, 1, 3, 2};
         double[] b = {3, 4, 2, 3, 4, 4, 2, 3, 3, 1, 1, 4, 3, 2, 2, 3, 4, 4, 3, 1};
 
@@ -101,7 +101,7 @@ public class LongestCommonSubsequenceDistanceTest {
     }
 
     @Test
-    public void testResultSmall() throws Exception {
+    public void testResultSmall() {
         double[] a = {3};
         double[] b = {2};
 
@@ -111,19 +111,19 @@ public class LongestCommonSubsequenceDistanceTest {
     }
 
     @Test
-    public void testResultLarge() throws Exception {
+    public void testResultLarge() {
         LongestCommonSubsequenceDistance lcss = new LongestCommonSubsequenceDistance(0.1, 0.05);
         int m = 128;
         ZNormalizer normalizer = new ZNormalizer();
 
-        Scanner dataScanner = new Scanner(getClass().getResourceAsStream("data-100k.txt")).useLocale(Locale.ENGLISH);
+        Scanner dataScanner = new Scanner(getClass().getResourceAsStream("/data-100k.txt")).useLocale(Locale.ENGLISH);
         double[] data = new double[m];
         double[] copy = new double[m];
         for (int i = 0; i < m && dataScanner.hasNextDouble(); i++) {
             data[i] = dataScanner.nextDouble();
         }
 
-        Scanner queryScanner = new Scanner(getClass().getResourceAsStream("query-128.txt")).useLocale(Locale.ENGLISH);
+        Scanner queryScanner = new Scanner(getClass().getResourceAsStream("/query-128.txt")).useLocale(Locale.ENGLISH);
         double[] query = new double[m];
         for (int i = 0; i < m && queryScanner.hasNextDouble(); i++) {
             query[i] = queryScanner.nextDouble();

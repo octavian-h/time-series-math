@@ -31,7 +31,7 @@ public class PiecewiseLinearAggregateApproximationTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void testConstructor() throws Exception {
+    public void testConstructor() {
         thrown.expect(NumberIsTooSmallException.class);
         thrown.expectMessage("0 is smaller than the minimum (1)");
 
@@ -39,7 +39,7 @@ public class PiecewiseLinearAggregateApproximationTest {
     }
 
     @Test
-    public void testTransformMoreSegmentsThanValues() throws Exception {
+    public void testTransformMoreSegmentsThanValues() {
         thrown.expect(ArrayLengthIsTooSmallException.class);
         thrown.expectMessage("3 is smaller than the minimum (4)");
 
@@ -50,7 +50,7 @@ public class PiecewiseLinearAggregateApproximationTest {
     }
 
     @Test
-    public void testTransformSegmentsNotDivisible() throws Exception {
+    public void testTransformSegmentsNotDivisible() {
         thrown.expect(ArrayLengthIsNotDivisibleException.class);
         thrown.expectMessage("5 is not divisible with 4");
 
@@ -61,7 +61,7 @@ public class PiecewiseLinearAggregateApproximationTest {
     }
 
     @Test
-    public void testTransformStrict() throws Exception {
+    public void testTransformStrict() {
         PiecewiseLinearAggregateApproximation plaa = new PiecewiseLinearAggregateApproximation(2);
         double[] v = {1, 2, 3, 3, 2, 1};
         MeanSlopePair[] expected = {new MeanSlopePair(2.0, 1.0), new MeanSlopePair(2.0, -1.0)};

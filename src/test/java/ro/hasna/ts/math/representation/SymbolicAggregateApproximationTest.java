@@ -23,7 +23,7 @@ import ro.hasna.ts.math.normalization.ZNormalizer;
 public class SymbolicAggregateApproximationTest {
 
     @Test
-    public void testTransformToIntArray1() throws Exception {
+    public void testTransformToIntArray1() {
         double[] list = new double[64];
         for (int i = 0; i < 32; i++) {
             list[i] = i;
@@ -41,7 +41,7 @@ public class SymbolicAggregateApproximationTest {
     }
 
     @Test
-    public void testTransformToIntArray2() throws Exception {
+    public void testTransformToIntArray2() {
         double[] list = new double[64];
         for (int i = 0; i < 32; i++) {
             list[i] = i;
@@ -59,7 +59,7 @@ public class SymbolicAggregateApproximationTest {
     }
 
     @Test
-    public void testNormalisationAndPaaOrder() throws Exception {
+    public void testNormalisationAndPaaOrder() {
         int segments = 16;
         int valuesPerSegment = 1024;
         int len = segments * valuesPerSegment;

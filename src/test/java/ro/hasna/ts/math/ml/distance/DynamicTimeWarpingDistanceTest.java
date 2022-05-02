@@ -32,17 +32,17 @@ public class DynamicTimeWarpingDistanceTest {
     private DynamicTimeWarpingDistance distance;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         distance = new DynamicTimeWarpingDistance();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         distance = null;
     }
 
     @Test
-    public void testConstructor1() throws Exception {
+    public void testConstructor1() {
         thrown.expect(OutOfRangeException.class);
         thrown.expectMessage("2 out of [0, 1] range");
 
@@ -50,7 +50,7 @@ public class DynamicTimeWarpingDistanceTest {
     }
 
     @Test
-    public void testConstructor2() throws Exception {
+    public void testConstructor2() {
         thrown.expect(OutOfRangeException.class);
         thrown.expectMessage("-0.5 out of [0, 1] range");
 
@@ -87,7 +87,7 @@ public class DynamicTimeWarpingDistanceTest {
     }
 
     @Test
-    public void testResultSmall() throws Exception {
+    public void testResultSmall() {
         double[] a = {3, 2, 1};
         double[] b = {2, 1, 0};
 
@@ -97,19 +97,19 @@ public class DynamicTimeWarpingDistanceTest {
     }
 
     @Test
-    public void testResultLarge() throws Exception {
+    public void testResultLarge() {
         DynamicTimeWarpingDistance dtw = new DynamicTimeWarpingDistance(0.05, null);
         int m = 128;
         ZNormalizer normalizer = new ZNormalizer();
 
-        Scanner dataScanner = new Scanner(getClass().getResourceAsStream("data-1m.txt")).useLocale(Locale.ENGLISH);
+        Scanner dataScanner = new Scanner(getClass().getResourceAsStream("/data-1m.txt")).useLocale(Locale.ENGLISH);
         double[] data = new double[m];
         double[] copy = new double[m];
         for (int i = 0; i < m && dataScanner.hasNextDouble(); i++) {
             data[i] = dataScanner.nextDouble();
         }
 
-        Scanner queryScanner = new Scanner(getClass().getResourceAsStream("query-128.txt")).useLocale(Locale.ENGLISH);
+        Scanner queryScanner = new Scanner(getClass().getResourceAsStream("/query-128.txt")).useLocale(Locale.ENGLISH);
         double[] query = new double[m];
         for (int i = 0; i < m && queryScanner.hasNextDouble(); i++) {
             query[i] = queryScanner.nextDouble();

@@ -22,7 +22,7 @@ import org.junit.Test;
 public class SaxPairTest {
 
     @Test
-    public void testGetters() throws Exception {
+    public void testGetters() {
         SaxPair pair = new SaxPair(10, 20);
 
         Assert.assertEquals(10, pair.getSymbol());

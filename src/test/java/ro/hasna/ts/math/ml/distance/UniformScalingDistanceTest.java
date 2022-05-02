@@ -29,17 +29,17 @@ public class UniformScalingDistanceTest {
     private UniformScalingDistance distance;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         distance = new UniformScalingDistance(0.5, 1.5, 11);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         distance = null;
     }
 
     @Test
-    public void testMinScalingBelowZero() throws Exception {
+    public void testMinScalingBelowZero() {
         thrown.expect(NumberIsTooSmallException.class);
         thrown.expectMessage("0 is smaller than, or equal to, the minimum (0)");
 
@@ -47,7 +47,7 @@ public class UniformScalingDistanceTest {
     }
 
     @Test
-    public void testMaxScalingBelowMinScaling() throws Exception {
+    public void testMaxScalingBelowMinScaling() {
         thrown.expect(NumberIsTooSmallException.class);
         thrown.expectMessage("0 is smaller than the minimum (1.5)");
 
@@ -55,7 +55,7 @@ public class UniformScalingDistanceTest {
     }
 
     @Test
-    public void testStepsBelowOne() throws Exception {
+    public void testStepsBelowOne() {
         thrown.expect(NumberIsTooSmallException.class);
         thrown.expectMessage("0 is smaller than the minimum (1)");
 
@@ -84,7 +84,7 @@ public class UniformScalingDistanceTest {
     }
 
     @Test
-    public void testResult() throws Exception {
+    public void testResult() {
         int n = 100;
         double[] a = new double[n];
         double[] b = new double[n];
@@ -99,7 +99,7 @@ public class UniformScalingDistanceTest {
     }
 
     @Test
-    public void testResult2() throws Exception {
+    public void testResult2() {
         int n = 100;
         double[] a = new double[n];
         double[] b = new double[n];
@@ -114,7 +114,7 @@ public class UniformScalingDistanceTest {
     }
 
     @Test
-    public void testResult3() throws Exception {
+    public void testResult3() {
         UniformScalingDistance dist = new UniformScalingDistance(1.5, 2.5, 1);
         double[] a = {1, 2, 3, 4, 5, 6};
         double[] b = {1, 1.5, 2, 2.5, 3, 3.5};
@@ -125,7 +125,7 @@ public class UniformScalingDistanceTest {
     }
 
     @Test
-    public void testResult4() throws Exception {
+    public void testResult4() {
         UniformScalingDistance dist = new UniformScalingDistance(2, 2, 10);
         double[] a = {1, 2, 3, 4, 5, 6};
         double[] b = {1, 1.5, 2, 2.5, 3, 3.5};

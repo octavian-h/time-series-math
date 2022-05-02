@@ -32,13 +32,13 @@ public class IndexableSaxEuclideanDistanceTest {
     private IndexableSymbolicAggregateApproximation isax;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         isax = new IndexableSymbolicAggregateApproximation(8, new int[]{2, 2, 2, 4, 2, 2, 2, 2});
         distance = new IndexableSaxEuclideanDistance(isax);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         distance = null;
         isax = null;
     }
@@ -50,7 +50,7 @@ public class IndexableSaxEuclideanDistanceTest {
     }
 
     @Test
-    public void testEquality() throws Exception {
+    public void testEquality() {
         int n = 128;
         double[] a = new double[n];
         double[] b = new double[n];
@@ -71,7 +71,7 @@ public class IndexableSaxEuclideanDistanceTest {
     }
 
     @Test
-    public void testEquality2() throws Exception {
+    public void testEquality2() {
         SaxPair[] a = new SaxPair[4];
         a[0] = new SaxPair(0, 8);
         a[1] = new SaxPair(4, 8);
@@ -90,7 +90,7 @@ public class IndexableSaxEuclideanDistanceTest {
     }
 
     @Test
-    public void testOverflow() throws Exception {
+    public void testOverflow() {
         SaxPair[] a = new SaxPair[4];
         a[0] = new SaxPair(0, 8);
         a[1] = new SaxPair(4, 8);

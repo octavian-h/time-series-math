@@ -30,7 +30,7 @@ public class PiecewiseAggregateApproximationTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void testConstructor() throws Exception {
+    public void testConstructor() {
         thrown.expect(NumberIsTooSmallException.class);
         thrown.expectMessage("0 is smaller than the minimum (1)");
 
@@ -38,7 +38,7 @@ public class PiecewiseAggregateApproximationTest {
     }
 
     @Test
-    public void testTransformMoreSegmentsThanValues() throws Exception {
+    public void testTransformMoreSegmentsThanValues() {
         thrown.expect(ArrayLengthIsTooSmallException.class);
         thrown.expectMessage("3 is smaller than the minimum (4)");
 
@@ -49,7 +49,7 @@ public class PiecewiseAggregateApproximationTest {
     }
 
     @Test
-    public void testTransformStrict() throws Exception {
+    public void testTransformStrict() {
         PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(2);
         double[] v = {1, 2, 3, 4, 5, 6};
         double[] expected = {2.0, 5.0};
@@ -60,7 +60,7 @@ public class PiecewiseAggregateApproximationTest {
     }
 
     @Test
-    public void testTransformFractionalPartition1() throws Exception {
+    public void testTransformFractionalPartition1() {
         PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(2);
         double[] v = {1, 2, 3, 4, 5, 6, 7};
         double[] expected = {8 / 3.5, 20 / 3.5};
@@ -71,7 +71,7 @@ public class PiecewiseAggregateApproximationTest {
     }
 
     @Test
-    public void testTransformFractionalPartition2() throws Exception {
+    public void testTransformFractionalPartition2() {
         PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(5);
         double[] v = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
         double[] expected = {24.0 / 13, 57.0 / 13, 91.0 / 13, 125.0 / 13, 158.0 / 13};
@@ -82,7 +82,7 @@ public class PiecewiseAggregateApproximationTest {
     }
 
     @Test
-    public void testTransformFractionalPartition3() throws Exception {
+    public void testTransformFractionalPartition3() {
         PiecewiseAggregateApproximation paa = new PiecewiseAggregateApproximation(13);
         double[] v = new double[523];
         for (int i = 0; i < 523; i++) {

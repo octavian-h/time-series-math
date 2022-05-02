@@ -17,32 +17,10 @@
 
 COMMIT_MESSAGE="$(git log --format=%s --max-count 1)"
 
-if [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
-    [[ "$COMMIT_MESSAGE" != *"[no-deploy]"* ]] &&
-    [[ "$COMMIT_MESSAGE" != "[maven-release-plugin]"* ]]; then
-
-    if [[ "$COMMIT_MESSAGE" == *"[start-release]"* ]]; then
-        echo "Release artifacts"
-        # point HEAD to master branch (this is needed by the maven release plugin)
-        git symbolic-ref HEAD refs/heads/master
-
-        mvn --batch-mode release:prepare --settings ci/maven-settings.xml
-        mvn --batch-mode release:perform --settings ci/maven-settings.xml
-
-        TAG="$(git describe --tags --abbrev=0)"
-        PACKAGE="${TAG%-*}" # delete the shortest substring from the end that starts with "-" (inclusive)
-        VERSION="${TAG##*-}" # delete the longest substring from the begging that ends with "-" (inclusive)
-
-        echo "Sync artifact $PACKAGE:$VERSION to Maven Central"
-        curl --request POST \
-             --url "https://api.bintray.com/maven_central_sync/octavian-h/maven/$PACKAGE/versions/$VERSION" \
-             --user octavian-h:"$BINTRAY_API_KEY" \
-             --header "content-type: application/json" \
-             --data "{\"username\": \"$SONATYPE_USER\",\"password\": \"$SONATYPE_TOKEN\",\"close\": \"1\"}"
-    else
-        echo "Deploy Snapshot artifacts"
-        mvn --batch-mode deploy -DskipTests=true --settings ci/maven-settings.xml
-    fi
+if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [[ "$COMMIT_MESSAGE" != *"[no-deploy]"* ]]; then
+  openssl aes-256-cbc -K "$encrypted_e0cb3f1fc6c0_key" -iv "$encrypted_e0cb3f1fc6c0_iv" -in ci/private-key.gpg.enc -out private-key.gpg -d
+  gpg --import private-key.gpg
+  mvn deploy --batch-mode -DskipTests=true --settings ci/maven-settings.xml -P release
 else
-   echo "Skip deploy/release"
+  echo "Skip deploy"
 fi

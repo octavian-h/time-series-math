@@ -104,9 +104,9 @@ public class TesparDzCoding implements GenericTransformer<double[], int[]> {
     private boolean isShape(double a, double b, double c) {
         /* true if is local minimum for positive values or
         local maximum for negative values otherwise false */
-        if (a > 0 && b > 0 && c > 0 && a > b && b < c) {
+        if (b > 0 && c > 0 && a > b && b < c) {
             return true;
         }
-        return a < 0 && b < 0 && c < 0 && a < b && b > c;
+        return b < 0 && c < 0 && a < b && b > c;
     }
 }

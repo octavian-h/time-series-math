@@ -33,13 +33,13 @@ public class PlaaEuclideanDistanceTest {
     private PiecewiseLinearAggregateApproximation plaa;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         plaa = new PiecewiseLinearAggregateApproximation(8);
         distance = new PlaaEuclideanDistance();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         distance = null;
         plaa = null;
     }
@@ -51,7 +51,7 @@ public class PlaaEuclideanDistanceTest {
     }
 
     @Test
-    public void testEquality() throws Exception {
+    public void testEquality() {
         int n = 128;
         double[] a = new double[n];
         double[] b = new double[n];
@@ -68,7 +68,7 @@ public class PlaaEuclideanDistanceTest {
     }
 
     @Test
-    public void testOverflow() throws Exception {
+    public void testOverflow() {
         MeanSlopePair[] a = new MeanSlopePair[4];
         a[0] = new MeanSlopePair(0, 8);
         a[1] = new MeanSlopePair(4, 8);

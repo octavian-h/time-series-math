@@ -26,17 +26,17 @@ public class DiscreteHaarWaveletTransformTest {
     private DiscreteHaarWaveletTransform waveletTransform;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         waveletTransform = new DiscreteHaarWaveletTransform();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         waveletTransform = null;
     }
 
     @Test
-    public void testTransform() throws Exception {
+    public void testTransform() {
         double[] v = {1, 2, 1, 0, -1, -2, -1, 0};
         double[] result = waveletTransform.transform(v);
         double[] expected = {0, 8, 2, -2, -1, 1, 1, -1};

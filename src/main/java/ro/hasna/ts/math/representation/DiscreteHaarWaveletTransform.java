@@ -19,7 +19,7 @@ package ro.hasna.ts.math.representation;
  * Implements the Haar Wavelet Transformation.
  * <p>
  * Reference:
- * Wikipedia https://en.wikipedia.org/wiki/Discrete_wavelet_transform
+ * Wikipedia <a href="https://en.wikipedia.org/wiki/Discrete_wavelet_transform">https://en.wikipedia.org/wiki/Discrete_wavelet_transform</a>
  * </p>
  *
  * @since 0.8

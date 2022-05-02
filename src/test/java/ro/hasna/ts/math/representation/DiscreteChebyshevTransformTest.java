@@ -40,18 +40,18 @@ public class DiscreteChebyshevTransformTest {
     private FastFourierTransformer fastFourierTransformer;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Mockito.when(fastFourierTransformer.transform(Mockito.<double[]>any(), Mockito.any())).thenReturn(new Complex[]{new Complex(0)});
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         discreteChebyshevTransform = null;
         fastFourierTransformer = null;
     }
 
     @Test
-    public void testTransform() throws Exception {
+    public void testTransform() {
         double[] v = {1, 2, 3};
         discreteChebyshevTransform.transform(v);
 
@@ -59,7 +59,7 @@ public class DiscreteChebyshevTransformTest {
     }
 
     @Test
-    public void testTransform2() throws Exception {
+    public void testTransform2() {
         double[] v = {1, 2, 3, 4};
         discreteChebyshevTransform.transform(v);
 
@@ -67,7 +67,7 @@ public class DiscreteChebyshevTransformTest {
     }
 
     @Test
-    public void testTransformSmallVector() throws Exception {
+    public void testTransformSmallVector() {
         double[] v = {1, 2};
         discreteChebyshevTransform.transform(v);
 
@@ -75,7 +75,7 @@ public class DiscreteChebyshevTransformTest {
     }
 
     @Test
-    public void testTransformConcrete() throws Exception {
+    public void testTransformConcrete() {
         double[] v = {98, 100}; // 99 * x^2 - x
         double[] expected = {99, -1};
         double[] result = new DiscreteChebyshevTransform().transform(v);

@@ -30,7 +30,7 @@ public class AdaptivePiecewiseConstantApproximationTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void testConstructor() throws Exception {
+    public void testConstructor() {
         thrown.expect(NumberIsTooSmallException.class);
         thrown.expectMessage("0 is smaller than the minimum (1)");
 
@@ -38,7 +38,7 @@ public class AdaptivePiecewiseConstantApproximationTest {
     }
 
     @Test
-    public void testTransformMoreSegmentsThanValues() throws Exception {
+    public void testTransformMoreSegmentsThanValues() {
         thrown.expect(ArrayLengthIsTooSmallException.class);
         thrown.expectMessage("3 is smaller than the minimum (8)");
 
@@ -49,7 +49,7 @@ public class AdaptivePiecewiseConstantApproximationTest {
     }
 
     @Test
-    public void testTransform() throws Exception {
+    public void testTransform() {
         AdaptivePiecewiseConstantApproximation apca = new AdaptivePiecewiseConstantApproximation(3);
         double[] v = {1, 1, 4, 5, 1, 0, 1, 2, 1};
 
@@ -64,7 +64,7 @@ public class AdaptivePiecewiseConstantApproximationTest {
     }
 
     @Test
-    public void testTransformWithoutApproximation() throws Exception {
+    public void testTransformWithoutApproximation() {
         AdaptivePiecewiseConstantApproximation apca = new AdaptivePiecewiseConstantApproximation(3, false);
         double[] v = {1, 1, 4, 5, 1, 0, 1, 2, 1};
 

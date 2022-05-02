@@ -41,7 +41,7 @@ public class ZNormalizerTest {
     private StandardDeviation standardDeviation;
 
     @Test
-    public void testCalls() throws Exception {
+    public void testCalls() {
         Mockito.when(mean.evaluate(ArgumentMatchers.any(double[].class))).thenReturn(3.0);
         double[] v = {1.0, 2.0, 3.0, 4.0, 5.0};
 
@@ -52,7 +52,7 @@ public class ZNormalizerTest {
     }
 
     @Test
-    public void testNormalize() throws Exception {
+    public void testNormalize() {
         normalizer = new ZNormalizer();
         double[] v = {1.0, 2.0, 3.0, 4.0, 5.0};
         double aux = FastMath.sqrt(2);

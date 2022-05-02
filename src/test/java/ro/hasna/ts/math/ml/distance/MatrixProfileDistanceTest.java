@@ -33,12 +33,12 @@ public class MatrixProfileDistanceTest {
     private MatrixProfileDistance distance;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         distance = new MatrixProfileDistance(32);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         distance = null;
     }
 
@@ -55,7 +55,7 @@ public class MatrixProfileDistanceTest {
     }
 
     @Test
-    public void testResult() throws Exception {
+    public void testResult() {
         double[] a = {1, 2, 3, 82, 69, 54};
         double[] b = {45, 78, 12, 98, 65, 32, 2, 2, 4};
 
@@ -66,7 +66,7 @@ public class MatrixProfileDistanceTest {
     }
 
     @Test
-    public void testResultSmall() throws Exception {
+    public void testResultSmall() {
         double[] a = {200, 100, 50};
         double[] b = {1, 2, 3};
 
@@ -84,18 +84,18 @@ public class MatrixProfileDistanceTest {
     }
 
     @Test
-    public void testResultLarge() throws Exception {
+    public void testResultLarge() {
         MatrixProfileDistance mpd = new MatrixProfileDistance(64);
         int m = 128;
 
-        Scanner dataScanner = new Scanner(getClass().getResourceAsStream("data-100k.txt")).useLocale(Locale.ENGLISH);
+        Scanner dataScanner = new Scanner(getClass().getResourceAsStream("/data-100k.txt")).useLocale(Locale.ENGLISH);
         double[] data = new double[m];
         double[] copy = new double[m];
         for (int i = 0; i < m && dataScanner.hasNextDouble(); i++) {
             data[i] = dataScanner.nextDouble();
         }
 
-        Scanner queryScanner = new Scanner(getClass().getResourceAsStream("query-128.txt")).useLocale(Locale.ENGLISH);
+        Scanner queryScanner = new Scanner(getClass().getResourceAsStream("/query-128.txt")).useLocale(Locale.ENGLISH);
         double[] query = new double[m];
         for (int i = 0; i < m && queryScanner.hasNextDouble(); i++) {
             query[i] = queryScanner.nextDouble();

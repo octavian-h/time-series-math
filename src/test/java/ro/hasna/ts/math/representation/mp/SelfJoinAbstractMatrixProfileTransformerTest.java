@@ -29,7 +29,7 @@ public class SelfJoinAbstractMatrixProfileTransformerTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void constructor_withSmallWindow() throws Exception {
+    public void constructor_withSmallWindow() {
         thrown.expect(NumberIsTooSmallException.class);
         thrown.expectMessage("3 is smaller than the minimum (4)");
 
@@ -49,7 +49,7 @@ public class SelfJoinAbstractMatrixProfileTransformerTest {
     }
 
     @Test
-    public void constructor_withSmallExclusionZonePercentage() throws Exception {
+    public void constructor_withSmallExclusionZonePercentage() {
         thrown.expect(NumberIsTooSmallException.class);
         thrown.expectMessage("4 is smaller than the minimum (10)");
 
@@ -69,7 +69,7 @@ public class SelfJoinAbstractMatrixProfileTransformerTest {
     }
 
     @Test
-    public void transform_withSmallInput() throws Exception {
+    public void transform_withSmallInput() {
         thrown.expect(NumberIsTooSmallException.class);
         thrown.expectMessage("4 is smaller than the minimum (5)");
 

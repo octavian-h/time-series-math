@@ -29,7 +29,7 @@ public class TesparSymbolTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void testConstructorException() throws Exception {
+    public void testConstructorException() {
         thrown.expect(NotPositiveException.class);
         thrown.expectMessage("-5.5 is smaller than the minimum (0)");
 
@@ -37,7 +37,7 @@ public class TesparSymbolTest {
     }
 
     @Test
-    public void testGetters() throws Exception {
+    public void testGetters() {
         TesparSymbol symbol = new TesparSymbol(10, 3, 5.5);
 
         Assert.assertEquals(10, symbol.getDuration());

@@ -27,12 +27,12 @@ public class RealPenaltyEditDistanceTest {
     private RealPenaltyEditDistance distance;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         distance = new RealPenaltyEditDistance();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         distance = null;
     }
 
@@ -57,7 +57,7 @@ public class RealPenaltyEditDistanceTest {
     }
 
     @Test
-    public void testResult() throws Exception {
+    public void testResult() {
         double[] a = {3, 2, 5, 7, 4, 8, 10, 7};
         double[] b = {2, 5, 4, 7, 3, 10, 8, 6};
 
@@ -67,7 +67,7 @@ public class RealPenaltyEditDistanceTest {
     }
 
     @Test
-    public void testDifferentLengths() throws Exception {
+    public void testDifferentLengths() {
         double[] a = {1, 2, 3, 4};
         double[] b = {1, 100, 101, 2, 4};
 

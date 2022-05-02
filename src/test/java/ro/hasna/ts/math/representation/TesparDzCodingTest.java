@@ -26,17 +26,17 @@ public class TesparDzCodingTest {
     private TesparDzCoding tesparDzCoding;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         tesparDzCoding = new TesparDzCoding();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         tesparDzCoding = null;
     }
 
     @Test
-    public void testTransform() throws Exception {
+    public void testTransform() {
         double[] list = new double[300];
         for (int i = 0; i < 300; i++) {
             list[i] = FastMath.sin(i * 0.1);

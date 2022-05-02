@@ -23,7 +23,7 @@ import ro.hasna.ts.math.util.TimeSeriesPrecision;
 public class MeanSlopePairTest {
 
     @Test
-    public void testGetters() throws Exception {
+    public void testGetters() {
         MeanSlopePair pair = new MeanSlopePair(10.0, 20.0);
 
         Assert.assertEquals(10.0, pair.getMean(), TimeSeriesPrecision.EPSILON);

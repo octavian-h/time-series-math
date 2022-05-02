@@ -28,7 +28,7 @@ public class MovingAverageFilterTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void testConstructor1() throws Exception {
+    public void testConstructor1() {
         thrown.expect(DimensionMismatchException.class);
         thrown.expectMessage("0 != 5");
 
@@ -36,7 +36,7 @@ public class MovingAverageFilterTest {
     }
 
     @Test
-    public void testConstructor2() throws Exception {
+    public void testConstructor2() {
         thrown.expect(DimensionMismatchException.class);
         thrown.expectMessage("0 != 2");
 
@@ -44,7 +44,7 @@ public class MovingAverageFilterTest {
     }
 
     @Test
-    public void testFilterSymmetricWithoutWeights() throws Exception {
+    public void testFilterSymmetricWithoutWeights() {
         double[] v = {1, 1, 2, 2, 3, 3, 4, 4, 5};
         double[] expected = {1, 1, 1.8, 2.2, 2.8, 3.2, 3.8, 4, 5};
 
@@ -55,7 +55,7 @@ public class MovingAverageFilterTest {
     }
 
     @Test
-    public void testFilterSymmetricWithWeights() throws Exception {
+    public void testFilterSymmetricWithWeights() {
         double[] v = {1, 1, 2, 2, 3, 3, 4, 4, 5};
         double[] w = {0.05, 0.1, 0.7, 0.1, 0.05};
         double[] expected = {1, 1, 1.9, 2.1, 2.9, 3.1, 3.9, 4, 5};
@@ -67,7 +67,7 @@ public class MovingAverageFilterTest {
     }
 
     @Test
-    public void testFilterNonSymmetricWithoutWeights() throws Exception {
+    public void testFilterNonSymmetricWithoutWeights() {
         double[] v = {1, 1, 2, 2, 3, 3, 4, 4, 5};
         double[] expected = {1, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5};
 
@@ -78,7 +78,7 @@ public class MovingAverageFilterTest {
     }
 
     @Test
-    public void testFilterNonSymmetricWithWeights() throws Exception {
+    public void testFilterNonSymmetricWithWeights() {
         double[] v = {1, 1, 2, 2, 3, 3, 4, 4, 5};
         double[] w = {0.4, 0.6};
         double[] expected = {1, 1, 1.6, 2, 2.6, 3, 3.6, 4, 4.6};

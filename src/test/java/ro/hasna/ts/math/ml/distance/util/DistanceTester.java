@@ -100,7 +100,7 @@ public class DistanceTester {
         return this;
     }
 
-    public void testTriangleInequality() throws Exception {
+    public void testTriangleInequality() {
         double[] a = new double[vectorLength];
         double[] b = new double[vectorLength];
         double[] c = new double[vectorLength];
@@ -122,7 +122,7 @@ public class DistanceTester {
         Assert.assertTrue(ac + bc >= ab);
     }
 
-    public void testEquality() throws Exception {
+    public void testEquality() {
         double[] a = new double[vectorLength];
         double[] b = new double[vectorLength];
         for (int i = 0; i < vectorLength; i++) {
@@ -135,7 +135,7 @@ public class DistanceTester {
         Assert.assertEquals(0, result, TimeSeriesPrecision.EPSILON);
     }
 
-    public void testOverflowAdditive() throws Exception {
+    public void testOverflowAdditive() {
         double[] a = new double[vectorLength];
         double[] b = new double[vectorLength];
         for (int i = 0; i < vectorLength; i++) {
@@ -148,7 +148,7 @@ public class DistanceTester {
         Assert.assertEquals(Double.POSITIVE_INFINITY, result, TimeSeriesPrecision.EPSILON);
     }
 
-    public void testOverflowSquare() throws Exception {
+    public void testOverflowSquare() {
         double[] a = new double[vectorLength];
         double[] b = new double[vectorLength];
         for (int i = 0; i < vectorLength; i++) {
@@ -161,7 +161,7 @@ public class DistanceTester {
         Assert.assertEquals(Double.POSITIVE_INFINITY, result, TimeSeriesPrecision.EPSILON);
     }
 
-    public void testResultAdditive() throws Exception {
+    public void testResultAdditive() {
         double[] a = new double[vectorLength];
         double[] b = new double[vectorLength];
         for (int i = 0; i < vectorLength; i++) {
@@ -174,7 +174,7 @@ public class DistanceTester {
         Assert.assertEquals(expectedResult, result, TimeSeriesPrecision.EPSILON);
     }
 
-    public void testResultSquare() throws Exception {
+    public void testResultSquare() {
         double[] a = new double[vectorLength];
         double[] b = new double[vectorLength];
         for (int i = 0; i < vectorLength; i++) {

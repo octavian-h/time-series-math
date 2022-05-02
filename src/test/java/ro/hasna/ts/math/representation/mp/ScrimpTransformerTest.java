@@ -36,7 +36,7 @@ public class ScrimpTransformerTest {
     }
 
     @Test
-    public void transform_withNormalization() throws Exception {
+    public void transform_withNormalization() {
         ScrimpTransformer transformer = new ScrimpTransformer(4);
         double[] v = {1, 2, 3, 4, 120, 71, 2, 2, 3, 5, 19};
 

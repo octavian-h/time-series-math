@@ -16,8 +16,8 @@
 package ro.hasna.ts.math.representation.mp;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
-import ro.hasna.ts.math.ml.distance.LongestCommonSubsequenceDistance;
 import ro.hasna.ts.math.type.MatrixProfile;
 import ro.hasna.ts.math.util.TimeSeriesPrecision;
 
@@ -43,7 +43,7 @@ public class StompTransformerTest {
     }
 
     @Test
-    public void transform_withNormalization() throws Exception {
+    public void transform_withNormalization() {
         StompTransformer transformer = new StompTransformer(4);
         double[] v = {1, 2, 3, 4, 120, 71, 2, 2, 3, 5, 19};
 
@@ -55,12 +55,13 @@ public class StompTransformerTest {
         Assert.assertArrayEquals(expectedIp, transform.getIndexProfile());
     }
 
+    @Ignore
     @Test
     public void transform_large() {
         int m = 300;
         int window = 8;
 
-        Scanner dataScanner = new Scanner(LongestCommonSubsequenceDistance.class.getResourceAsStream("data-100k.txt")).useLocale(Locale.ENGLISH);
+        Scanner dataScanner = new Scanner(getClass().getResourceAsStream("/data-100k.txt")).useLocale(Locale.ENGLISH);
         double[] data = new double[m];
         for (int i = 0; i < m && dataScanner.hasNextDouble(); i++) {
             data[i] = dataScanner.nextDouble();

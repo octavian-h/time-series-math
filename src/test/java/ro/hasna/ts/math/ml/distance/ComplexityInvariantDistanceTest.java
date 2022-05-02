@@ -27,17 +27,17 @@ public class ComplexityInvariantDistanceTest {
     private ComplexityInvariantDistance distance;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         distance = new ComplexityInvariantDistance(new EuclideanDistanceAdapter());
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         distance = null;
     }
 
     @Test
-    public void testConstructor1() throws Exception {
+    public void testConstructor1() {
         EuclideanDistanceAdapter ed = new EuclideanDistanceAdapter();
         ComplexityInvariantDistance cid = new ComplexityInvariantDistance(ed);
 
@@ -70,7 +70,7 @@ public class ComplexityInvariantDistanceTest {
     }
 
     @Test
-    public void testResultSmall() throws Exception {
+    public void testResultSmall() {
         double[] a = {2, 3, 4, 3, 2}; // CF = sqrt(1+1+1+1)=2
         double[] b = {0, 1, 2, 1, 0}; // CF = sqrt(1+1+1+1)=2
         double[] c = {2, 4, 2, 4, 2}; // CF = sqrt(4+4+4+4)=4

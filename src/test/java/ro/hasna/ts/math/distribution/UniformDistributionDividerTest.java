@@ -28,17 +28,17 @@ public class UniformDistributionDividerTest {
     private UniformDistributionDivider divider;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         divider = new UniformDistributionDivider(-1, 1);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         divider = null;
     }
 
     @Test
-    public void testConstructor() throws Exception {
+    public void testConstructor() {
         thrown.expect(NumberIsTooLargeException.class);
         thrown.expectMessage("4 is larger than the maximum (3)");
 
@@ -46,7 +46,7 @@ public class UniformDistributionDividerTest {
     }
 
     @Test
-    public void testGetBreakpointsWithException() throws Exception {
+    public void testGetBreakpointsWithException() {
         thrown.expect(NumberIsTooSmallException.class);
         thrown.expectMessage("1 is smaller than the minimum (2)");
 
@@ -54,7 +54,7 @@ public class UniformDistributionDividerTest {
     }
 
     @Test
-    public void testGetBreakpoints1() throws Exception {
+    public void testGetBreakpoints1() {
         double[] expected = {-1.0 / 3, 1.0 / 3};
         double[] v = divider.getBreakpoints(3);
 
@@ -62,7 +62,7 @@ public class UniformDistributionDividerTest {
     }
 
     @Test
-    public void testGetBreakpoints2() throws Exception {
+    public void testGetBreakpoints2() {
         double[] expected = {-1.0 / 2, 0, 1.0 / 2};
         double[] v = divider.getBreakpoints(4);
 

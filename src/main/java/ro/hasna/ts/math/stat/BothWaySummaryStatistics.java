@@ -33,8 +33,8 @@ public class BothWaySummaryStatistics implements StatisticalSummary, Serializabl
     private long n;
     private double sum;
     private double sumSquares;
-    private Max max;
-    private Min min;
+    private final Max max;
+    private final Min min;
     private boolean removeMade;
 
     public BothWaySummaryStatistics() {

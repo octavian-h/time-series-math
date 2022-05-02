@@ -44,18 +44,18 @@ public class DiscreteFourierTransformTest {
     private FastFourierTransformer fastFourierTransformer;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Mockito.when(fastFourierTransformer.transform(Mockito.<double[]>any(), Mockito.any())).thenReturn(new Complex[]{new Complex(0)});
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         discreteFourierTransform = null;
         fastFourierTransformer = null;
     }
 
     @Test
-    public void testTransform() throws Exception {
+    public void testTransform() {
         double[] v = {1, 2, 3};
         discreteFourierTransform.transform(v);
 
@@ -63,7 +63,7 @@ public class DiscreteFourierTransformTest {
     }
 
     @Test
-    public void testTransformPowerOfTwo() throws Exception {
+    public void testTransformPowerOfTwo() {
         double[] v = {1, 2, 3, 4};
         discreteFourierTransform.transform(v);
 
@@ -78,7 +78,7 @@ public class DiscreteFourierTransformTest {
         Complex[] transformB = fft.transform(v, TransformType.FORWARD);
         Complex[] transformA = fft.transform(v2, TransformType.FORWARD);
         for (int i = 0; i < 8; i++) {
-            transformA[i] =transformA[i].multiply(transformB[i]);
+            transformA[i] = transformA[i].multiply(transformB[i]);
         }
         Complex[] reverse = fft.transform(transformA, TransformType.INVERSE);
         System.out.println(Arrays.toString(reverse));
@@ -86,7 +86,7 @@ public class DiscreteFourierTransformTest {
     }
 
     @Test
-    public void testTransformSineWave() throws Exception {
+    public void testTransformSineWave() {
         double signalFrequency = 100;
         double amplitude = 30;
         double displacement = 17;

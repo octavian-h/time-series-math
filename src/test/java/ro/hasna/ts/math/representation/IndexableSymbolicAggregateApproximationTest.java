@@ -33,7 +33,7 @@ public class IndexableSymbolicAggregateApproximationTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void testConstructorException() throws Exception {
+    public void testConstructorException() {
         thrown.expect(DimensionMismatchException.class);
         thrown.expectMessage("5 != 4");
 
@@ -41,7 +41,7 @@ public class IndexableSymbolicAggregateApproximationTest {
     }
 
     @Test
-    public void testTransformToSaxPairArray1() throws Exception {
+    public void testTransformToSaxPairArray1() {
         double[] list = new double[64];
         for (int i = 0; i < 32; i++) {
             list[i] = i;
@@ -75,7 +75,7 @@ public class IndexableSymbolicAggregateApproximationTest {
     }
 
     @Test
-    public void testTransformToSaxPairArray2() throws Exception {
+    public void testTransformToSaxPairArray2() {
         double[] list = new double[64];
         for (int i = 0; i < 32; i++) {
             list[i] = i;
@@ -104,7 +104,7 @@ public class IndexableSymbolicAggregateApproximationTest {
     }
 
     @Test
-    public void testTransformToSaxPairArray3() throws Exception {
+    public void testTransformToSaxPairArray3() {
         double[] list = new double[64];
         Random random = new Random();
         for (int i = 0; i < 26; i++) {

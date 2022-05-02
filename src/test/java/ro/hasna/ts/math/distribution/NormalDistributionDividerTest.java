@@ -27,17 +27,17 @@ public class NormalDistributionDividerTest {
     private NormalDistributionDivider divider;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         divider = new NormalDistributionDivider();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         divider = null;
     }
 
     @Test
-    public void testGetBreakpointsWithException() throws Exception {
+    public void testGetBreakpointsWithException() {
         thrown.expect(NumberIsTooSmallException.class);
         thrown.expectMessage("1 is smaller than the minimum (2)");
 
@@ -45,7 +45,7 @@ public class NormalDistributionDividerTest {
     }
 
     @Test
-    public void testGetBreakpoints1() throws Exception {
+    public void testGetBreakpoints1() {
         double[] expected = {-0.4307272992954576, 0.4307272992954576};
         double[] v = divider.getBreakpoints(3);
 
@@ -53,7 +53,7 @@ public class NormalDistributionDividerTest {
     }
 
     @Test
-    public void testGetBreakpoints2() throws Exception {
+    public void testGetBreakpoints2() {
         double[] expected = {-0.6744897501960816, 0, 0.6744897501960816};
         double[] v = divider.getBreakpoints(4);
 

@@ -30,7 +30,7 @@ public class MatrixProfileTransformerTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void constructor_withSmallWindow() throws Exception {
+    public void constructor_withSmallWindow() {
         thrown.expect(NumberIsTooSmallException.class);
         thrown.expectMessage("0 is smaller than the minimum (1)");
 
@@ -38,7 +38,7 @@ public class MatrixProfileTransformerTest {
     }
 
     @Test
-    public void transform_withSmallInput() throws Exception {
+    public void transform_withSmallInput() {
         thrown.expect(NumberIsTooSmallException.class);
         thrown.expectMessage("3 is smaller than the minimum (4)");
 
@@ -46,7 +46,7 @@ public class MatrixProfileTransformerTest {
     }
 
     @Test
-    public void fullJoinTransform_withSmallInput() throws Exception {
+    public void fullJoinTransform_withSmallInput() {
         thrown.expect(NumberIsTooSmallException.class);
         thrown.expectMessage("3 is smaller than the minimum (4)");
 
@@ -54,7 +54,7 @@ public class MatrixProfileTransformerTest {
     }
 
     @Test
-    public void transform_withoutNormalization() throws Exception {
+    public void transform_withoutNormalization() {
         MatrixProfileTransformer transformer = new MatrixProfileTransformer(4, 0, false);
         double[] v = {1, 2, 3, 4, 120, 71, 2, 2, 49, 25, 19};
         double[] v2 = {1, 2, 2, 5, 50, 25, 18};
@@ -68,7 +68,7 @@ public class MatrixProfileTransformerTest {
     }
 
     @Test
-    public void transform_withNormalization() throws Exception {
+    public void transform_withNormalization() {
         MatrixProfileTransformer transformer = new MatrixProfileTransformer(4);
         double[] v = {1, 2, 3, 4, 120, 71, 2, 2, 49, 25, 19};
         double[] v2 = {1, 2, 2, 5, 50, 25, 18};
@@ -82,7 +82,7 @@ public class MatrixProfileTransformerTest {
     }
 
     @Test
-    public void fullJoinTransform_withoutNormalization() throws Exception {
+    public void fullJoinTransform_withoutNormalization() {
         MatrixProfileTransformer transformer = new MatrixProfileTransformer(4, 0, false);
         double[] v = {1, 2, 3, 4, 120, 71, 2, 2, 49, 25, 19};
         double[] v2 = {1, 2, 2, 5, 50, 25, 18};
@@ -100,7 +100,7 @@ public class MatrixProfileTransformerTest {
     }
 
     @Test
-    public void fullJoinTransform_withNormalization() throws Exception {
+    public void fullJoinTransform_withNormalization() {
         MatrixProfileTransformer transformer = new MatrixProfileTransformer(4);
         double[] v = {1, 2, 3, 4, 120, 71, 2, 2, 49, 25, 19};
         double[] v2 = {1, 2, 2, 5, 50, 25, 18};
@@ -118,7 +118,7 @@ public class MatrixProfileTransformerTest {
     }
 
     @Test
-    public void fullJoinTransform_sameArray_withoutNormalization() throws Exception {
+    public void fullJoinTransform_sameArray_withoutNormalization() {
         MatrixProfileTransformer transformer = new MatrixProfileTransformer(4, 0.25, false);
         double[] v = {1, 2, 3, 4, 120, 71, 2, 2, 3, 5, 19};
 
@@ -133,7 +133,7 @@ public class MatrixProfileTransformerTest {
     }
 
     @Test
-    public void fullJoinTransform_sameArray_withNormalization() throws Exception {
+    public void fullJoinTransform_sameArray_withNormalization() {
         MatrixProfileTransformer transformer = new MatrixProfileTransformer(4, 0.25, true);
         double[] v = {1, 2, 3, 4, 120, 71, 2, 2, 3, 5, 19};
 

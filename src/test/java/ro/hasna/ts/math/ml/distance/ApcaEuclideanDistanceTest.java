@@ -29,13 +29,13 @@ public class ApcaEuclideanDistanceTest {
     private AdaptivePiecewiseConstantApproximation apca;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         apca = new AdaptivePiecewiseConstantApproximation(8);
         distance = new ApcaEuclideanDistance();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         distance = null;
         apca = null;
     }
@@ -53,7 +53,7 @@ public class ApcaEuclideanDistanceTest {
     }
 
     @Test
-    public void testOverflow() throws Exception {
+    public void testOverflow() {
         MeanLastPair[] a = new MeanLastPair[4];
         a[0] = new MeanLastPair(0, 16);
         a[1] = new MeanLastPair(4, 32);

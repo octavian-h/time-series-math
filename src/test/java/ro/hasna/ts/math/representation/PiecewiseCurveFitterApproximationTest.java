@@ -39,17 +39,17 @@ public class PiecewiseCurveFitterApproximationTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         curveFitter = PolynomialCurveFitter.create(0).withMaxIterations(2);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         curveFitter = null;
     }
 
     @Test
-    public void testConstructor() throws Exception {
+    public void testConstructor() {
         thrown.expect(NumberIsTooSmallException.class);
         thrown.expectMessage("0 is smaller than the minimum (1)");
 
@@ -57,7 +57,7 @@ public class PiecewiseCurveFitterApproximationTest {
     }
 
     @Test
-    public void testTransformMoreSegmentsThanValues() throws Exception {
+    public void testTransformMoreSegmentsThanValues() {
         thrown.expect(ArrayLengthIsTooSmallException.class);
         thrown.expectMessage("3 is smaller than the minimum (4)");
 
@@ -68,7 +68,7 @@ public class PiecewiseCurveFitterApproximationTest {
     }
 
     @Test
-    public void testTransformStrict() throws Exception {
+    public void testTransformStrict() {
         PiecewiseCurveFitterApproximation pcfa = new PiecewiseCurveFitterApproximation(2, curveFitter);
         double[] v = {1, 2, 3, 4, 5, 6};
         double[][] expected = {{2.0}, {5.0}};
@@ -79,7 +79,7 @@ public class PiecewiseCurveFitterApproximationTest {
     }
 
     @Test
-    public void testTransformFractionalPartition1() throws Exception {
+    public void testTransformFractionalPartition1() {
         PiecewiseCurveFitterApproximation pcfa = new PiecewiseCurveFitterApproximation(2, curveFitter);
         double[] v = {1, 2, 3, 4, 5, 6, 7};
         double[][] expected = {{8 / 3.5}, {20 / 3.5}};
@@ -90,7 +90,7 @@ public class PiecewiseCurveFitterApproximationTest {
     }
 
     @Test
-    public void testTransformFractionalPartition2() throws Exception {
+    public void testTransformFractionalPartition2() {
         PiecewiseCurveFitterApproximation pcfa = new PiecewiseCurveFitterApproximation(5, curveFitter);
         double[] v = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
         double[][] expected = {{24.0 / 13}, {57.0 / 13}, {91.0 / 13}, {125.0 / 13}, {158.0 / 13}};
@@ -101,7 +101,7 @@ public class PiecewiseCurveFitterApproximationTest {
     }
 
     @Test
-    public void testTransformFractionalPartition3() throws Exception {
+    public void testTransformFractionalPartition3() {
         PiecewiseCurveFitterApproximation pcfa = new PiecewiseCurveFitterApproximation(13, curveFitter);
         double[] v = new double[523];
         for (int i = 0; i < 523; i++) {

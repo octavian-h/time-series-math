@@ -28,7 +28,7 @@ public class MinMaxNormalizerTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void testConstructor() throws Exception {
+    public void testConstructor() {
         thrown.expect(NumberIsTooLargeException.class);
         thrown.expectMessage("4 is larger than the maximum (3)");
 
@@ -36,7 +36,7 @@ public class MinMaxNormalizerTest {
     }
 
     @Test
-    public void testNormalizeDefaultConstructor() throws Exception {
+    public void testNormalizeDefaultConstructor() {
         MinMaxNormalizer normalizer = new MinMaxNormalizer();
         double[] v = {1.0, 2.0, 3.0, 4.0, 5.0};
         double[] expected = {0.0, 0.25, 0.5, 0.75, 1.0};
@@ -47,7 +47,7 @@ public class MinMaxNormalizerTest {
     }
 
     @Test
-    public void testNormalize() throws Exception {
+    public void testNormalize() {
         MinMaxNormalizer normalizer = new MinMaxNormalizer(-1, 1);
         double[] v = {1.0, 2.0, 3.0, 4.0, 5.0};
         double[] expected = {-1.0, -0.5, 0.0, 0.5, 1.0};

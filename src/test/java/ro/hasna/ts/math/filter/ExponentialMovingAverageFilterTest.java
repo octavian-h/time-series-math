@@ -27,7 +27,7 @@ public class ExponentialMovingAverageFilterTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void testConstructor1() throws Exception {
+    public void testConstructor1() {
         thrown.expect(OutOfRangeException.class);
         thrown.expectMessage("2 out of (0, 1) range");
 
@@ -35,7 +35,7 @@ public class ExponentialMovingAverageFilterTest {
     }
 
     @Test
-    public void testConstructor2() throws Exception {
+    public void testConstructor2() {
         thrown.expect(OutOfRangeException.class);
         thrown.expectMessage("0 out of (0, 1) range");
 
@@ -43,7 +43,7 @@ public class ExponentialMovingAverageFilterTest {
     }
 
     @Test
-    public void testConstructor3() throws Exception {
+    public void testConstructor3() {
         thrown.expect(OutOfRangeException.class);
         thrown.expectMessage("1 out of (0, 1) range");
 
@@ -51,7 +51,7 @@ public class ExponentialMovingAverageFilterTest {
     }
 
     @Test
-    public void testFilter() throws Exception {
+    public void testFilter() {
         double[] v = {1, 1, 2, 2, 3, 3, 4, 4, 5};
         double[] expected = {1, 1, 1.8, 1.96, 2.792, 2.9584, 3.79168, 3.958336, 4.7916672};
 
