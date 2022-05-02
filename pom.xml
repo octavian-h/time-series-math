@@ -150,7 +150,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.5</version>
+                <version>0.8.6</version>
                 <executions>
                     <execution>
                         <id>default-prepare-agent</id>
@@ -191,7 +191,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.1.1</version>
+                        <version>3.2.0</version>
                         <configuration>
                             <source>1.8</source>
                         </configuration>
