@@ -18,8 +18,7 @@
 COMMIT_MESSAGE="$(git log --format=%s --max-count 1)"
 
 if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [[ "$COMMIT_MESSAGE" != *"[no-deploy]"* ]]; then
-  echo "$GPG_SECRET_KEY" | base64 --decode | gpg --import
-  echo "$GPG_OWNERTRUST" | base64 --decode | gpg --import-ownertrust
+  gpg --import ci/private-key.pgp
   mvn deploy --batch-mode -DskipTests=true --settings ci/maven-settings.xml -P release
 else
   echo "Skip deploy"
