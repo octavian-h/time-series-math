@@ -18,7 +18,7 @@
 COMMIT_MESSAGE="$(git log --format=%s --max-count 1)"
 
 if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [[ "$COMMIT_MESSAGE" != *"[no-deploy]"* ]]; then
-  openssl aes-256-cbc -K "$encrypted_e0cb3f1fc6c0_key" -iv "$encrypted_e0cb3f1fc6c0_iv" -in ci/private-key.gpg.enc -out private-key.gpg -d
+  openssl aes-256-cbc -K $encrypted_481151886268_key -iv $encrypted_481151886268_iv -in ci/private-key.gpg.enc -out private-key.gpg -d
   gpg --import private-key.gpg
   mvn deploy --batch-mode -DskipTests=true --settings ci/maven-settings.xml -P release
 else
