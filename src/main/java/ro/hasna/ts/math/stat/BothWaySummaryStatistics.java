@@ -30,11 +30,11 @@ import java.io.Serializable;
  */
 public class BothWaySummaryStatistics implements StatisticalSummary, Serializable, Cloneable {
     private static final long serialVersionUID = -8419769227216721345L;
+    private final Max max;
+    private final Min min;
     private long n;
     private double sum;
     private double sumSquares;
-    private final Max max;
-    private final Min min;
     private boolean removeMade;
 
     public BothWaySummaryStatistics() {

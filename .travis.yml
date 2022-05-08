@@ -2,10 +2,10 @@ language: java
 
 cache:
   directories:
-  - "$HOME/.m2"
+    - "$HOME/.m2"
 branches:
   only:
-  - master
+    - master
 
 script:
   - mvn --batch-mode clean test jacoco:report coveralls:report
