@@ -1,7 +1,8 @@
 # Time Series Math Library #
 
-[![Build Status](https://img.shields.io/travis/octavian-h/time-series-math/master.svg)](https://travis-ci.org/octavian-h/time-series-math)
-[![Coverage Status](https://img.shields.io/coveralls/octavian-h/time-series-math/master.svg)](https://coveralls.io/github/octavian-h/time-series-math?branch=master)
+[![Build Status](https://app.travis-ci.com/octavian-h/time-series-math.svg?branch=master)](https://app.travis-ci.com/github/octavian-h/time-series-math)
+[![Coverage Status](https://coveralls.io/repos/github/octavian-h/time-series-math/badge.svg?branch=master)](https://coveralls.io/github/octavian-h/time-series-math?branch=master)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/ro.hasna.ts/time-series-math/badge.svg)](https://maven-badges.herokuapp.com/maven-central/ro.hasna.ts/time-series-math)
 
 ## Overview ##
 The goal of this library is to provide optimised algorithms for time-series analysis and signal processing.
@@ -50,7 +51,7 @@ Add the following dependency to your maven project.
 <dependency>
     <groupId>ro.hasna.ts</groupId>
     <artifactId>time-series-math</artifactId>
-    <version>0.18</version>
+    <version><!--use latest version--></version>
 </dependency>
 ```
 

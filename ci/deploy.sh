@@ -17,11 +17,23 @@
 
 COMMIT_MESSAGE="$(git log --format=%s --max-count 1)"
 
-if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [[ "$COMMIT_MESSAGE" != *"[no-deploy]"* ]]; then
-  gpg --version
-  gpg --import ci/private.key.enc
-  gpg --list-secret-keys
-  mvn deploy --batch-mode -DskipTests=true --settings ci/maven-settings.xml -P release
+if [ "$TRAVIS_PULL_REQUEST" == "false" ] &&
+  [[ "$COMMIT_MESSAGE" != *"[no-deploy]"* ]] &&
+  [[ "$COMMIT_MESSAGE" != "[maven-release-plugin]"* ]]; then
+
+  if [[ "$COMMIT_MESSAGE" == *"[start-release]"* ]]; then
+    echo "Release artifacts"
+    # point HEAD to master branch (this is needed by the maven release plugin)
+    git symbolic-ref HEAD refs/heads/master
+    gpg --version
+    gpg --quiet --import ci/private.key.enc
+
+    mvn release:prepare --batch-mode --settings ci/maven-settings.xml
+    mvn release:perform --batch-mode --settings ci/maven-settings.xml
+  else
+    echo "Deploy Snapshot artifacts"
+    mvn deploy --batch-mode -DskipTests=true --settings ci/maven-settings.xml
+  fi
 else
-  echo "Skip deploy"
+  echo "Skip deploy/release"
 fi
